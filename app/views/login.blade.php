@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('layout.signin')
 
 @section('content')
             <!-- if there are login errors, show them here -->
@@ -9,29 +9,35 @@
     </p>
 @endif
 
-{{ Form::open(array('url' => 'login')) }}
-    <h1>Login</h1>
+{{ Form::open(array('url' => 'login','class'=>'form-signin')) }}
+        <h2 class="form-signin-heading">Please sign in</h2>
+        @if (Session::has('login_errors'))
+            @if (Session::get('loginError'))
+            <div class="alert alert-danger">{{ Session::get('loginError') }}</div>
+                 <button type="button" class="close" data-dismiss="alert"></button>
+                 Email or password incorrect.
+            @endif
+        @endif
+        <p>
+            {{ $errors->first('email') }}
+            {{ $errors->first('password') }}
+        </p>
 
-    <!-- if there are login errors, show them here -->
-    @if (Session::get('loginError'))
-    <div class="alert alert-danger">{{ Session::get('loginError') }}</div>
-    @endif
+        <p>
+            {{ Form::label('email', 'Email Address') }}
+            {{ Form::text('email', Input::old('email'), array('placeholder' => 'awesome@awesome.com')) }}
+        </p>
+        <p>
+            {{ Form:: label('password', 'Password') }}
+            {{ Form::password('password') }}
+        </p>
 
-    <p>
-        {{ $errors->first('email') }}
-        {{ $errors->first('password') }}
-    </p>
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
 
-    <p>
-        {{ Form::label('email', 'Email Address') }}
-        {{ Form::text('email', Input::old('email'), array('placeholder' => 'awesome@awesome.com')) }}
-    </p>
-    <p>
-        {{ Form:: label('password', 'Password') }}
-        {{ Form::password('password') }}
-    </p>
 
-    <p>{{ Form::submit('Submit!') }}</p>
+    <p>{{ Form::submit('Submit!',array('class'=>'btn btn-primary')) }}</p>
 {{ Form::close() }}
 
 @stop

@@ -10,6 +10,8 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+Route::controller('products', 'ProductsController');
+Route::controller('ajax', 'AjaxController');
 
 Route::get('/', function()
 {
@@ -86,4 +88,22 @@ Route::post('login',function(){
 Route::get('logout',function(){
     Auth::logout();
     return Redirect::to('/');
+});
+
+/* Filters */
+
+Route::filter('auth', function()
+{
+
+    if (Auth::guest()){
+        Session::put('redirect',URL::full());
+        return Redirect::to('login');
+    }
+
+    if($redirect = Session::get('redirect')){
+        Session::forget('redirect');
+        return Redirect::to($redirect);
+    }
+
+    //if (Auth::guest()) return Redirect::to('login');
 });

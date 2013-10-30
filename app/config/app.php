@@ -114,6 +114,12 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
         'Jenssegers\Mongodb\MongodbServiceProvider',
+        'Former\FormerServiceProvider',
+        'Noherczeg\Breadcrumb\BreadcrumbServiceProvider',
+        'Intervention\Validation\ValidationServiceProvider',
+        'Intervention\Image\ImageServiceProvider',
+        'Intervention\Helper\DateServiceProvider',
+        'Intervention\Helper\StringServiceProvider'
 	),
 
 	/*
@@ -178,6 +184,11 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
+        'Former'          => 'Former\Facades\Former',
+        'Breadcrumb'      => 'Noherczeg\Breadcrumb\Facades\Breadcrumb',
+        'Date'            => 'Intervention\Helper\Facades\Date',
+        'String'          => 'Intervention\Helper\Facades\String',
+        'Image'           => 'Intervention\Image\Facades\Image'
 
 	),
 

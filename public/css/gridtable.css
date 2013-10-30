@@ -1,0 +1,46 @@
+table.table thead .sorting { background: url('../images/sort_both.png') no-repeat center right; }
+table.table thead .sorting_asc { background: url('../images/sort_asc.png') no-repeat center right; }
+table.table thead .sorting_desc { background: url('../images/sort_desc.png') no-repeat center right; }
+
+table.table thead .sorting_asc_disabled { background: url('../images/sort_asc_disabled.png') no-repeat center right; }
+table.table thead .sorting_desc_disabled { background: url('../images/sort_desc_disabled.png') no-repeat center right; }
+
+.dataTables_info{
+	margin-bottom: 20px;
+	float: right;
+	padding-right:10px;
+}
+
+.dataTables_paginate{
+	right: 25px;
+}
+
+.dataTables_length .ingrid{
+	margin-right: 4px;
+}
+
+.dataTables_length div.ingrid.styled-select{
+	margin-right: 4px;
+}
+
+div.dataTables_length label {
+	margin-top: 20px;
+}
+
+.dataTables_paginate a.paginate_button,.dataTables_paginate span a{
+	float: left;
+	padding: 4px 12px;
+	line-height: 20px;
+	text-decoration: none;
+	background-color: #ffffff;
+	border: 1px solid #dddddd;
+	border-left-width: 0;
+	cursor: pointer;
+}
+.dataTables_paginate a.first.paginate_button{
+	border-left-width: 1px;
+}
+
+.dataTables_paginate a.paginate_button:hover,.dataTables_paginate span a:hover,.dataTables_paginate a.paginate_active{
+	background-color: #f5f5f5;
+}

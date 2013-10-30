@@ -1,0 +1,132 @@
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled]
+{
+	background-color: maroon;
+    background-image:none;
+}
+
+input, textarea, .uneditable-input{
+	width:300px;
+}
+
+textarea{
+	min-height: 150px;
+	padding: 4px 4px;
+    width: 100%;
+}
+
+.styled-select{
+	display: block;
+	border: 1px solid #cccccc;
+	padding: 0px;
+	height:27px;
+	margin-top: 10px;
+	background: url(../images/dk_arrows.png) no-repeat 95% 50% #fff;
+}
+
+.styled-select select{
+	margin:0px;
+	margin-left: 2px;
+	background: transparent;
+	font-size: 11px;
+	line-height: 1em;
+	height: 24px;
+	border: 0;
+	border-radius: 0;
+	-webkit-appearance: none;
+}
+
+.ingrid {
+	margin-top: 0px;
+	float:left;
+}
+
+.styled-menu-select{
+	display: block;
+	border: 2px solid #cccccc;
+	padding: 0px;
+	height:24px;
+	background: url(../images/dk_arrows.png) no-repeat 95% 50% #fff;
+}
+
+.styled-menu-select select{
+	margin:0px;
+	margin-left: 2px;
+	background: transparent;
+	font-size: 11px;
+	line-height: 1em;
+	height: 24px;
+	border: 0;
+	border-radius: 0;
+	-webkit-appearance: none;
+}
+
+#searchinput input[type="text"]{
+	font-size: 11px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	min-height: 29px;
+	height:26px;
+	border: 1px solid #cccccc;
+}
+
+#searchinput{
+	background-color: #f7f7f7;
+}
+.search_init {
+	width: 100px;
+}
+
+.search_init:focus {
+	width: 150px;
+}
+
+
+thead #searchinput td{
+	padding: 7px 5px;
+	min-height: 0;
+
+}
+
+thead .add-on{
+	margin-top: 10px;
+}
+
+#clearsearch{
+	display: block;
+	margin-top: 14px;
+}
+
+#wysihtml5-toolbar{
+    padding-left: 180px;
+}
+
+.add-btn{
+    cursor: pointer;
+}
+
+.add-btn:hover{
+    text-decoration: underline;
+}
+
+legend{
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+.note{
+    font-size: 11px;
+    font-weight: normal;
+}
+
+#notifier{
+    display: block;
+    padding: 10px;
+    border:thin solid #ddd;
+}
