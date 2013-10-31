@@ -4,6 +4,9 @@
 <div id="home">
     <div class="row">
         <div class="col-md-8">
+            <div class="col-md-4 visible-xs">
+                @include('partials.identity')
+            </div>
             <div class="col-md-6">
                 <h2>PRACTICAL DESIGN</h2>
                 <div class="item">
@@ -21,7 +24,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 visible-lg">
             @include('partials.identity')
         </div>
     </div>
