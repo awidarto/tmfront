@@ -66,6 +66,21 @@ h2{
     margin-bottom: 0px;
 }
 
+#twitbox, #newsbox{
+    height:400px;
+    width: 100%;
+    overflow: auto;
+}
+
+#twitbox ul, #newsbox ul{
+    padding-left: 0px;
+}
+
+#twitbox ul li, #newsbox ul li{
+    list-style: none;
+    list-style-position: inside;
+}
+
 @media (min-width: 978px) {
     .navbar-default .navbar-nav>.active>a,
     .navbar-default .navbar-nav>li>a:hover{
