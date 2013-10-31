@@ -10,7 +10,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var string
 	 */
-	protected $table = 'users';
+	protected $table = '';
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -18,6 +18,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var array
 	 */
 	protected $hidden = array('password');
+
+
+    public function __construct(){
+
+        $this->table = Config::get('kickstart.user_collection');
+
+    }
 
 	/**
 	 * Get the unique identifier for the user.

@@ -49,15 +49,18 @@ Route::post('login',function(){
         return Redirect::to('login')->withErrors($validator);
     } else {
 
+        $userfield = Config::get('kickstart.user_field');
+        $passwordfield = Config::get('kickstart.password_field');
+
         // find the user
-        $user = User::where('username', '=', Input::get('email'))->first();
+        $user = User::where($userfield, '=', Input::get('email'))->first();
 
 
         // check if user exists
         if ($user) {
 
             // check if password is correct
-            if (Hash::check(Input::get('password'), $user->password)) {
+            if (Hash::check(Input::get('password'), $user->{$passwordfield} )) {
 
                 // login the user
                 Auth::login($user);

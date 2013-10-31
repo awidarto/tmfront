@@ -22,13 +22,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <h2>LOGIN / SIGN UP</h2>
-            <p>
-
-                Here Foo and Bar are POJOs that you will use within your app. Hongo library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily:
-
-                In order to interact with the database, you must get an implementation of the SqlAdapter interface. You can do so this way
-            </p>
+            @include('partials.identity')
         </div>
     </div>
 
