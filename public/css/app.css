@@ -81,6 +81,10 @@ h2{
     list-style-position: inside;
 }
 
+#newsbox ul li a{
+    padding-right: 8px;
+}
+
 @media (min-width: 978px) {
     .navbar-default .navbar-nav>.active>a,
     .navbar-default .navbar-nav>li>a:hover{
