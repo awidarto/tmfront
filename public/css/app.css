@@ -114,12 +114,16 @@ h3{
     text-align: center;
 }
 
-$adbox img{
+#adbox img{
     width: 100%;
 }
 
 #location .row, #socmed .row{
     border-bottom: none;
+}
+
+#order-box{
+    padding-top: 55px;
 }
 
 @media (min-width: 978px) {

@@ -11,12 +11,12 @@
             </div>
             <div class="row">
                 <div class="col-md-8">
-                    <h2>SEWING TABLE</h2>
+                <h2 class="clearfix">SEWING TABLE</h2>
                     <div class="item">
                         <img src="{{ URL::to('/') }}/images/dummy/5.jpg" style="width:100%">
                     </div>
                 </div>
-                <div class="col-md-4 visible-lg">
+                <div class="col-md-4 visible-lg" id="order-box">
                     <label>Quantity</label>
                     <select>
                         <option>1</option>
@@ -28,7 +28,7 @@
                         <option>7</option>
                     </select> set
                     <br />
-                    <a class="btn" href="">Add to cart</a>
+                    <button class="btn" href="">Add to cart</button>
                 </div>
             </div>
             <div class="row">
