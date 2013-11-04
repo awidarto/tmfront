@@ -45,6 +45,11 @@ h2{
     margin: 0px;
 }
 
+h3{
+    font-size: 14px;
+    margin: 0px;
+}
+
 .item a{
     font-family: 'Merriweather Sans',sans-serif;
     text-decoration: none;
@@ -66,6 +71,20 @@ h2{
     margin-bottom: 0px;
 }
 
+.thumbs{
+    padding: 8px;
+}
+
+.thumbs img{
+    width:120px;
+    float:left;
+    margin-right: 8px;
+}
+
+#detail-view .row{
+    margin-right: 8px;
+}
+
 #twitbox, #newsbox{
     height:400px;
     width: 100%;
@@ -83,6 +102,23 @@ h2{
 
 #newsbox ul li a{
     padding-right: 8px;
+}
+
+#twitbox{
+    height:200px;
+}
+
+#adbox{
+    padding: 8px;
+    text-align: center;
+}
+
+$adbox img{
+    width: 100%;
+}
+
+#location .row, #socmed .row{
+    border-bottom: none;
 }
 
 @media (min-width: 978px) {

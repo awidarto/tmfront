@@ -12,7 +12,7 @@
                 <div class="item">
                     <img src="{{ URL::to('/') }}/images/dummy/5.jpg">
                     <h1>Sewing Table</h1>
-                    <a href="">buy now for IDR 2.350.000</a>
+                    <a href="{{ URL::to('shop/detail')}}">buy now for IDR 2.350.000</a>
                 </div>
             </div>
             <div class="col-md-6">
@@ -20,19 +20,20 @@
                 <div class="item">
                     <img src="{{ URL::to('/') }}/images/dummy/4.jpg">
                     <h1>A1 B1 Soft Baskets</h1>
-                    <a href="">buy now for IDR 300.000</a>
+                    <a href="{{ URL::to('shop/detail')}}">buy now for IDR 300.000</a>
                 </div>
             </div>
         </div>
         <div class="col-md-4 visible-lg">
             @include('partials.identity')
+            @include('partials.location')
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-8">
             <h2>INTERIOR DESIGN</h2>
-            <img src="{{ URL::to('/') }}/images/dummy/6.jpg">
+            <img src="{{ URL::to('/') }}/images/dummy/6.jpg" class="img-responsive" >
         </div>
         <div class="col-md-4">
             @include('partials.news')
@@ -65,6 +66,7 @@
         </div>
         <div class="col-md-4">
             @include('partials.twitter')
+            @include('partials.ad')
         </div>
     </div>
 </div>

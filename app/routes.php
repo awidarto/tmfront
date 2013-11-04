@@ -11,6 +11,7 @@
 |
 */
 Route::controller('home', 'HomeController');
+Route::controller('shop', 'ShopController');
 Route::controller('products', 'ProductsController');
 Route::controller('ajax', 'AjaxController');
 
