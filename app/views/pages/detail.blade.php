@@ -43,12 +43,14 @@
         <div class="col-md-4 visible-lg">
             <div class="row">
                 @include('partials.identity')
+                @include('partials.location')
             </div>
             <div class="row">
                 @include('partials.news')
             </div>
             <div class="row">
                 @include('partials.twitter')
+                @include('partials.ad')
             </div>
          </div>
     </div>

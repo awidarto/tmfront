@@ -24,4 +24,8 @@ class ShopController extends BaseController {
         return View::make('pages.detail');
     }
 
+    public function getCollection($slug = null,$page = 0){
+        return View::make('pages.collection')->with('colname',$slug);
+    }
+
 }

@@ -215,3 +215,46 @@ $adbox img{
     background-color: #FFF;
 }
 
+#collectionbox.row{
+    border:none;
+}
+
+#collectionbox h2{
+    text-transform: uppercase;
+    border:none;
+}
+
+ul#col-list{
+    list-style: none;
+}
+
+li.item-col{
+    float: left;
+}
+
+li.item-col .item{
+    display: block;
+    width:300px;
+    padding: 10px;
+}
+
+.pagination{
+    clear:both;
+    margin-bottom: 10px;
+}
+
+.pagination ul{
+    list-style: none;
+}
+
+.pagination li{
+    float:left;
+}
+
+.pagination li a{
+    font-family: "Merriweather Sans";
+    display: block;
+    padding: 4px;
+    color: #000;
+}
+
