@@ -12,6 +12,7 @@
 */
 Route::controller('home', 'HomeController');
 Route::controller('shop', 'ShopController');
+Route::controller('news', 'NewsController');
 Route::controller('products', 'ProductsController');
 Route::controller('ajax', 'AjaxController');
 
@@ -29,6 +30,15 @@ Route::get('media',function(){
     print $media->toJson();
 
 });
+
+Route::get('contact',function(){
+    return View::make('pages.contact');
+});
+
+Route::get('about',function(){
+    return View::make('pages.about');
+});
+
 
 Route::get('login',function(){
     return View::make('login');
