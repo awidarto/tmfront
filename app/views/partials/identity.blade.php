@@ -7,30 +7,47 @@
         <p>You have 0 items in your shopping cart</p>
     </div>
 @else
+    <style type="text/css">
+        #identity-box input[type=text],
+        #identity-box input[type=password]{
+            float: left;
+            width: 80px;
+            line-height: 20px;
+            border: thin solid #000;
+            padding: 2px;
+            margin: 2px;
+        }
+
+        #identity-box input[type=text]#search{
+            width:100%;
+        }
+
+        #identity-box .btn{
+            border: thin solid #000;
+            font-size: 11px;
+            line-height: 1.3;
+            margin-top: 2px;
+        }
+    </style>
     <h2>LOGIN / SIGN UP</h2>
-    <div class="col-md-12" style="padding:0px;">
+
+    <div class="col-md-12" style="padding:0px;" id="identity-box">
         {{ Form::open(array('url' => 'login','class'=>'form-inline', 'role'=>'form')) }}
-                @if (Session::has('loginError'))
-                    @if (Session::get('loginError'))
-                    <div class="alert alert-danger">{{ Session::get('loginError') }}</div>
-                         <button type="button" class="close" data-dismiss="alert"></button>
-                         Email or password incorrect.
-                    @endif
+            @if (Session::has('loginError'))
+                @if (Session::get('loginError'))
+                <div class="alert alert-danger">{{ Session::get('loginError') }}</div>
+                     <button type="button" class="close" data-dismiss="alert"></button>
+                     Email or password incorrect.
                 @endif
-                <div class="form-group" >
-                    {{ $errors->first('email') }}
-                    {{ $errors->first('password') }}
-                </div>
-
-                <div class="form-group" >
-                    {{ Form::text('email', Input::old('email'), array('placeholder' => 'your email')) }}
-                    {{ Form::password('password',array('placeholder' => 'your password')) }}
-                    {{ Form::submit('Go',array('class'=>'btn btn-default btn-sm')) }}
-                </div>
-
-                <label class="checkbox">
-                  <input type="checkbox" value="remember-me"> Remember me
-                </label>
+            @endif
+            {{ Former::text('email','')->placeholder('Email') }}
+            {{ Former::password('password','')->placeholder('Password') }}
+            {{ Former::submit('Go')->class('btn btn-default btn-sm') }}
         {{ Form::close() }}
+        <div class="clearfix"></div>
+        {{ Form::open(array('url' => 'search','class'=>'form-inline', 'role'=>'form')) }}
+            {{ Former::text('search','')->placeholder('Search')->id('search') }}
+        {{ Form::close() }}
+        <div class="clearfix"></div>
     </div>
 @endif

@@ -1,4 +1,4 @@
-<h2>@toimoitwit</h2>
+<h2>@TOIMOITWIT</h2>
 <div id="twitbox">
     <ul>
         <li>

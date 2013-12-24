@@ -18,6 +18,7 @@
     {{ HTML::style('css/sticky-footer-navbar.css') }}
     {{ HTML::style('css/app.css') }}
 
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
         <script src="../../assets/js/html5shiv.js"></script>
@@ -27,6 +28,9 @@
     {{ HTML::script('js/jquery-1.9.1.js')}}
     {{ HTML::script('js/jquery-ui-1.9.2.custom.min.js')}}
 
+    {{ HTML::script('js/bxslider/jquery.bxslider.min.js')}}
+
+    {{ HTML::style('js/bxslider/jquery.bxslider.css')}}
 </head>
 
 <body>
@@ -36,7 +40,7 @@
         <!-- topmost header -->
         <div id="tm-head" class="visible-md visible-lg">
             <div class="container">
-                <div class="col-lg-8">
+                <div class="col-lg-8" id="tm-logo-container">
                     <a href="{{ URL::to('/') }}"><img class="img-responsive" src="{{ URL::to('images/').'/tmlogo_med.png' }}"></a>
                 </div>
                 <div class="col-lg-4" id="tm-side-head">
