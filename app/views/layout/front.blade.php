@@ -83,12 +83,13 @@
         </div>
     </div>
 
-    <div id="footer">
-        <div class="container">
-            <p class="text-muted credit">SITE MAP | TERMS &amp; CONDITIONS | PRIVACY POLICY
-               <span class="pull-right"> &copy; {{ date('Y',time()) }} {{ Config::get('site.design')}}</span>
-            </p>
-    </div>
+</div>
+
+<div id="footer">
+    <div class="container">
+        <p class="text-muted credit">SITE MAP | TERMS &amp; CONDITIONS | PRIVACY POLICY
+           <span class="pull-right"> &copy; {{ date('Y',time()) }} {{ Config::get('site.design')}}</span>
+        </p>
 </div>
 
 
