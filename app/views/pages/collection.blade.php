@@ -32,6 +32,7 @@
                                         <img src="{{ URL::to('/') }}/images/dummy/5.jpg" class="img-responsive" >
                                         <h1>Sewing Table</h1>
                                         buy now for IDR 2.350.000
+                                         <b class="icon icon-shopping-cart"></b>
                                     </a>
                                 </div>
                             </li>
@@ -40,7 +41,8 @@
                                     <a href="{{ URL::to('shop/detail')}}">
                                         <img src="{{ URL::to('/') }}/images/dummy/4.jpg" class="img-responsive" >
                                         <h1>A1 B1 Soft Baskets</h1>
-                                        buy now for IDR 2.350.000
+                                        buy now for IDR 350.000
+                                         <b class="icon icon-shopping-cart"></b>
                                     </a>
                                 </div>
                             </li>
