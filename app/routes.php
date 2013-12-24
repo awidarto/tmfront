@@ -82,7 +82,7 @@ Route::post('login',function(){
                 // validation not successful
                 // send back to form with errors
                 // send back to form with old input, but not the password
-                return Redirect::to('login')
+                return Redirect::to('/')
                     ->withErrors($validator)
                     ->withInput(Input::except('password'));
             }

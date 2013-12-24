@@ -11,7 +11,7 @@
         #identity-box input[type=text],
         #identity-box input[type=password]{
             float: left;
-            width: 80px;
+            width: 120px;
             line-height: 20px;
             border: thin solid #000;
             padding: 2px;
