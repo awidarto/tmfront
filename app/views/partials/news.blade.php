@@ -1,5 +1,5 @@
-<h2>WHAT'S HAPPENING</h2>
-<div id="newsbox">
+<h2>NEWS</h2>
+<div id="newsbox" class="lionbar">
     <ul>
         <li class="item">
             <h6>Art Exhibition 14 - 16 Dec. 2013</h6>

@@ -1,5 +1,5 @@
 <h2>@TOIMOITWIT</h2>
-<div id="twitbox">
+<div id="twitbox" class="lionbar">
     <ul>
         <li>
             <h6>@oddiegetah</h6>

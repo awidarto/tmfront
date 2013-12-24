@@ -32,7 +32,7 @@
                 <div class="item">
                     <img src="{{ URL::to('/') }}/images/dummy/5.jpg">
                     <h1>Sewing Table</h1>
-                    <a href="{{ URL::to('shop/detail')}}">buy now for IDR 2.350.000</a>
+                    <a href="{{ URL::to('shop/detail')}}">buy now for IDR 2.350.000 <b class="icon icon-shopping-cart"></b></a>
                 </div>
             </div>
             <div class="col-md-6">
@@ -40,12 +40,12 @@
                 <div class="item">
                     <img src="{{ URL::to('/') }}/images/dummy/4.jpg">
                     <h1>A1 B1 Soft Baskets</h1>
-                    <a href="{{ URL::to('shop/detail')}}">buy now for IDR 300.000</a>
+                    <a href="{{ URL::to('shop/detail')}}">buy now for IDR 300.000 <b class="icon icon-shopping-cart"></b></a>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            @include('partials.news')
+            @include('partials.instagram')
         </div>
     </div>
 
@@ -76,7 +76,8 @@
                     $('.slider').bxSlider({
                         mode: 'fade',
                         auto: true,
-                        autoControls: true,
+                        pager:false,
+                        autoControls: false,
                         pause: 2000
                     });
                 });
@@ -85,6 +86,7 @@
 
 
         <div class="col-md-4">
+            @include('partials.news')
             @include('partials.ad')
         </div>
     </div>

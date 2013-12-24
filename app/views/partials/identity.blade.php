@@ -46,7 +46,7 @@
         {{ Form::close() }}
         <div class="clearfix"></div>
         {{ Form::open(array('url' => 'search','class'=>'form-inline', 'role'=>'form')) }}
-            {{ Former::text('search','')->placeholder('Search')->id('search') }}
+            {{ Former::text('search','')->placeholder('Search')->id('search')->class('search') }}
         {{ Form::close() }}
         <div class="clearfix"></div>
     </div>

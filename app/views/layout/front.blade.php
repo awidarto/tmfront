@@ -30,7 +30,18 @@
 
     {{ HTML::script('js/bxslider/jquery.bxslider.min.js')}}
 
+    {{ HTML::script('js/jquery.lionbars.0.3.min.js')}}
+
+
     {{ HTML::style('js/bxslider/jquery.bxslider.css')}}
+    {{ HTML::style('css/lionbars.css')}}
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.lionbar').lionbars();
+        });
+    </script>
+
 </head>
 
 <body>
