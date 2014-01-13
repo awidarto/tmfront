@@ -29,19 +29,76 @@
 
             <div class="col-md-6">
                 <h2>HELLO</h2>
-                <div class="item">
-                    <img src="{{ URL::to('/') }}/images/dummy/5.jpg">
-                    <h1>Sewing Table</h1>
-                    <a href="{{ URL::to('shop/detail')}}">buy now for IDR 2.350.000 <b class="icon icon-shopping-cart"></b></a>
-                </div>
+                <ul class="slider">
+                    <li>
+                        <div class="item">
+                            <img src="{{ URL::to('/') }}/images/dummy/2.jpg">
+                            <h1>Sewing Table</h1>
+                            <a href="{{ URL::to('shop/detail')}}">buy now for IDR 2.350.000 <b class="icon icon-shopping-cart"></b></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <img src="{{ URL::to('/') }}/images/dummy/5.jpg">
+                            <h1>Sewing Table</h1>
+                            <a href="{{ URL::to('shop/detail')}}">buy now for IDR 2.350.000 <b class="icon icon-shopping-cart"></b></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <img src="{{ URL::to('/') }}/images/dummy/3.jpg">
+                            <h1>Sewing Table</h1>
+                            <a href="{{ URL::to('shop/detail')}}">buy now for IDR 2.350.000 <b class="icon icon-shopping-cart"></b></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <img src="{{ URL::to('/') }}/images/dummy/4.jpg">
+                            <h1>Sewing Table</h1>
+                            <a href="{{ URL::to('shop/detail')}}">buy now for IDR 2.350.000 <b class="icon icon-shopping-cart"></b></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <img src="{{ URL::to('/') }}/images/dummy/1.jpg">
+                            <h1>Sewing Table</h1>
+                            <a href="{{ URL::to('shop/detail')}}">buy now for IDR 2.350.000 <b class="icon icon-shopping-cart"></b></a>
+                        </div>
+                    </li>
+                </ul>
             </div>
             <div class="col-md-6">
                 <h2>GOOD BUY</h2>
-                <div class="item">
-                    <img src="{{ URL::to('/') }}/images/dummy/4.jpg">
-                    <h1>A1 B1 Soft Baskets</h1>
-                    <a href="{{ URL::to('shop/detail')}}">buy now for IDR 300.000 <b class="icon icon-shopping-cart"></b></a>
-                </div>
+                <ul class="slider">
+                    <li>
+                        <div class="item">
+                            <img src="{{ URL::to('/') }}/images/dummy/4.jpg">
+                            <h1>A1 B1 Soft Baskets</h1>
+                            <a href="{{ URL::to('shop/detail')}}">buy now for IDR 300.000 <b class="icon icon-shopping-cart"></b></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <img src="{{ URL::to('/') }}/images/dummy/4.jpg">
+                            <h1>A1 B1 Soft Baskets</h1>
+                            <a href="{{ URL::to('shop/detail')}}">buy now for IDR 300.000 <b class="icon icon-shopping-cart"></b></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <img src="{{ URL::to('/') }}/images/dummy/2.jpg">
+                            <h1>A1 B1 Soft Baskets</h1>
+                            <a href="{{ URL::to('shop/detail')}}">buy now for IDR 300.000 <b class="icon icon-shopping-cart"></b></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <img src="{{ URL::to('/') }}/images/dummy/3.jpg">
+                            <h1>A1 B1 Soft Baskets</h1>
+                            <a href="{{ URL::to('shop/detail')}}">buy now for IDR 300.000 <b class="icon icon-shopping-cart"></b></a>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="col-md-4">
@@ -87,7 +144,6 @@
 
         <div class="col-md-4">
             @include('partials.news')
-            @include('partials.ad')
         </div>
     </div>
 </div>

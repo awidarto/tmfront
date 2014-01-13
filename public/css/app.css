@@ -104,7 +104,7 @@ h3{
     color: #000;
     display: block;
     text-align: right;
-    font-size: 11px;
+    font-size: 13px;
 }
 
 .item h1{
@@ -150,6 +150,10 @@ h3{
     overflow: auto;
 }
 
+#newsbox{
+    height:370px;
+}
+
 #twitbox ul, #newsbox ul,#instabox ul{
     padding-left: 0px;
 }
@@ -168,6 +172,15 @@ h3{
 
 #instabox ul li {
     padding:10px;
+}
+
+#instabox{
+    height:300px;
+}
+
+#instabox img{
+    width: 95%;
+    height:auto;
 }
 
 
