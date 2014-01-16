@@ -11,7 +11,7 @@
         #identity-box input[type=text],
         #identity-box input[type=password]{
             float: left;
-            width: 120px;
+            width: 94px;
             line-height: 20px;
             border: thin solid #000;
             padding: 2px;
@@ -19,7 +19,7 @@
         }
 
         #identity-box input[type=text]#search{
-            width:100%;
+            width:95%;
         }
 
         #identity-box .btn{
@@ -27,6 +27,7 @@
             font-size: 11px;
             line-height: 1.3;
             margin-top: 2px;
+            padding:5px;
         }
     </style>
     <h2>LOGIN / SIGN UP</h2>

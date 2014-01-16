@@ -52,7 +52,7 @@
         <div id="tm-head" class="visible-md visible-lg">
             <div class="container">
                 <div class="col-lg-8" id="tm-logo-container">
-                    <a href="{{ URL::to('/') }}"><img class="img-responsive" src="{{ URL::to('images/').'/tmlogo_med.png' }}"></a>
+                    <a href="{{ URL::to('/') }}"><img class="img-responsive" src="{{ URL::to('images/').'/tmlogotrans.png' }}"></a>
                 </div>
                 <div class="col-lg-4" id="tm-side-head">
                     <p><a href="#">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added within</a></p>

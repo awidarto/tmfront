@@ -1,6 +1,26 @@
 @extends('layout.front')
 
 @section('content')
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-md-4 visible-xs">
+                @include('partials.identity')
+            </div>
+            <div class="slide-box" style="width:600px;">
+                <h2>PROJECT : INTERIOR</h2>
+                <ul id="slider1" class="slider">
+                  <li><img src="{{ URL::to('/') }}/images/dummy/slider1.jpg" /></li>
+                  <li><img src="{{ URL::to('/') }}/images/dummy/slider2.jpg" /></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4 visible-lg tm-side">
+            @include('partials.identity')
+            @include('partials.location')
+            @include('partials.twitter')
+        </div>
+    </div>
+
 <div id="home">
     <div class="row">
         <div class="col-md-8" id="detail-view">

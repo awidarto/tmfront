@@ -1,11 +1,17 @@
 body{
-    font-family: Arial,sans-serif;
+    font-family: Helvetica,Arial,sans-serif;
     font-size: 11px;
+    line-height: 1.5em;
+}
+
+#main p{
+    font-size: 13px;
+    line-height: 1.5em;
 }
 
 #tm-head{
     background-color: #0098a6;
-    height:175px;
+    height:220px;
 }
 
 #tm-head a{
@@ -25,6 +31,22 @@ body{
     font-family: inherit;
     margin-top: 40px;
     vertical-align: middle;
+}
+
+#tm-location{
+    background: url(../images/dummy/geomarker.png) no-repeat;
+    padding-left: 24px;
+}
+
+#tm-location h6{
+    background-color: transparent;
+    color: #000;
+    margin: 0px;
+    padding: 0px;
+}
+
+#tm-socmed{
+    margin-left: 65px;
 }
 
 .navbar-default a{
@@ -88,14 +110,15 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 }
 
 h2{
-    font-size: 16px;
+    font-size: 14px;
     margin: 0px;
     margin-bottom: 10px;
 }
 
 h3{
-    font-size: 14px;
+    font-size: 12px;
     margin: 0px;
+    margin-bottom: 8px;
 }
 
 .item a{
@@ -104,7 +127,7 @@ h3{
     color: #000;
     display: block;
     text-align: right;
-    font-size: 13px;
+    font-size: 11px;
 }
 
 .item h1{
@@ -207,11 +230,12 @@ h3{
 
 @media (min-width: 978px) {
     .container {
-        max-width: 970px;
+        max-width: 930px;
     }
 
     #tm-logo-container{
         padding-left: 0px;
+        margin-top: 20px;
     }
 
     .navbar-default .navbar-nav>.active>a,
@@ -249,13 +273,13 @@ h3{
 
     .navbar-nav>li>a.social{
         padding:0px;
-        margin: 4px;
+        margin: 4px 2px;
         border:thin solid transparent;
     }
 
     .navbar-nav>li>a.social:hover{
         padding:0px;
-        margin: 4px;
+        margin: 4px 2px;
         border:thin solid #ccc;
     }
 
@@ -351,14 +375,15 @@ ul#col-list{
     list-style: none;
 }
 
-#collectionbox ul li.item-col{
+ul li.item-col{
     float: left;
+    width: 48%;
 }
 
-#collectionbox ul li.item-col .item{
+ul li.item-col .item{
     display: block;
-    width:300px;
     padding: 10px;
+    margin: 8px;
 }
 
 .pagination{
@@ -439,5 +464,10 @@ ul#more-news li a{
 .bx-wrapper img{
     display:block;
     max-width: 100%;
+}
+
+.tm-side{
+    /*padding-right: 40px;*/
+    padding-left: 63px;
 }
 

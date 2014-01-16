@@ -17,7 +17,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-4 visible-lg">
+        <div class="col-md-4 visible-lg tm-side">
             @include('partials.identity')
             @include('partials.location')
             @include('partials.twitter')
@@ -28,7 +28,7 @@
         <div class="col-md-8">
 
             <div class="col-md-6">
-                <h2>HELLO</h2>
+                <a href="#"  data-toggle="tooltip" title="New Stuff" ><h2>HELLO</h2></a>
                 <ul class="slider">
                     <li>
                         <div class="item">
@@ -68,7 +68,7 @@
                 </ul>
             </div>
             <div class="col-md-6">
-                <h2>GOOD BUY</h2>
+                <a href="#"  data-toggle="tooltip" title="Best Seller" ><h2>GOOD BUY</h2></a>
                 <ul class="slider">
                     <li>
                         <div class="item">
@@ -101,7 +101,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 tm-side">
             @include('partials.instagram')
         </div>
     </div>
@@ -137,12 +137,17 @@
                         autoControls: false,
                         pause: 2000
                     });
+
+                    $('[data-toggle="tooltip"]').tooltip({
+                        placement:'right'
+                    });
+
                 });
 
             </script>
 
 
-        <div class="col-md-4">
+        <div class="col-md-4 tm-side">
             @include('partials.news')
         </div>
     </div>
