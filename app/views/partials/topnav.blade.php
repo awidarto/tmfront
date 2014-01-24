@@ -37,7 +37,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li {{ sa('projects/interior') }}  ><a href="{{ URL::to('projects/interior') }}" >Interior</a></li>
-                <li {{ sa('projects/others') }} ><a href="{{ URL::to('projects/others') }}" >Event</a></li>
+                <li {{ sa('projects/others') }} ><a href="{{ URL::to('projects/others') }}" >Others</a></li>
               </ul>
             </li>
 
