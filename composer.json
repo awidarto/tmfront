@@ -11,7 +11,9 @@
         "intervention/image": "dev-master",
         "intervention/imagecache": "dev-master",
         "intervention/helper": "dev-master",
-        "intervention/validation": "dev-master"
+        "intervention/validation": "dev-master",
+        "alexwhitman/view-themes": "dev-master",
+        "barryvdh/laravel-dompdf": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
