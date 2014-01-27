@@ -36,8 +36,8 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li {{ sa('projects/interior') }}  ><a href="{{ URL::to('projects/interior') }}" >Interior</a></li>
-                <li {{ sa('projects/others') }} ><a href="{{ URL::to('projects/others') }}" >Others</a></li>
+                <li {{ sa('page/list/projects/interior') }}  ><a href="{{ URL::to('page/list/projects/interior') }}" >Interior</a></li>
+                <li {{ sa('page/list/projects/others') }} ><a href="{{ URL::to('page/list/projects/others') }}" >Others</a></li>
               </ul>
             </li>
 
@@ -45,14 +45,14 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">News <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li {{ sa('news/product-story') }}  ><a href="{{ URL::to('news/product-story') }}" >Product's Story</a></li>
-                <li {{ sa('news/event') }} ><a href="{{ URL::to('news/event') }}" >Event</a></li>
+                <li {{ sa('page/list/news/product-story') }}  ><a href="{{ URL::to('page/list/news/product-story') }}" >Product's Story</a></li>
+                <li {{ sa('page/list/news/event') }} ><a href="{{ URL::to('page/list/news/event') }}" >Event</a></li>
               </ul>
             </li>
 
             <li {{ sa('press') }} ><a href="{{ URL::to('press') }}" >Press</a></li>
-            <li {{ sa('about') }} ><a href="{{ URL::to('about') }}" >About Us</a></li>
-            <li {{ sa('contact') }} ><a href="{{ URL::to('contact') }}"  >Find Us</a></li>
+            <li {{ sa('page/view/about') }} ><a href="{{ URL::to('page/view/static/page/about') }}" >About Us</a></li>
+            <li {{ sa('page/view/contact') }} ><a href="{{ URL::to('page/view/static/page/contact') }}"  >Find Us</a></li>
 
           </ul>
 

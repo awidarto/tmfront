@@ -49,6 +49,7 @@ body{
     margin-left: 95px;
 }
 
+
 .navbar-default a{
     text-transform: uppercase;
     font-weight: normal;
@@ -208,7 +209,7 @@ h3{
 
 
 #twitbox{
-    height:200px;
+    height:120px;
 }
 
 #adbox{
@@ -469,5 +470,10 @@ ul#more-news li a{
 .tm-side{
     /*padding-right: 40px;*/
     padding-left: 63px;
+}
+
+#home .row .tm-side #location{
+    padding-bottom: 5px;
+    padding-top: 12px;
 }
 

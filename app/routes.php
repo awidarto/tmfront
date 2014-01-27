@@ -15,6 +15,7 @@ Route::controller('shop', 'ShopController');
 Route::controller('news', 'NewsController');
 Route::controller('products', 'ProductsController');
 Route::controller('ajax', 'AjaxController');
+Route::controller('page', 'PageController');
 
 
 Route::get('/', 'HomeController@getIndex');
@@ -23,6 +24,14 @@ Route::get('hashme/{mypass}',function($mypass){
 
     print Hash::make($mypass);
 });
+
+Route::get('page/cat/{slug}','PageController@getCat');
+Route::get('page/view/{slug}','PageController@getView');
+Route::get('page','PageController@getIndex');
+
+Route::get('projects/{slug}','PageController@getCat');
+Route::get('projects/view/{slug}','PageController@getView');
+Route::get('page','PageController@getIndex');
 
 Route::get('media',function(){
     $media = Product::all();
@@ -34,11 +43,6 @@ Route::get('media',function(){
 Route::get('contact',function(){
     return View::make('pages.contact');
 });
-
-Route::get('about',function(){
-    return View::make('pages.about');
-});
-
 
 Route::get('login',function(){
     return View::make('login');
