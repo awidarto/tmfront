@@ -135,7 +135,7 @@
                         auto: true,
                         pager:false,
                         autoControls: false,
-                        pause: 2000
+                        pause: 15000
                     });
 
                     $('[data-toggle="tooltip"]').tooltip({
