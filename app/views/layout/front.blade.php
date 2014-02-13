@@ -17,6 +17,8 @@
     {{ HTML::style('css/typography.css') }}
     {{ HTML::style('css/sticky-footer-navbar.css') }}
     {{ HTML::style('css/app.css') }}
+    {{ HTML::style('css/bootstrap-magnify.min.css') }}
+    {{ HTML::style('css/multizoom.css') }}
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -32,6 +34,9 @@
 
     {{ HTML::script('js/jquery.lionbars.0.3.min.js')}}
 
+    {{ HTML::script('js/bootstrap-magnify.min.js')}}
+
+    {{ HTML::script('js/zoomsl-3.0.min.js') }}
 
     {{ HTML::style('js/bxslider/jquery.bxslider.css')}}
     {{ HTML::style('css/lionbars.css')}}

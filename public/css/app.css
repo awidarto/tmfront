@@ -477,3 +477,63 @@ ul#more-news li a{
     padding-top: 12px;
 }
 
+ul.item-col{
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+#main ul.item-col li div.item a{
+    float: left;
+    width: 190px;
+}
+
+ul.item-col li div.item a, ul.item-col li div.item a h1{
+    text-align: left;
+    text-transform: capitalize;
+    font-size: 12px;
+    font-family: arial,sans-serif;
+}
+
+ul.item-col li div.item a h1{
+    padding: 0px;
+}
+
+ul.item-col li div.item a img{
+    width: 158px;
+    height: 158px;
+}
+
+div.detail-col h2{
+    margin-bottom: 0px;
+}
+
+#item-info h2{
+    display:block;
+    background: transparent;
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+    padding-left: 0px;
+    margin-bottom: 0px;
+}
+
+ul#other-picture{
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+ul#other-picture li{
+    display: block;
+    float: left;
+    margin: 4px;
+}
+
+#buy-box{
+    padding: 10px;
+    margin-top: 20px;
+    border: thin solid #ccc;
+}
+
+#item-description{
+    margin-top: 20px;
+}
