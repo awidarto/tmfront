@@ -507,6 +507,13 @@ div.detail-col h2{
     margin-bottom: 0px;
 }
 
+div.item-detail h2{
+    color: #000;
+    font-size: 16px;
+    font-family: arial,sans-serif;
+    background: transparent;
+}
+
 #item-info h2{
     display:block;
     background: transparent;
