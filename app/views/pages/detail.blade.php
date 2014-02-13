@@ -12,6 +12,7 @@
                 <div id="viewer">
                     <img id="zoomed"  src="{{ URL::to('/') }}/images/dummy/detail_med.jpg" data-zoom-image="{{ URL::to('/') }}/images/dummy/detail_lrg.jpg"/>
                 </div>
+                hover to zoom
             </div>
             <script type="text/javascript">
                 $(document).ready(function(){
