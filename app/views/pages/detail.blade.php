@@ -56,7 +56,7 @@
 
                     ul.color-list li a{
                         display: block;
-                        margin-right: 4px;
+                        margin-right: 8px;
                     }
 
                     ul.color-list li a div.color-chip{
@@ -68,6 +68,7 @@
                     .color-box{
                         display: block;
                         padding: 10px;
+                        padding-left:0px;
                         min-height: 50px;
                         height: 50px;
 
