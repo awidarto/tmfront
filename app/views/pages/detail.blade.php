@@ -78,7 +78,7 @@
                         border: thin solid #000;
                         border-radius: 8px;
                         margin-top: 20px;
-                        padding: 10px;
+                        padding: 15px;
                         font-weight: bold;
                         font-size: 12px;
                     }
@@ -90,6 +90,14 @@
 
                     #viewer img{
                         border: thin solid black;
+                    }
+
+                    .buy-box .xlabel{
+                        width: 120px;
+                        color: black;
+                        display: inline-block;
+                        line-height: 25px;
+                        margin-bottom: 10px;
                     }
 
                 </style>
@@ -115,14 +123,14 @@
                     </ul>
                 </div>
                 <div class="buy-box">
-                    Select Quantity
+                    <span class="xlabel">Select Quantity</span>
                     <select>
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
                     </select><br />
-                    Add to Cart <i class="icon-shopping-cart icon-3x"></i>
+                    <span class="xlabel">Add to Cart</span> <i class="icon-shopping-cart icon-2x"></i>
                 </div>
 
             {{--
