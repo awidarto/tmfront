@@ -9,26 +9,22 @@
             </div>
 
             <ul id="col-list" class="item-col">
-                @for($i = 0; $i < 4;$i++)
-                    <li>
-                        <div class="item">
-                            <a href="{{ URL::to('shop/detail')}}">
-                                <h1>Sewing Table</h1>
-                                buy now for IDR 2.350.000
-                                <img src="{{ URL::to('/') }}/images/dummy/5.jpg" class="img-responsive" >
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <a href="{{ URL::to('shop/detail')}}">
-                                <h1>A1 B1 Soft Baskets</h1>
-                                buy now for IDR 350.000
-                                <img src="{{ URL::to('/') }}/images/dummy/4.jpg" class="img-responsive" >
-                            </a>
-                        </div>
-                    </li>
-                @endfor
+
+                @if(count($products) > 0 )
+                    @for($i = 0; $i < count($products);$i++)
+                        <li>
+                            <div class="item">
+                                <a href="{{ URL::to('shop/detail/'.$product['_id'])}}">
+                                    <h1>{{ $product['title']}}</h1>
+                                    buy now for IDR 2.350.000
+                                    <img src="{{ URL::to('/') }}/images/dummy/5.jpg" class="img-responsive" >
+                                </a>
+                            </div>
+                        </li>
+                    @endfor
+                @else
+                    <p>No Product found in this category</p>
+                @endif
             </ul>
 
         </div>

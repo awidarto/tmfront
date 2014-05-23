@@ -18,15 +18,14 @@
                         </ul>
                     </div>
                     <div class="clearfix"></div>
-
             <ul id="col-list">
-                @for($i = 0; $i < 4;$i++)
+                @for($i = 0; $i < count($pages);$i++)
                     <li class="item-col">
                         <div class="item">
                             <a href="{{ URL::to('news/detail')}}">
-                                <h1>What is it now</h1>
+                                <h1>{{ $pages[$i]['title'] }}</h1>
                                 <p>
-                                    The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words. Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators. To achieve this, it would be necessary to have uniform
+                                    {{ $pages[$i]['description'] }}
                                 </p>
                                 <span>more &raquo;</span>
                             </a>

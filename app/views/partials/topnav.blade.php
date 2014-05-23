@@ -25,11 +25,12 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Webshop <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li {{ sa('shop/collection/art') }} ><a href="{{ URL::to('shop/collection/art') }}" >Art</a></li>
-                <li {{ sa('shop/collection/furniture') }}  ><a href="{{ URL::to('shop/collection/furniture') }}" >Furniture</a></li>
-                <li {{ sa('shop/collection/home-accessories') }}  ><a href="{{ URL::to('shop/collection/home-accessories') }}" >Home Accessories</a></li>
-                <li {{ sa('shop/collection/lifestyle') }} ><a href="{{ URL::to('shop/collection/lifestyle') }}" >Lifestyle</a></li>
-                <li {{ sa('shop/collection/gifts') }}  ><a href="{{ URL::to('shop/collection/gifts') }}" >Gifts</a></li>
+                <?php
+                  $categories = Prefs::getProductCategory()->productCatToSelection('slug', 'title', false );
+                ?>
+                @foreach($categories as $category=>$cname)
+                <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/'.$category) }}" >{{ $cname }}</a></li>
+                @endforeach
               </ul>
             </li>
 
@@ -45,12 +46,12 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">News <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li {{ sa('page/list/news/product-story') }}  ><a href="{{ URL::to('page/list/news/product-story') }}" >Product's Story</a></li>
+                <li {{ sa('page/list/news/product-story') }}  ><a href="{{ URL::to('page/list/news/products-story') }}" >Product's Story</a></li>
                 <li {{ sa('page/list/news/event') }} ><a href="{{ URL::to('page/list/news/event') }}" >Event</a></li>
               </ul>
             </li>
 
-            <li {{ sa('press') }} ><a href="{{ URL::to('press') }}" >Press</a></li>
+            <li {{ sa('press') }} ><a href="{{ URL::to('page/list/press/press') }}" >Press</a></li>
             <li {{ sa('page/view/about') }} ><a href="{{ URL::to('page/view/static/page/about') }}" >About Us</a></li>
             <li {{ sa('page/view/contact') }} ><a href="{{ URL::to('page/view/static/page/contact') }}"  >Find Us</a></li>
 

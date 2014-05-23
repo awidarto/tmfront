@@ -37,8 +37,9 @@ class PageController extends BaseController {
         return View::make('pages.pagelist')->with('pages',$pages);
     }
 
-    public function getList($section = null,$category = null)
+    public function getList($section,$category)
     {
+        /*
         if(!is_null($section) && !is_null($category) ){
             $pages = Page::where('section','=',$section)->where('category','=',$category)->get()->toArray();
         }elseif(!is_null($section) && is_null($category) ){
@@ -48,6 +49,9 @@ class PageController extends BaseController {
         }else{
             $pages = array();
         }
+        */
+
+        $pages = Page::where('section','=',$section)->where('category','=',$category)->get()->toArray();
 
         return View::make('pages.pagelist')->with('pages',$pages);
     }
@@ -66,7 +70,7 @@ class PageController extends BaseController {
         return View::make('pages.pagereader')->with('content',$page);
     }
 
-    public function missingMethod($parameter){
+    public function missingMethod($parameter = array()){
 
     }
 

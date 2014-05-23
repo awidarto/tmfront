@@ -14,6 +14,7 @@
                 <ul id="slider1" class="slider">
                   <li><img src="{{ URL::to('/') }}/images/dummy/slider1.jpg" /></li>
                   <li><img src="{{ URL::to('/') }}/images/dummy/slider2.jpg" /></li>
+                  <li><img src="{{ URL::to('/') }}/images/dummy/slider3.jpg" /></li>
                 </ul>
             </div>
         </div>

@@ -24,8 +24,18 @@ class ShopController extends BaseController {
         return View::make('pages.detail');
     }
 
-    public function getCollection($slug = null,$page = 0){
-        return View::make('pages.collection')->with('colname',$slug);
+    public function getCollection($category = null,$page = 0){
+
+        //$categories = Prefs::getProductCategory()->productCatToSelection('slug', 'title', false );
+
+        $products = Product::where('category',$category)
+                        ->get()->toArray();
+
+
+        return View::make('pages.collection')
+            ->with('products',$products)
+            //->with('categories', $categories)
+            ->with('colname',$category);
     }
 
 }

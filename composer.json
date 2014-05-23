@@ -4,8 +4,9 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.0.*",
+		"laravel/framework": "4.1.*",
         "jenssegers/mongodb": "*",
+        "nitmedia/wkhtml2pdf": "dev-master",
         "noherczeg/breadcrumb": "dev-master",
         "anahkiasen/former": "dev-develop",
         "intervention/image": "dev-master",
@@ -13,7 +14,9 @@
         "intervention/helper": "dev-master",
         "intervention/validation": "dev-master",
         "alexwhitman/view-themes": "dev-master",
-        "barryvdh/laravel-dompdf": "dev-master"
+        "mj/breadcrumb": "dev-master",
+        "knplabs/knp-snappy": "*",
+        "barryvdh/laravel-snappy": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
@@ -22,7 +25,9 @@
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php"
+			"app/tests/TestCase.php",
+            "app/helpers",
+            "app/library"
 		]
 	},
 	"scripts": {
