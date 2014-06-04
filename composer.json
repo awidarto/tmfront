@@ -9,7 +9,7 @@
         "nitmedia/wkhtml2pdf": "dev-master",
         "noherczeg/breadcrumb": "dev-master",
         "anahkiasen/former": "dev-develop",
-        "intervention/image": "dev-master",
+        "intervention/image": "2.*",
         "intervention/imagecache": "dev-master",
         "intervention/helper": "dev-master",
         "intervention/validation": "dev-master",
