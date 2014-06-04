@@ -25,16 +25,32 @@ class ShopController extends BaseController {
     }
 
     public function getCollection($category = null,$page = 0){
+        $perpage = Config::get('shop.pagination_itemperpage');
 
         //$categories = Prefs::getProductCategory()->productCatToSelection('slug', 'title', false );
 
-        $products = Product::where('category',$category)
+        $products = Product::where('categoryLink',$category)
+                        ->skip($page * $perpage)
+                        ->take($perpage)
                         ->get()->toArray();
 
+        $currentcount = count($products);
+
+        $total_found = Product::where('categoryLink',$category)->count();
+
+        $total_all = Product::count();
+
+        $paging = floor($total_found / $perpage);
 
         return View::make('pages.collection')
             ->with('products',$products)
-            //->with('categories', $categories)
+            ->with('total',$total_found)
+            ->with('alltotal',$total_all)
+            ->with('current',$page)
+            ->with('perpage',$perpage)
+            ->with('currentcount',$currentcount)
+            ->with('paging',$paging)
+            ->with('category',$category)
             ->with('colname',$category);
     }
 
