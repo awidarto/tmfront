@@ -16,7 +16,8 @@
         "alexwhitman/view-themes": "dev-master",
         "mj/breadcrumb": "dev-master",
         "knplabs/knp-snappy": "*",
-        "barryvdh/laravel-snappy": "dev-master"
+        "barryvdh/laravel-snappy": "dev-master",
+        "pingpong/menus": "1.0.*"
 	},
 	"autoload": {
 		"classmap": [

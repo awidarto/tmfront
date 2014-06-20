@@ -21,7 +21,10 @@ class ShopController extends BaseController {
     }
 
     public function getDetail($id = null){
-        return View::make('pages.detail');
+
+        $product = Product::find($id);
+
+        return View::make('pages.detail')->with('product',$product);
     }
 
     public function getCollection($category = null,$page = 0){

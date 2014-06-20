@@ -1,15 +1,16 @@
 @extends('layout.front')
 
 @section('content')
+{{-- print_r($product)--}}
 <div id="home">
     <div class="row" id="item-picture" style="border-bottom:none;">
         <div class="col-md-8">
             <div class="col-md-4 visible-xs">
                 @include('partials.identity')
             </div>
-            <div class="item-detail" style="width:600px;">
+            <div class="item-detail" style="width:600px;max-width:600px;">
                 <div id="viewer">
-                    <img id="zoomed"  src="{{ URL::to('/') }}/images/dummy/detail_med.jpg" data-zoom-image="{{ URL::to('/') }}/images/dummy/detail_lrg.jpg"/>
+                    <img id="zoomed"  src="{{ $product['defaultpictures']['large_url'] }}" data-zoom-image="{{ $product['defaultpictures']['full_url'] }}"/>
                 </div>
                 hover to zoom
             </div>
@@ -35,10 +36,10 @@
         </div>
         <div class="col-md-4 visible-lg tm-side item-detail">
                 <h2 style="display:block;padding-left:0px;font-size:24px;font-weight:bold;">Pallet Sofa</h2>
-                buy now for IDR 2.350.000
+                buy now for IDR {{ Ks::idr($product['priceRegular']) }}
                 <div id="item-description">
                     <p>
-                        the adaptable interior contains a varied family and personal collection of 2D pieces dating from the 1940′s to today, which was specifically measured for storing. they were organized and ordered according to groups, sizes and artistic connections. four separate proportions were allocated for, with each cell, cupboard or drawer crafted according to these requirements – only when the drawers are opened is the colorfully painted mosaic on the sides revealed
+                        {{ $product['itemDescription'] }}
                     </p>
                 </div>
                 <style type="text/css">
@@ -102,7 +103,7 @@
                     }
 
                 </style>
-
+                {{--
                 <div class="color-box">
                     Available Colors
                     <ul class="color-list">
@@ -123,6 +124,7 @@
                         </li>
                     </ul>
                 </div>
+                --}}
                 <div class="buy-box">
                     <span class="xlabel">Select Quantity</span>
                     <select>
@@ -147,12 +149,11 @@
             <h2 style="display:inline-block;">Other Photos</h2>
             ( click to view the image )
             <ul id="other-picture">
-                <li>
-                    <img class="zoom-thumb" src="{{ URL::to('/') }}/images/dummy/detail_ot_1.jpg" data-disp="{{ URL::to('/') }}/images/dummy/detail_med_1.jpg" data-large="{{ URL::to('/') }}/images/dummy/detail_lrg_1.jpg" >
-                </li>
-                <li>
-                    <img  class="zoom-thumb" src="{{ URL::to('/') }}/images/dummy/detail_ot_2.jpg" data-disp="{{ URL::to('/') }}/images/dummy/detail_med_2.jpg" data-large="{{ URL::to('/') }}/images/dummy/detail_lrg_2.jpg">
-                </li>
+                @foreach($product['files'] as $pic)
+                    <li>
+                        <img class="zoom-thumb" src="{{ $pic['thumbnail_url']}}" data-disp="{{ $pic['large_url']}}" data-large="{{ $pic['full_url'] }}" >
+                    </li>
+                @endforeach
             </ul>
 
         </div>
