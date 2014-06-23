@@ -1,6 +1,6 @@
 <?php
 
-class PageController extends BaseController {
+class PostController extends BaseController {
 
     /*
     |--------------------------------------------------------------------------
@@ -17,7 +17,7 @@ class PageController extends BaseController {
 
     public function getIndex()
     {
-        $pages = Page::get();
+        $pages = Posts::get();
         return View::make('pages.pagelist')->with('pages',$pages);
     }
 
@@ -26,12 +26,12 @@ class PageController extends BaseController {
 
         if(is_null($slug)){
 
-            $pages = Page::get()->toArray();
+            $pages = Posts::get()->toArray();
 
         }else{
             $slug = ucfirst($slug);
 
-            $pages = Page::where('category','=',$slug)->get()->toArray();
+            $pages = Posts::where('category','=',$slug)->get()->toArray();
         }
 
         return View::make('pages.pagelist')->with('pages',$pages);
@@ -41,26 +41,39 @@ class PageController extends BaseController {
     {
         /*
         if(!is_null($section) && !is_null($category) ){
-            $pages = Page::where('section','=',$section)->where('category','=',$category)->get()->toArray();
+            $pages = Posts::where('section','=',$section)->where('category','=',$category)->get()->toArray();
         }elseif(!is_null($section) && is_null($category) ){
-            $pages = Page::where('section','=',$section)->get()->toArray();
+            $pages = Posts::where('section','=',$section)->get()->toArray();
         }elseif(is_null($section) && !is_null($category) ){
-            $pages = Page::where('category','=',$category)->get()->toArray();
+            $pages = Posts::where('category','=',$category)->get()->toArray();
         }else{
             $pages = array();
         }
         */
 
-        $pages = Page::where('section','=',$section)->where('category','=',$category)->get()->toArray();
+        $pages = Posts::where('section','=',$section)->where('category','=',$category)->get()->toArray();
 
         return View::make('pages.pagelist')->with('pages',$pages);
     }
 
 
+    public function getRead($section = null,$category = null, $slug = null){
+
+        if(!is_null($section) && !is_null($category) && !is_null($slug)){
+            $page = Posts::where('section','=',$section)
+                ->where('category','=',$category)
+                ->where('slug','=',$slug)
+                ->first()->toArray();
+        }else{
+            $page = null;
+        }
+        return View::make('pages.pagereader')->with('content',$page);
+    }
+
     public function getView($slug = null){
 
         if(!is_null($slug)){
-            $page = Page::where('slug','=',$slug)
+            $page = Posts::where('slug','=',$slug)
                 ->first()->toArray();
         }else{
             $page = null;

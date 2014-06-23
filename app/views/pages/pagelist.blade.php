@@ -22,7 +22,7 @@
                 @for($i = 0; $i < count($pages);$i++)
                     <li class="item-col">
                         <div class="item">
-                            <a href="{{ URL::to('news/detail')}}">
+                            <a href="{{ URL::to('page/view/'.$pages[$i]['slug'])}}">
                                 <h1>{{ $pages[$i]['title'] }}</h1>
                                 <p>
                                     {{ $pages[$i]['description'] }}

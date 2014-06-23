@@ -52,8 +52,8 @@
             </li>
 
             <li {{ sa('press') }} ><a href="{{ URL::to('page/list/press/press') }}" >Press</a></li>
-            <li {{ sa('page/view/about') }} ><a href="{{ URL::to('page/view/static/page/about') }}" >About Us</a></li>
-            <li {{ sa('page/view/contact') }} ><a href="{{ URL::to('page/view/static/page/contact') }}"  >Find Us</a></li>
+            <li {{ sa('page/view/about') }} ><a href="{{ URL::to('page/view/about') }}" >About Us</a></li>
+            <li {{ sa('page/view/contact') }} ><a href="{{ URL::to('page/view/contact') }}"  >Find Us</a></li>
 
           </ul>
 

@@ -113,7 +113,8 @@ return array(
         'Intervention\Validation\ValidationServiceProvider',
         'Intervention\Image\ImageServiceProvider',
         'Intervention\Helper\DateServiceProvider',
-        'Intervention\Helper\StringServiceProvider'
+        'Intervention\Helper\StringServiceProvider',
+        'Thujohn\Twitter\TwitterServiceProvider',
 	),
 
 	/*
@@ -185,7 +186,8 @@ return array(
         'Breadcrumb'      => 'Noherczeg\Breadcrumb\Facades\Breadcrumb',
         'Date'            => 'Intervention\Helper\Facades\Date',
         'String'          => 'Intervention\Helper\Facades\String',
-        'Image'           => 'Intervention\Image\Facades\Image'
+        'Image'           => 'Intervention\Image\Facades\Image',
+        'Twitter'         => 'Thujohn\Twitter\TwitterFacade',
 
 	),
 

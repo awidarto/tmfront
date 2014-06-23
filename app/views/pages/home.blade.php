@@ -10,11 +10,18 @@
                 @include('partials.identity')
             </div>
             <div class="slide-box" style="width:600px;">
-                <h2>PROJECT : INTERIOR</h2>
                 <ul id="slider1" class="slider">
-                  <li><img src="{{ URL::to('/') }}/images/dummy/slider1.jpg" /></li>
-                  <li><img src="{{ URL::to('/') }}/images/dummy/slider2.jpg" /></li>
-                  <li><img src="{{ URL::to('/') }}/images/dummy/slider3.jpg" /></li>
+                    @foreach($headslider as $hs)
+                        <li>
+                            @if(isset($hs['linkTo']) && $hs['linkTo'] != '')
+                                <a href="{{ URL::to($hs['linkTo'])}}" >
+                                    <img src="{{ $hs['defaultpictures']['full_url'] }}" />
+                                </a>
+                            @else
+                                <img src="{{ $hs['defaultpictures']['full_url'] }}" />
+                            @endif
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
@@ -31,74 +38,30 @@
             <div class="col-md-6">
                 <a href="#"  data-toggle="tooltip" title="New Stuff" ><h2>HELLO</h2></a>
                 <ul class="slider">
-                    <li>
-                        <div class="item">
-                            <img src="{{ URL::to('/') }}/images/dummy/2.jpg">
-                            <h1>Sewing Table</h1>
-                            <a href="{{ URL::to('shop/detail')}}">buy now for IDR 2.350.000 <b class="icon icon-shopping-cart"></b></a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <img src="{{ URL::to('/') }}/images/dummy/5.jpg">
-                            <h1>Sewing Table</h1>
-                            <a href="{{ URL::to('shop/detail')}}">buy now for IDR 2.350.000 <b class="icon icon-shopping-cart"></b></a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <img src="{{ URL::to('/') }}/images/dummy/3.jpg">
-                            <h1>Sewing Table</h1>
-                            <a href="{{ URL::to('shop/detail')}}">buy now for IDR 2.350.000 <b class="icon icon-shopping-cart"></b></a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <img src="{{ URL::to('/') }}/images/dummy/4.jpg">
-                            <h1>Sewing Table</h1>
-                            <a href="{{ URL::to('shop/detail')}}">buy now for IDR 2.350.000 <b class="icon icon-shopping-cart"></b></a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <img src="{{ URL::to('/') }}/images/dummy/1.jpg">
-                            <h1>Sewing Table</h1>
-                            <a href="{{ URL::to('shop/detail')}}">buy now for IDR 2.350.000 <b class="icon icon-shopping-cart"></b></a>
-                        </div>
-                    </li>
+                    @foreach($hello as $hs)
+                        <li>
+                            <div class="item">
+                                <img src="{{ $hs['defaultpictures']['medium_url']}}">
+                                <h1>{{ $hs['itemDescription']}}</h1>
+                                <a href="{{ URL::to('shop/detail') }}/{{ $hs['_id']}}">buy now for IDR {{ Ks::idr($hs['priceRegular']) }} <b class="icon icon-shopping-cart"></b></a>
+                            </div>
+                        </li>
+                    @endforeach
+
                 </ul>
             </div>
             <div class="col-md-6">
                 <a href="#"  data-toggle="tooltip" title="Best Seller" ><h2>GOOD BUY</h2></a>
                 <ul class="slider">
-                    <li>
-                        <div class="item">
-                            <img src="{{ URL::to('/') }}/images/dummy/4.jpg">
-                            <h1>A1 B1 Soft Baskets</h1>
-                            <a href="{{ URL::to('shop/detail')}}">buy now for IDR 300.000 <b class="icon icon-shopping-cart"></b></a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <img src="{{ URL::to('/') }}/images/dummy/4.jpg">
-                            <h1>A1 B1 Soft Baskets</h1>
-                            <a href="{{ URL::to('shop/detail')}}">buy now for IDR 300.000 <b class="icon icon-shopping-cart"></b></a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <img src="{{ URL::to('/') }}/images/dummy/2.jpg">
-                            <h1>A1 B1 Soft Baskets</h1>
-                            <a href="{{ URL::to('shop/detail')}}">buy now for IDR 300.000 <b class="icon icon-shopping-cart"></b></a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <img src="{{ URL::to('/') }}/images/dummy/3.jpg">
-                            <h1>A1 B1 Soft Baskets</h1>
-                            <a href="{{ URL::to('shop/detail')}}">buy now for IDR 300.000 <b class="icon icon-shopping-cart"></b></a>
-                        </div>
-                    </li>
+                    @foreach($goodbuy as $hs)
+                        <li>
+                            <div class="item">
+                                <img src="{{ $hs['defaultpictures']['medium_url']}}">
+                                <h1>{{ $hs['itemDescription']}}</h1>
+                                <a href="{{ URL::to('shop/detail') }}/{{ $hs['_id']}}">buy now for IDR {{ Ks::idr($hs['priceRegular']) }} <b class="icon icon-shopping-cart"></b></a>
+                            </div>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
@@ -113,8 +76,13 @@
                 <div class="slide-box" style="width:275px;">
                     <h2>IDEAS</h2>
                     <ul id="slider1" class="slider">
-                      <li><img src="{{ URL::to('/') }}/images/dummy/slide1.png" /></li>
-                      <li><img src="{{ URL::to('/') }}/images/dummy/slide2.png" /></li>
+                        @foreach($idea as $hs)
+                            <li>
+                                <a href="{{ URL::to('/post/view/'.$hs['slug'])}}" >
+                                    <img src="{{ $hs['defaultpictures']['medium_portrait_url'] }}" />
+                                </a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -122,8 +90,13 @@
                 <div class="slide-box" style="width:275px;">
                     <h2>WE LOVE</h2>
                     <ul id="slider1" class="slider">
-                      <li><img src="{{ URL::to('/') }}/images/dummy/slide2.png" /></li>
-                      <li><img src="{{ URL::to('/') }}/images/dummy/slide1.png" /></li>
+                        @foreach($welove as $hs)
+                            <li>
+                                <a href="{{ URL::to('/post/view/'.$hs['slug'])}}" >
+                                    <img src="{{ $hs['defaultpictures']['medium_portrait_url'] }}" />
+                                </a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

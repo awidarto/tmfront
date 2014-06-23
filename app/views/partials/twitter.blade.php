@@ -1,65 +1,18 @@
 <h2>@TOIMOITWIT</h2>
 <div id="twitbox" class="lionbar">
+    <?php
+
+    $toimoitwit = Twitter::getSearch(array('q'=>'toimoi'));
+
+    ?>
     <ul>
+        @foreach($toimoitwit->statuses as $twit)
         <li>
-            <h6>@oddiegetah</h6>
+            <h6>{{ '@'.$twit->user->screen_name }}</h6>
             <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
+                {{ $twit->text }}
             </p>
         </li>
-        <li>
-            <h6>@oddiegetah</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-        </li>
-        <li>
-            <h6>@oddiegetah</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-        </li>
-        <li>
-            <h6>@oddiegetah</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-        </li>
-        <li>
-            <h6>@oddiegetah</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-        </li>
-        <li>
-            <h6>@oddiegetah</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-        </li>
-        <li>
-            <h6>@oddiegetah</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-        </li>
-        <li>
-            <h6>@oddiegetah</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-        </li>
-        <li>
-            <h6>@oddiegetah</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-        </li>
-        <li>
-            <h6>@oddiegetah</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-        </li>
+        @endforeach
     </ul>
 </div>

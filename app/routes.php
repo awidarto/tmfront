@@ -16,6 +16,7 @@ Route::controller('news', 'NewsController');
 Route::controller('products', 'ProductsController');
 Route::controller('ajax', 'AjaxController');
 Route::controller('page', 'PageController');
+Route::controller('post', 'PostController');
 
 
 Route::get('/', 'HomeController@getIndex');

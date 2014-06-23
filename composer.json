@@ -13,10 +13,13 @@
         "intervention/imagecache": "dev-master",
         "intervention/helper": "dev-master",
         "intervention/validation": "dev-master",
-        "alexwhitman/view-themes": "dev-master",
+        "alexwhitman/view-themes": "1.1.2",
         "mj/breadcrumb": "dev-master",
         "knplabs/knp-snappy": "*",
         "barryvdh/laravel-snappy": "dev-master",
+        "thujohn/twitter": "dev-master",
+        "php-instagram-api/php-instagram-api": "dev-master",
+        "elevencodes/instagram-laravel": "2.0.*@dev",
         "pingpong/menus": "1.0.*"
 	},
 	"autoload": {

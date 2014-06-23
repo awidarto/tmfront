@@ -1,89 +1,14 @@
 <h2>NEWS</h2>
 <div id="newsbox" class="lionbar">
     <ul>
-        <li class="item">
-            <h6>Art Exhibition 14 - 16 Dec. 2013</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-            <a href="#">more &raquo;</a>
-        </li>
-        <li class="item">
-            <h6>Art Exhibition 14 - 16 Dec. 2013</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-            <a href="#">more &raquo;</a>
-        </li>
-        <li class="item">
-            <h6>Art Exhibition 14 - 16 Dec. 2013</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-            <a href="#">more &raquo;</a>
-        </li>
-        <li class="item">
-            <h6>Art Exhibition 14 - 16 Dec. 2013</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-            <a href="#">more &raquo;</a>
-        </li>
-        <li class="item">
-            <h6>Art Exhibition 14 - 16 Dec. 2013</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-            <a href="#">more &raquo;</a>
-        </li>
-        <li class="item">
-            <h6>Art Exhibition 14 - 16 Dec. 2013</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-            <a href="#">more &raquo;</a>
-        </li>
-        <li class="item">
-            <h6>Art Exhibition 14 - 16 Dec. 2013</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-            <a href="#">more &raquo;</a>
-        </li>
-        <li class="item">
-            <h6>Art Exhibition 14 - 16 Dec. 2013</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-            <a href="#">more &raquo;</a>
-        </li>
-        <li class="item">
-            <h6>Art Exhibition 14 - 16 Dec. 2013</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-            <a href="#">more &raquo;</a>
-        </li>
-        <li class="item">
-            <h6>Art Exhibition 14 - 16 Dec. 2013</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-            <a href="#">more &raquo;</a>
-        </li>
-        <li class="item">
-            <h6>Art Exhibition 14 - 16 Dec. 2013</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-            <a href="#">more &raquo;</a>
-        </li>
-        <li class="item">
-            <h6>Art Exhibition 14 - 16 Dec. 2013</h6>
-            <p>
-                library will automatically create sqlite tables for those classes, which will allow you to insert, query, update and delete data easily
-            </p>
-            <a href="#">more &raquo;</a>
-        </li>
+        @foreach($news as $n)
+            <li class="item">
+                <h6>{{ $n['title'] }}</h6>
+                <p>
+                    {{ $n['body'] }}
+                </p>
+                <a href="{{ URL::to('post/view/'.$n['slug']) }}">more &raquo;</a>
+            </li>
+        @endforeach
     </ul>
 </div>
