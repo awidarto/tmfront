@@ -8,15 +8,16 @@
 
     ?>
     <ul>
-
-        @foreach($toimoitwit as $twit)
-        <li>
-            <h6>{{ '@'.$twit->user->screen_name }}</h6>
-            <p>
-                {{ makeUrl($twit->text) }}
-            </p>
-        </li>
-        @endforeach
+        @if(!is_null($toimoitwit) && is_array($toimoitwit))
+            @foreach($toimoitwit as $twit)
+            <li>
+                <h6>{{ '@'.$twit->user->screen_name }}</h6>
+                <p>
+                    {{ makeUrl($twit->text) }}
+                </p>
+            </li>
+            @endforeach
+        @endif
     </ul>
 </div>
 

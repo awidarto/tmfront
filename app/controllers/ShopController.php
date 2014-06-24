@@ -27,7 +27,11 @@ class ShopController extends BaseController {
         return View::make('pages.detail')->with('product',$product);
     }
 
-    public function getCollection($category = null,$page = 0){
+    public function getCollection($category = null){
+
+        $page = Input::get('page');
+        $page = (is_null($page))?0:$page;
+
         $perpage = Config::get('shop.pagination_itemperpage');
 
         //$categories = Prefs::getProductCategory()->productCatToSelection('slug', 'title', false );
