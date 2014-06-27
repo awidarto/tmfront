@@ -23,6 +23,15 @@ class HomeController extends BaseController {
                                 ->orderBy('sequence','asc')
                                 ->get()->toArray();
 
+        $tmhead = Posts::where('tags','like','%tmhead%')
+                            ->orderBy('createdAt','desc')
+                            ->get()->toArray();
+
+        if( count($tmhead) > 1 ){
+            $idx = rand(0, count($tmhead) );
+            $tmhead = $tmhead[$idx];
+        }
+
         $hello = Product::where('tags','like','%hello%')
                             ->orderBy('createdAt','desc')
                             ->get()->toArray();
@@ -47,6 +56,7 @@ class HomeController extends BaseController {
 
 		return View::make('pages.home')
                 ->with('hello',$hello)
+                ->with('tmhead',$tmhead)
                 ->with('goodbuy',$goodbuy)
                 ->with('idea',$ideas)
                 ->with('welove',$welove)

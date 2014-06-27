@@ -60,7 +60,9 @@
                     <a href="{{ URL::to('/') }}"><img class="img-responsive" src="{{ URL::to('images/').'/tmlogotrans.png' }}"></a>
                 </div>
                 <div class="col-lg-4" id="tm-side-head">
-                    <p><a href="#">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added within</a></p>
+                    @if(isset($tmhead) && is_array($tmhead) && !empty($tmhead))
+                        {{ $tmhead[0]['body'] }}
+                    @endif
                 </div>
             </div>
         </div>
