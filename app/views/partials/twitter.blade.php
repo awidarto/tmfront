@@ -2,7 +2,7 @@
 <div id="twitbox" class="lionbar">
     <?php
 
-    //$toimoitwit = Twitter::getSearch(array('q'=>'toimoiindonesia'));
+    //$toimoitwit = Twitter::getSearch(array('q'=>'toimoi'));
 
     $toimoitwit = Twitter::getUserTimeline(array('screen_name'=>'toimoiindonesia'));
 

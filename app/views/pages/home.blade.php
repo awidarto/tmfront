@@ -12,6 +12,7 @@
             <div class="slide-box" style="width:600px;">
                 <ul id="slider1" class="slider">
                     @foreach($headslider as $hs)
+                        @if(isset($hs['defaultpictures']['full_url'])
                         <li>
                             @if(isset($hs['linkTo']) && $hs['linkTo'] != '')
                                 <a href="{{ URL::to($hs['linkTo'])}}" >
@@ -21,6 +22,7 @@
                                 <img src="{{ $hs['defaultpictures']['full_url'] }}" />
                             @endif
                         </li>
+                        @endif
                     @endforeach
                 </ul>
             </div>
@@ -41,7 +43,9 @@
                     @foreach($hello as $hs)
                         <li>
                             <div class="item">
-                                <img src="{{ $hs['defaultpictures']['medium_url']}}">
+                                @if(isset($hs['defaultpictures']['medium_portrait_url']))
+                                    <img src="{{ $hs['defaultpictures']['medium_url']}}">
+                                @endif
                                 <h1>{{ $hs['itemDescription']}}</h1>
                                 <a href="{{ URL::to('shop/detail') }}/{{ $hs['_id']}}">buy now for IDR {{ Ks::idr($hs['priceRegular']) }} <b class="icon icon-shopping-cart"></b></a>
                             </div>
@@ -56,7 +60,9 @@
                     @foreach($goodbuy as $hs)
                         <li>
                             <div class="item">
-                                <img src="{{ $hs['defaultpictures']['medium_url']}}">
+                                @if(isset($hs['defaultpictures']['medium_portrait_url']))
+                                    <img src="{{ $hs['defaultpictures']['medium_url']}}">
+                                @endif
                                 <h1>{{ $hs['itemDescription']}}</h1>
                                 <a href="{{ URL::to('shop/detail') }}/{{ $hs['_id']}}">buy now for IDR {{ Ks::idr($hs['priceRegular']) }} <b class="icon icon-shopping-cart"></b></a>
                             </div>
@@ -77,11 +83,13 @@
                     <h2>IDEAS</h2>
                     <ul id="slider1" class="slider">
                         @foreach($idea as $hs)
+                            @if(isset($hs['defaultpictures']['medium_portrait_url']))
                             <li>
                                 <a href="{{ URL::to('/post/view/'.$hs['slug'])}}" >
                                     <img src="{{ $hs['defaultpictures']['medium_portrait_url'] }}" />
                                 </a>
                             </li>
+                            @endif
                         @endforeach
                     </ul>
                 </div>
@@ -91,11 +99,13 @@
                     <h2>WE LOVE</h2>
                     <ul id="slider1" class="slider">
                         @foreach($welove as $hs)
+                            @if(isset($hs['defaultpictures']['medium_portrait_url']))
                             <li>
                                 <a href="{{ URL::to('/post/view/'.$hs['slug'])}}" >
                                     <img src="{{ $hs['defaultpictures']['medium_portrait_url'] }}" />
                                 </a>
                             </li>
+                            @endif
                         @endforeach
                     </ul>
                 </div>

@@ -31,7 +31,7 @@ class HomeController extends BaseController {
                             ->orderBy('createdAt','desc')
                             ->get()->toArray();
 
-        $idea = Posts::where('tags','like','%idea%')
+        $ideas = Posts::where('tags','like','%ideas%')
                             ->orderBy('createdAt','desc')
                             ->get()->toArray();
 
@@ -48,7 +48,7 @@ class HomeController extends BaseController {
 		return View::make('pages.home')
                 ->with('hello',$hello)
                 ->with('goodbuy',$goodbuy)
-                ->with('idea',$idea)
+                ->with('idea',$ideas)
                 ->with('welove',$welove)
                 ->with('toimoitwit',$twits)
                 ->with('news',$news)
