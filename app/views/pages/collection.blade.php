@@ -73,7 +73,7 @@
                                         )
                                         <img src="{{ $products[$i]['defaultpictures']['medium_url'] }}" class="img-responsive" >
                                     @else
-                                        <img src="{{ URL::to('/') }}/images/dummy/5.jpg" class="img-responsive" >
+                                        <img src="{{ URL::to('/') }}/images/th_default.png" class="img-responsive" >
                                     @endif
                                     buy now for IDR {{ Ks::idr($products[$i]['priceRegular']) }}
                                 </a>

@@ -9,10 +9,14 @@
                 @include('partials.identity')
             </div>
             <div class="item-detail" style="width:600px;max-width:600px;">
+                @if(isset($product['defaultpictures']['large_url']))
                 <div id="viewer">
                     <img id="zoomed"  src="{{ $product['defaultpictures']['large_url'] }}" data-zoom-image="{{ $product['defaultpictures']['full_url'] }}"/>
                 </div>
                 hover to zoom
+                @else
+                    <img src="{{ URL::to('/') }}/images/lrg_default.png" />
+                @endif
             </div>
             <script type="text/javascript">
                 $(document).ready(function(){
@@ -35,7 +39,7 @@
 
         </div>
         <div class="col-md-4 visible-lg tm-side item-detail">
-                <h2 style="display:block;padding-left:0px;font-size:24px;font-weight:bold;">Pallet Sofa</h2>
+                <h2 style="display:block;padding-left:0px;font-size:24px;font-weight:bold;">{{ $product['itemDescription']}}</h2>
                 buy now for IDR {{ Ks::idr($product['priceRegular']) }}
                 <div id="item-description">
                     <p>
@@ -146,6 +150,8 @@
 
     <div class="row" id="item-info">
         <div class="col-md-8">
+            @if(isset($product['defaultpictures']['large_url']))
+
             <h2 style="display:inline-block;">Other Photos</h2>
             ( click to view the image )
             <ul id="other-picture">
@@ -155,7 +161,7 @@
                     </li>
                 @endforeach
             </ul>
-
+            @endif
         </div>
         <div class="col-md-4 tm-side">
             {{--
