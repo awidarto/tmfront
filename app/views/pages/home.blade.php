@@ -43,7 +43,7 @@
                     @foreach($hello as $hs)
                         <li>
                             <div class="item">
-                                @if(isset($hs['defaultpictures']['medium_portrait_url']))
+                                @if(isset($hs['defaultpictures']['medium_url']))
                                     <img src="{{ $hs['defaultpictures']['medium_url']}}">
                                 @endif
                                 <h1>{{ $hs['itemDescription']}}</h1>
@@ -60,7 +60,7 @@
                     @foreach($goodbuy as $hs)
                         <li>
                             <div class="item">
-                                @if(isset($hs['defaultpictures']['medium_portrait_url']))
+                                @if(isset($hs['defaultpictures']['medium_url']))
                                     <img src="{{ $hs['defaultpictures']['medium_url']}}">
                                 @endif
                                 <h1>{{ $hs['itemDescription']}}</h1>
