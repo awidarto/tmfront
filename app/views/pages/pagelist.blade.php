@@ -25,7 +25,7 @@
                             <a href="{{ URL::to('page/view/'.$pages[$i]['slug'])}}">
                                 <h1>{{ $pages[$i]['title'] }}</h1>
                                 <p>
-                                    {{ $pages[$i]['description'] }}
+                                    {{ str_limit(strip_tags($pages[$i]['body']), 150, '...')  }}
                                 </p>
                                 <span>more &raquo;</span>
                             </a>
