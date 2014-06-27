@@ -12,7 +12,7 @@
             <div class="slide-box" style="width:600px;">
                 <ul id="slider1" class="slider">
                     @foreach($headslider as $hs)
-                        @if(isset($hs['defaultpictures']['full_url'])
+                        @if(isset($hs['defaultpictures']['full_url']) )
                         <li>
                             @if(isset($hs['linkTo']) && $hs['linkTo'] != '')
                                 <a href="{{ URL::to($hs['linkTo'])}}" >
