@@ -17,6 +17,8 @@ Route::controller('products', 'ProductsController');
 Route::controller('ajax', 'AjaxController');
 Route::controller('page', 'PageController');
 Route::controller('post', 'PostController');
+Route::controller('event', 'EventController');
+Route::controller('press', 'PressController');
 
 
 Route::get('/', 'HomeController@getIndex');
@@ -30,8 +32,8 @@ Route::get('page/cat/{slug}','PageController@getCat');
 Route::get('page/view/{slug}','PageController@getView');
 Route::get('page','PageController@getIndex');
 
-Route::get('projects/{slug}','PageController@getCat');
-Route::get('projects/view/{slug}','PageController@getView');
+Route::get('projects/view/{slug}','ProjectsController@getView');
+Route::get('projects/{slug}','ProjectsController@getIndex');
 Route::get('page','PageController@getIndex');
 
 Route::get('media',function(){
@@ -39,6 +41,11 @@ Route::get('media',function(){
 
     print $media->toJson();
 
+});
+
+Route::get('testwit',function(){
+    $toimoitwit = Twitter::getSearch(array('q'=>'toimoi','lang'=>'id','include_entities'=>1));
+    print_r($toimoitwit);
 });
 
 Route::get('regeneratepic',function(){

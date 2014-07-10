@@ -3,49 +3,6 @@
 @section('content')
 <?php
 
-    function mg($newparam){
-
-        $pstring = str_replace(URL::current(), '', URL::full());
-        $pstring = str_replace('?', '', $pstring);
-
-        parse_str($pstring,$reqs);
-
-        $nreqs = array_merge($reqs,$newparam);
-        $str = array();
-        foreach ($nreqs as $k=>$v) {
-            $str[]= $k.'='.$v;
-        }
-        $str = implode('&', $str);
-
-        return URL::current().'?'.$str;
-    }
-
-    function ms($key, $val, $default){
-        $pstring = str_replace(URL::current(), '', URL::full());
-        $pstring = str_replace('?', '', $pstring);
-        parse_str($pstring,$reqs);
-
-        if(Input::get($key) == $val ){
-            return 'active';
-        }else if(Input::get($key) == '' && $val == $default){
-            return 'active';
-        }else{
-            return '';
-        }
-    }
-
-    function ps($page){
-
-        if(Input::get('page') == $page ){
-            return 'active';
-        }else if(Input::get('page') == '' && $page == 0){
-            return 'active';
-        }else{
-            return '';
-        }
-
-    }
-
     if(Input::get('order') == 'asc'){
         $ord = 'desc';
     }else{

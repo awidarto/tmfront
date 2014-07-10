@@ -52,7 +52,7 @@ class HomeController extends BaseController {
                             ->orderBy('createdAt','desc')
                             ->get()->toArray();
 
-        $twits = Twitter::getSearch(array('q'=>'toimoi'));
+        $twits = Twitter::getSearch(array('q'=>'@toimoiindonesia'));
 
 		return View::make('pages.home')
                 ->with('hello',$hello)

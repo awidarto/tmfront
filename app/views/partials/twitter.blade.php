@@ -2,18 +2,18 @@
 <div id="twitbox" class="lionbar">
     <?php
 
-    //$toimoitwit = Twitter::getSearch(array('q'=>'toimoi'));
-
-    $toimoitwit = Twitter::getUserTimeline(array('screen_name'=>'toimoiindonesia'));
+    $toimoitwit = Twitter::getSearch(array('q'=>'toimoi','lang'=>'id','include_entities'=>1));
+    //print_r($toimoitwit);
+    //$toimoitwit = Twitter::getUserTimeline(array('screen_name'=>'toimoiindonesia'));
 
     ?>
     <ul>
-        @if(!is_null($toimoitwit) && is_array($toimoitwit))
-            @foreach($toimoitwit as $twit)
+        @if(!is_null($toimoitwit))
+            @foreach($toimoitwit->statuses as $twit)
             <li>
                 <h6>{{ '@'.$twit->user->screen_name }}</h6>
                 <p>
-                    {{ makeUrl($twit->text) }}
+                    {{ Twitter::linkify($twit->text) }}
                 </p>
             </li>
             @endforeach

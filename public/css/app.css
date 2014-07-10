@@ -544,3 +544,13 @@ ul#other-picture li{
 #item-description{
     margin-top: 20px;
 }
+
+.strike{
+    text-decoration: line-through;
+}
+
+.discount{
+    background-color: red;
+    padding: 2px 4px;
+    color:white;
+}

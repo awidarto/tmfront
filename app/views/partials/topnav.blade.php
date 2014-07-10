@@ -37,8 +37,8 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li {{ sa('page/list/projects/interior') }}  ><a href="{{ URL::to('page/list/projects/interior') }}" >Interior</a></li>
-                <li {{ sa('page/list/projects/others') }} ><a href="{{ URL::to('page/list/projects/others') }}" >Others</a></li>
+                <li {{ sa('projects/interior') }}  ><a href="{{ URL::to('projects/interior') }}" >Interior</a></li>
+                <li {{ sa('projects/others') }} ><a href="{{ URL::to('projects/others') }}" >Others</a></li>
               </ul>
             </li>
 
@@ -47,11 +47,11 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">News <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li {{ sa('page/list/news/product-story') }}  ><a href="{{ URL::to('page/list/news/products-story') }}" >Product's Story</a></li>
-                <li {{ sa('page/list/news/event') }} ><a href="{{ URL::to('page/list/news/event') }}" >Event</a></li>
+                <li {{ sa('event') }} ><a href="{{ URL::to('event') }}" >Event</a></li>
               </ul>
             </li>
 
-            <li {{ sa('press') }} ><a href="{{ URL::to('page/list/press/press') }}" >Press</a></li>
+            <li {{ sa('press') }} ><a href="{{ URL::to('press') }}" >Press</a></li>
             <li {{ sa('page/view/about') }} ><a href="{{ URL::to('page/view/about') }}" >About Us</a></li>
             <li {{ sa('page/view/contact') }} ><a href="{{ URL::to('page/view/contact') }}"  >Find Us</a></li>
 
@@ -62,7 +62,9 @@
             <li><a class="social" href="../navbar-static-top/"><img src="{{ URL::to('/')}}/images/facebook.png"></a></li>
             <li><a class="social" href="../navbar-static-top/"><img src="{{ URL::to('/')}}/images/instagram.png"></a></li>
             <li><a class="social" href="../navbar-static-top/"><img src="{{ URL::to('/')}}/images/pinterest.png"></a></li>
+            {{--
             <li><a class="social" href="../navbar-static-top/"><img src="{{ URL::to('/')}}/images/gplus.png"></a></li>
+            --}}
           </ul>
 
         </div><!--/.nav-collapse -->

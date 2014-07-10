@@ -47,7 +47,7 @@
                                     <img src="{{ $hs['defaultpictures']['medium_url']}}">
                                 @endif
                                 <h1>{{ $hs['itemDescription']}}</h1>
-                                <a href="{{ URL::to('shop/detail') }}/{{ $hs['_id']}}">buy now for IDR {{ Ks::idr($hs['priceRegular']) }} <b class="icon icon-shopping-cart"></b></a>
+                                <a href="{{ URL::to('shop/detail') }}/{{ $hs['_id']}}">buy now for<br />IDR {{ Ks::idr($hs['priceRegular']) }} <b class="icon icon-shopping-cart"></b></a>
                             </div>
                         </li>
                     @endforeach
@@ -64,7 +64,7 @@
                                     <img src="{{ $hs['defaultpictures']['medium_url']}}">
                                 @endif
                                 <h1>{{ $hs['itemDescription']}}</h1>
-                                <a href="{{ URL::to('shop/detail') }}/{{ $hs['_id']}}">buy now for IDR {{ Ks::idr($hs['priceRegular']) }} <b class="icon icon-shopping-cart"></b></a>
+                                <a href="{{ URL::to('shop/detail') }}/{{ $hs['_id']}}">buy now for<br /><span class="strike">IDR {{ Ks::idr($hs['priceRegular']) }}</span> <span class="discount">IDR {{ (isset($hs['priceDiscount']))?Ks::idr($hs['priceDiscount']):'' }}</span> <b class="icon icon-shopping-cart"></b></a>
                             </div>
                         </li>
                     @endforeach
