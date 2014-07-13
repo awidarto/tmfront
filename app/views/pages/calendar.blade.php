@@ -30,10 +30,27 @@
 .fc-state-highlight{
     background-color: #ddd;
 }
-
-.modal{
-    z-index: 1050;
+.fc-event-title{
+    padding-left: 4px;
 }
+/*
+.fc-border-separate th, .fc-border-separate td {
+    border-width: 2px 0 0 2px;
+    border-color: #fff;
+}
+
+.fc th {
+    background-color: #7da7d9;
+}
+
+.fc td {
+    background-color: #00ffff;
+}
+
+table.fc-header td{
+    background-color: #FFF;
+}
+*/
 </style>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -54,9 +71,7 @@
                     },
                     error: function() {
                         alert('there was an error while fetching events!');
-                    },
-                    color: 'yellow',   // a non-ajax option
-                    textColor: 'black' // a non-ajax option
+                    }
                 }
             ],
             eventClick: function(event) {

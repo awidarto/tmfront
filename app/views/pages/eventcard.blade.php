@@ -5,7 +5,14 @@
         </td>
     </tr>
     <tr>
+    @if(isset($ev['defaultpictures']['thumbnail_url']) && $ev['defaultpictures']['thumbnail_url'] != '')
+        <td>
+            <img src="{{  $ev['defaultpictures']['thumbnail_url'] }}" alt="{{ $ev['title']}}" />
+        </td>
+        <td>
+    @else
         <td colspan="2">
+    @endif
             <p>{{ $ev['description']}}</p>
         </td>
     </tr>
