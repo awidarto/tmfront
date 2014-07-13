@@ -21,11 +21,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 
     public function __construct($table = null){
+        /*
         if(is_null($table)){
             $this->table = Config::get('kickstart.user_collection');
         }else{
             $this->table = $table;
         }
+        */
+        $this->table = Config::get('kickstart.user_collection');
 
     }
 

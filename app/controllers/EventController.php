@@ -17,8 +17,61 @@ class EventController extends BaseController {
 
     public function getIndex()
     {
-        $pages = Page::get();
-        return View::make('pages.pagelist')->with('pages',$pages);
+        $events = Events::get()->toArray();
+        return View::make('pages.calendar')
+            ->with('title','Events')
+            ->with('events',$events);
+    }
+
+    public function postData()
+    {
+        $start = Input::get('start');
+        $end = Input::get('end');
+
+        //$daystart = new MongoDate(strtotime($start.' 00:00:00'));
+        //$dayend = new MongoDate(strtotime($end.' 23:59:59'));
+        /*
+        $daystart = new DateTime($start);
+        $dayend = new DateTime($end);
+
+        print_r($daystart);
+        print_r($dayend);
+
+        $events = Events::where('fromDate','<=',$daystart)
+                        ->where('toDate','>=',$dayend)
+                        ->get()->toArray();
+        */
+        $daystart = new MongoDate(strtotime($start.' 00:00:00'));
+        $dayend = new MongoDate(strtotime($end.' 23:59:59'));
+
+        $qval = array('fromDate'=>array('$gte'=>$daystart),'toDate'=>array('$lte'=>$dayend));
+
+        $events = Events::whereRaw($qval)->get()->toArray();
+
+        $res = array();
+        foreach ($events as $ev) {
+            $dt = array();
+            $dt['id'] = $ev['_id'];
+            $dt['title'] = $ev['title'];
+            $dt['allDay'] = true;
+            $dt['start'] = date( 'Y-m-d H:i:s', $ev['fromDate']->sec);
+            $dt['end'] = date( 'Y-m-d H:i:s',$ev['toDate']->sec);
+            $dt['description'] = $ev['description'];
+            $dt['eventDetail'] = $ev;
+            $res[] = $dt;
+        }
+
+        return Response::json($res);
+
+    }
+
+    public function getDetail($id)
+    {
+        $event = Events::find($id);
+
+        $card = View::make('pages.eventcard')->with('ev',$event->toArray())->render();
+
+        return Response::json(array('result'=>'OK', 'html'=>$card ));
     }
 
     public function getCat($slug = null)
