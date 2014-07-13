@@ -7,7 +7,7 @@
     <tr>
     @if(isset($ev['defaultpictures']['thumbnail_url']) && $ev['defaultpictures']['thumbnail_url'] != '')
         <td>
-            <img src="{{  $ev['defaultpictures']['thumbnail_url'] }}" alt="{{ $ev['title']}}" />
+            <img class="event-picture" src="{{  $ev['defaultpictures']['thumbnail_url'] }}" alt="{{ $ev['title']}}" />
         </td>
         <td>
     @else
@@ -40,5 +40,8 @@
         background-color: white;
         color:black;
         font-weight: bold;
+    }
+    .event-picture{
+        margin: 4px;
     }
 </style>
