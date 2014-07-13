@@ -56,7 +56,7 @@
                     ?>
                     <li class="" >
                         <a href="{{ mg(array('page'=>$prev))}}" class="prev" >
-                            <i class="fa fa-angle-double-left"></i>
+                            <i class="fa fa-chevron-left"></i>
                         </a>
                     </li>
                     <?php
@@ -96,7 +96,7 @@
                     @endif
                     <li class="" >
                         <a href="{{ mg(array('page'=>$next))}}" class="next" >
-                            <i class="fa fa-angle-double-right"></i>
+                            <i class="fa fa-chevron-right"></i>
                         </a>
                     </li>
 

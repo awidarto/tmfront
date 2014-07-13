@@ -17,11 +17,10 @@
                 @include('partials.identity')
             </div>
 
-            <ul id="col-list" class="item-col">
 
-                @if(count($products) > 0 )
+            @if(count($products) > 0 )
+                <div id="col-list" class="item-col">
                     @for($i = 0; $i < count($products);$i++)
-                        <li>
                             <div class="item">
                                 <a href="{{ URL::to('shop/detail/'.$products[$i]['_id'])}}">
                                     <h1>{{ $products[$i]['itemDescription']}}</h1>
@@ -35,10 +34,22 @@
                                     buy now for IDR {{ Ks::idr($products[$i]['priceRegular']) }}
                                 </a>
                             </div>
-                        </li>
                     @endfor
+                </div>
+            @else
+                <p>No Product found in this category</p>
+            @endif
 
-                    <div class="pagination pagination-centered span4" style="color:#fff;width:320px;text-align:center">
+                <div class="row" style="border:none;">
+                    {{--
+                    <div class="pull-right"  >
+                        <p>
+                            Items {{ ($current * $perpage) + 1 }} to {{ ( $current * $perpage ) + $currentcount }} of {{$total}} total (Filtered from {{$alltotal}} entries)
+                        </p>
+                    </div>
+                    --}}
+
+                    <div class="pagination pull-right">
                         <ul>
                             <?php
                                 $prev = ($current - 1 < 0 )?0:($current - 1);
@@ -46,7 +57,7 @@
                             ?>
                             <li class="" >
                                 <a href="{{ mg(array('page'=>$prev))}}" class="prev" >
-                                    <i class="fa fa-angle-double-left"></i>
+                                    <i class="fa fa-chevron-left"></i>
                                 </a>
                             </li>
                             <?php
@@ -86,22 +97,13 @@
                             @endif
                             <li class="" >
                                 <a href="{{ mg(array('page'=>$next))}}" class="next" >
-                                    <i class="fa fa-angle-double-right"></i>
+                                    <i class="fa fa-chevron-right"></i>
                                 </a>
                             </li>
 
                         </ul>
                     </div>
-
-
-                    <div class="span2 pull-right white-text" style="width:110px;" >
-                        Items {{ ($current * $perpage) + 1 }} to {{ ( $current * $perpage ) + $currentcount }} of {{$total}}{{-- total (Filtered from {{$alltotal}} entries) --}}
-                    </div>
-
-                @else
-                    <p>No Product found in this category</p>
-                @endif
-            </ul>
+                </div>
 
         </div>
         <div class="col-md-4 visible-lg tm-side">

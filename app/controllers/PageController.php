@@ -39,21 +39,33 @@ class PageController extends BaseController {
 
     public function getList($section,$category)
     {
-        /*
-        if(!is_null($section) && !is_null($category) ){
-            $pages = Page::where('section','=',$section)->where('category','=',$category)->get()->toArray();
-        }elseif(!is_null($section) && is_null($category) ){
-            $pages = Page::where('section','=',$section)->get()->toArray();
-        }elseif(is_null($section) && !is_null($category) ){
-            $pages = Page::where('category','=',$category)->get()->toArray();
-        }else{
-            $pages = array();
-        }
-        */
+        $page = Input::get('page');
+        $page = (is_null($page))?0:$page;
 
-        $pages = Page::where('section','=',$section)->where('category','=',$category)->get()->toArray();
+        $perpage = Config::get('shop.pagination_itemperpage');
 
-        return View::make('pages.pagelist')->with('pages',$pages);
+        $pages = Page::where('section','=',$section)
+                    ->where('category','=',$category)
+                    ->skip($page * $perpage)
+                    ->take($perpage)
+                    ->get()->toArray();
+
+        $currentcount = count($pages);
+
+        $total_found = Page::where('categoryLink',$category)->count();
+
+        $total_all = Page::count();
+
+        $paging = floor($total_found / $perpage);
+
+        return View::make('pages.pagelist')
+                    ->with('pages',$pages)
+                    ->with('total',$total_found)
+                    ->with('alltotal',$total_all)
+                    ->with('current',$page)
+                    ->with('perpage',$perpage)
+                    ->with('currentcount',$currentcount)
+                    ->with('paging',$paging);
     }
 
 

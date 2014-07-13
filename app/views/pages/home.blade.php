@@ -42,12 +42,12 @@
                 <ul class="slider">
                     @foreach($hello as $hs)
                         <li>
-                            <div class="item">
+                            <div class="item home">
                                 @if(isset($hs['defaultpictures']['medium_url']))
                                     <img src="{{ $hs['defaultpictures']['medium_url']}}">
                                 @endif
                                 <h1>{{ $hs['itemDescription']}}</h1>
-                                <a href="{{ URL::to('shop/detail') }}/{{ $hs['_id']}}">buy now for<br />IDR {{ Ks::idr($hs['priceRegular']) }} <b class="icon icon-shopping-cart"></b></a>
+                                <a class="slide" href="{{ URL::to('shop/detail') }}/{{ $hs['_id']}}">buy now for<br />IDR {{ Ks::idr($hs['priceRegular']) }} <b class="fa fa-shopping-cart"></b></a>
                             </div>
                         </li>
                     @endforeach
@@ -59,12 +59,12 @@
                 <ul class="slider">
                     @foreach($goodbuy as $hs)
                         <li>
-                            <div class="item">
+                            <div class="item home">
                                 @if(isset($hs['defaultpictures']['medium_url']))
                                     <img src="{{ $hs['defaultpictures']['medium_url']}}">
                                 @endif
                                 <h1>{{ $hs['itemDescription']}}</h1>
-                                <a href="{{ URL::to('shop/detail') }}/{{ $hs['_id']}}">buy now for<br /><span class="strike">IDR {{ Ks::idr($hs['priceRegular']) }}</span> <span class="discount">IDR {{ (isset($hs['priceDiscount']))?Ks::idr($hs['priceDiscount']):'' }}</span> <b class="icon icon-shopping-cart"></b></a>
+                                <a class="slide" href="{{ URL::to('shop/detail') }}/{{ $hs['_id']}}">buy now for<br /><span class="strike">IDR {{ Ks::idr($hs['priceRegular']) }}</span> <span class="discount">IDR {{ (isset($hs['priceDiscount']))?Ks::idr($hs['priceDiscount']):'' }}</span> <b class="fa fa-shopping-cart"></b></a>
                             </div>
                         </li>
                     @endforeach

@@ -11,11 +11,15 @@
 
     <!-- Bootstrap core CSS -->
     {{ HTML::style('bootstrap/css/bootstrap.min.css') }}
-    {{ HTML::style('bootstrap/css/font-awesome.min.css') }}
+    {{ HTML::style('font-awesome/css/font-awesome.min.css') }}
 
     <!-- Custom styles for this template -->
     {{ HTML::style('css/typography.css') }}
     {{ HTML::style('css/sticky-footer-navbar.css') }}
+
+    {{ HTML::style('js/bxslider/jquery.bxslider.css')}}
+    {{ HTML::style('css/lionbars.css')}}
+
     {{ HTML::style('css/app.css') }}
     {{ HTML::style('css/bootstrap-magnify.min.css') }}
     {{ HTML::style('css/multizoom.css') }}
@@ -38,8 +42,6 @@
 
     {{ HTML::script('js/zoomsl-3.0.min.js') }}
 
-    {{ HTML::style('js/bxslider/jquery.bxslider.css')}}
-    {{ HTML::style('css/lionbars.css')}}
 
     <script type="text/javascript">
         $(document).ready(function(){
