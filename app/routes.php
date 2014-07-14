@@ -30,7 +30,7 @@ Route::get('hashme/{mypass}',function($mypass){
 
 Route::get('insta',function(){
     $user_id = 34783131;
-    $user = Instagram::getUser( $user_id );
+    $user = Instagram::User($user_id)->getMedia();
     $media = $user->getMedia();
     print_r($media);
 });
