@@ -28,6 +28,17 @@ Route::get('hashme/{mypass}',function($mypass){
     print Hash::make($mypass);
 });
 
+Route::get('insta',function(){
+    $user_id = 'awidarto';
+    $user = Instagram::getUser( $user_id );
+    $media = $user->getMedia();
+    print_r($media);
+});
+
+Route::get('oauth',function(){
+    Session::put(Config::get('instagram::session_name'), Instagram::getAccessToken(Input::get('code')));
+});
+
 Route::get('page/cat/{slug}','PageController@getCat');
 Route::get('page/view/{slug}','PageController@getView');
 Route::get('page','PageController@getIndex');

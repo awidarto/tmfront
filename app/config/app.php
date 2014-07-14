@@ -115,6 +115,7 @@ return array(
         'Intervention\Helper\DateServiceProvider',
         'Intervention\Helper\StringServiceProvider',
         'Thujohn\Twitter\TwitterServiceProvider',
+        'Elevencodes\InstagramLaravel\InstagramLaravelServiceProvider',
 	),
 
 	/*
@@ -188,6 +189,7 @@ return array(
         'String'          => 'Intervention\Helper\Facades\String',
         'Image'           => 'Intervention\Image\Facades\Image',
         'Twitter'         => 'Thujohn\Twitter\TwitterFacade',
+        'Instagram'       => 'Elevencodes\InstagramLaravel\Facades\InstagramLaravel',
 
 	),
 
