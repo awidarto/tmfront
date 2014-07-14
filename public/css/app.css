@@ -594,3 +594,8 @@ ul#other-picture li{
 .bx-wrapper .bx-prev{
     left:-5px;
 }
+
+b.fa{
+    font-size: 16px;
+    margin-left: 4px;
+}
