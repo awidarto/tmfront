@@ -20,7 +20,7 @@
 
     $instaimage = $instaimages[0];
 
-    print_r($instaimage->images);
+    print_r($instaimage->images->low_resolution->url);
 
     $instaimage = $instaimage->images->low_resolution->url;
 
