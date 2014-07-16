@@ -1,11 +1,11 @@
 <h2>@TOIMOIGRAM</h2>
 
 <?php
-    $user_id = 647213689;
+    $user_id = Config::get('instagram.user_id');
     $instagramconfig = array(
-        'client_id' => 'aa4f0e77c438445a9879040409fa542a',
-        'client_secret'=> '4dd61f9ae62a49a5bcdfc03435a06a3e',
-        'access_token' => 'secret'
+        'client_id' => Config::get('instagram.client_id'),
+        'client_secret'=> Config::get('instagram.client_secret'),
+        'access_token' => Config::get('instagram.access_token');
     );
 
     $api = Instaphp\Instaphp::Instance(null, $instagramconfig);
