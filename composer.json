@@ -20,6 +20,7 @@
         "thujohn/twitter": "dev-master",
         "php-instagram-api/php-instagram-api": "dev-master",
         "elevencodes/instagram-laravel": "2.0.*@dev",
+        "fishmarket/instaphp": "dev-master",
         "pingpong/menus": "1.0.*"
 	},
 	"autoload": {
