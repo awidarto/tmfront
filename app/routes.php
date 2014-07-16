@@ -44,9 +44,9 @@ Route::get('insta',function(){
 
     $instaimages = $instagramedia->data;
 
-    print_r($instaimages);
-
     $instaimage = $instaimages[0];
+
+    print_r($instaimages->images);
 
     $instaimage = $instaimage->images->low_resolution->url;
 
