@@ -25,7 +25,12 @@
     $image_url = $instaimage->images->low_resolution->url;
 
 ?>
-
+<style type="text/css">
+    #instabox img{
+        width:200px;
+        height:auto;
+    }
+</style>
 <div id="instabox" class="lionbar" >
     <img src="{{ $image_url }}">
     </ul>
