@@ -10,7 +10,7 @@
 
     $api = Instaphp\Instaphp::Instance(null, $instagramconfig);
     //var_dump($api); // Epic fail!
-    print_r($api->Users->Recent($user_id) );
+    //print_r($api->Users->Recent($user_id) );
 
     $obj = $api->Users->Recent($user_id);
 
@@ -20,13 +20,13 @@
 
     $instaimage = $instaimages[0];
 
-    print_r($instaimage->images->low_resolution->url);
+    //print_r($instaimage->images->low_resolution->url);
 
-    $instaimage = $instaimage->images->low_resolution->url;
+    $image_url = $instaimage->images->low_resolution->url;
 
 ?>
 
 <div id="instabox" class="lionbar" >
-    <img src="{{ $instaimage }}">
+    <img src="{{ $image_url }}">
     </ul>
 </div>
