@@ -18,7 +18,7 @@
 
     $instaimages = $instagramedia->data;
 
-    $instaimage = array_pop($instaimages);
+    $instaimage = $instaimages[0];
 
     $instaimage = $instaimage->images->low_resolution->url;
 

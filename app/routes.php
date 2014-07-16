@@ -39,7 +39,17 @@ Route::get('insta',function(){
 
     $api = Instaphp\Instaphp::Instance(null, $instagramconfig);
     //var_dump($api); // Epic fail!
-    print_r($api->Users->Recent($user_id) );
+
+    $instagramedia = $api->Users->Recent($user_id);
+
+    $instaimages = $instagramedia->data;
+
+    print_r($instaimages);
+
+    $instaimage = $instaimages[0];
+
+    $instaimage = $instaimage->images->low_resolution->url;
+
 });
 
 Route::get('oauth',function(){
