@@ -5,7 +5,7 @@
     $instagramconfig = array(
         'client_id' => Config::get('instagram.client_id'),
         'client_secret'=> Config::get('instagram.client_secret'),
-        'access_token' => Config::get('instagram.access_token');
+        'access_token' => Config::get('instagram.access_token')
     );
 
     $api = Instaphp\Instaphp::Instance(null, $instagramconfig);
