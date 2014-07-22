@@ -44,7 +44,9 @@ class ShopController extends BaseController {
 
         $currentcount = count($products);
 
-        $total_found = Product::where('categoryLink',$category)->count();
+        $total_found = Product::where('categoryLink',$category)
+                        ->where('status','active')
+                        ->count();
 
         $total_all = Product::count();
 
