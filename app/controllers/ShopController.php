@@ -37,6 +37,7 @@ class ShopController extends BaseController {
         //$categories = Prefs::getProductCategory()->productCatToSelection('slug', 'title', false );
 
         $products = Product::where('categoryLink',$category)
+                        ->where('status','active')
                         ->skip($page * $perpage)
                         ->take($perpage)
                         ->get()->toArray();

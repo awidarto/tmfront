@@ -16,13 +16,19 @@
 
     $instagramedia = $api->Users->Recent($user_id);
 
-    $instaimages = $instagramedia->data;
+    print_r($instagramedia);
 
-    $instaimage = $instaimages[0];
+    die();
 
-    //print_r($instaimage->images->low_resolution->url);
+    if(!is_null($instagramedia)){
+        $instaimages = $instagramedia->data;
 
-    $image_url = $instaimage->images->low_resolution->url;
+        $instaimage = $instaimages[0];
+
+        $image_url = $instaimage->images->low_resolution->url;
+    }else{
+        $image_url = URL::to('images/th_default.png');
+    }
 
 ?>
 <style type="text/css">

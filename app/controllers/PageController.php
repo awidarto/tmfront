@@ -46,13 +46,16 @@ class PageController extends BaseController {
 
         $pages = Page::where('section','=',$section)
                     ->where('category','=',$category)
+                    ->where('status','active')
                     ->skip($page * $perpage)
                     ->take($perpage)
                     ->get()->toArray();
 
         $currentcount = count($pages);
 
-        $total_found = Page::where('categoryLink',$category)->count();
+        $total_found = Page::where('categoryLink',$category)
+                        ->where('status','active')
+                        ->count();
 
         $total_all = Page::count();
 

@@ -39,6 +39,41 @@ class PostController extends BaseController {
 
     public function getList($section,$category)
     {
+        $page = Input::get('page');
+        $page = (is_null($page))?0:$page;
+
+        $perpage = Config::get('shop.pagination_itemperpage');
+
+        $pages = Posts::where('section','=',$section)
+                    ->where('category','=',$category)
+                    ->where('status','active')
+                    ->skip($page * $perpage)
+                    ->take($perpage)
+                    ->get()->toArray();
+
+        $currentcount = count($pages);
+
+        $total_found = Posts::where('categoryLink',$category)
+                        ->where('status','active')
+                        ->count();
+
+        $total_all = Posts::count();
+
+        $paging = floor($total_found / $perpage);
+
+        return View::make('pages.pagelist')
+                    ->with('pages',$pages)
+                    ->with('total',$total_found)
+                    ->with('alltotal',$total_all)
+                    ->with('current',$page)
+                    ->with('perpage',$perpage)
+                    ->with('currentcount',$currentcount)
+                    ->with('paging',$paging);
+    }
+
+
+    public function __etList($section,$category)
+    {
         /*
         if(!is_null($section) && !is_null($category) ){
             $pages = Posts::where('section','=',$section)->where('category','=',$category)->get()->toArray();
