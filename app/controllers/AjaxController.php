@@ -49,7 +49,7 @@ class AjaxController extends BaseController {
         $instagramconfig = array(
             'client_id' => Config::get('instagram.client_id'),
             'client_secret'=> Config::get('instagram.client_secret'),
-            'access_token' => Config::get('instagram.access_token')
+            //'access_token' => Config::get('instagram.access_token')
         );
 
         $api = Instaphp\Instaphp::Instance(null, $instagramconfig);
@@ -57,18 +57,17 @@ class AjaxController extends BaseController {
         //print_r($api->Users->Recent($user_id) );
         $image_url = URL::to('images/th_default.png');
 
-        $obj = $api->Users->Recent($user_id);
+        //$obj = $api->Users->Recent($user_id);
 
         $instagramedia = $api->Users->Recent($user_id);
 
-        if(isset( $instagramedia->data )){
+        //if(isset( $instagramedia->data )){
             $instaimages = $instagramedia->data;
 
             $instaimage = $instaimages[0];
 
             $image_url = $instaimage->images->low_resolution->url;
-
-        }
+        //}
 
         return Response::json(array('result'=>'OK', 'image'=>$image_url));
     }
