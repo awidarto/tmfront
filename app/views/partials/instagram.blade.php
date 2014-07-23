@@ -16,10 +16,6 @@
 
     $instagramedia = $api->Users->Recent($user_id);
 
-    print_r($instagramedia);
-
-    die();
-
     if(!is_null($instagramedia)){
         $instaimages = $instagramedia->data;
 
