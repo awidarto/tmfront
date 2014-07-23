@@ -52,22 +52,23 @@ class AjaxController extends BaseController {
             //'access_token' => Config::get('instagram.access_token')
         );
 
-        $api = Instaphp\Instaphp::Instance(null, $instagramconfig);
-        //var_dump($api); // Epic fail!
-        //print_r($api->Users->Recent($user_id) );
+        $api_url = 'https://api.instagram.com/v1/users/'.Config::get('instagram.user_id').'/media/recent/?client_id='.Config::get('instagram.client_id');
+
         $image_url = URL::to('images/th_default.png');
 
-        //$obj = $api->Users->Recent($user_id);
+        $api = Buzz::get($api_url);
 
-        $instagramedia = $api->Users->Recent($user_id);
+        $instagramedia = json_decode( $api->getContent() );
 
-        //if(isset( $instagramedia->data )){
+
+        if(isset( $instagramedia->data )){
             $instaimages = $instagramedia->data;
 
             $instaimage = $instaimages[0];
 
             $image_url = $instaimage->images->low_resolution->url;
-        //}
+
+        }
 
         return Response::json(array('result'=>'OK', 'image'=>$image_url));
     }
