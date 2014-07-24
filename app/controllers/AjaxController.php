@@ -56,7 +56,9 @@ class AjaxController extends BaseController {
 
         $image_url = URL::to('images/th_default.png');
 
-        $api = Buzz::get($api_url);
+        $browser = new Buzz\Browser(new Buzz\Client\Curl());
+
+        $api = $browser->get($api_url);
 
         $instagramedia = json_decode( $api->getContent() );
 
