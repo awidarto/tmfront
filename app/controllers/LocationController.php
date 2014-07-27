@@ -17,6 +17,8 @@ class LocationController extends BaseController {
 
     public function getIndex()
     {
+        $body = Page::where('tags','like','%contact us%')->orWhere('tags','like','%locations%')->first()->toArray();
+
         $locations = Outlet::get()->toArray();
 
         $markers = array();
@@ -27,6 +29,7 @@ class LocationController extends BaseController {
         }
 
         return View::make('pages.location')
+            ->with('body', $body)
             ->with('markers', $markers)
             ->with('title','Find Us')
             ->with('locs',$locations);

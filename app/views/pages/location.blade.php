@@ -68,6 +68,9 @@
             </div>
             <h2>{{ $title }}</h2>
             <div style="display:block;font-size:12px;">
+                @if(!empty($body))
+                    {{ $body[0]['body'] }}
+                @endif
                 <div id="map">
 
                 </div>
