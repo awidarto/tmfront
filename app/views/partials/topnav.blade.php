@@ -53,7 +53,7 @@
 
             <li {{ sa('press') }} ><a href="{{ URL::to('press') }}" >Press</a></li>
             <li {{ sa('page/view/about') }} ><a href="{{ URL::to('page/view/about') }}" >About Us</a></li>
-            <li {{ sa('page/view/contact') }} ><a href="{{ URL::to('page/view/contact') }}"  >Find Us</a></li>
+            <li {{ sa('location') }} ><a href="{{ URL::to('location') }}"  >Find Us</a></li>
 
           </ul>
 
