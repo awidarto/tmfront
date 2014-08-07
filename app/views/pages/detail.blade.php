@@ -187,93 +187,51 @@
             <div class="col-md-6">
                 <h2>RELATED ITEMS</h2>
                 <ul id="related" class="item-col">
-                    <li>
-                        <div class="item">
-                            <a href="{{ URL::to('shop/detail')}}">
-                                <h1>Film Counter Pillow</h1>
-                                buy now for IDR 2.350.000
+                        @if(isset( $product['relatedProducts'] ))
+                            @foreach(Commerce::splitProductTag($product['relatedProducts']) as $prod )
+                                <li>
+                                    <div class="item">
+                                        <a href="{{ URL::to('shop/detail/'.$prod['_id'])}}">
+                                            <h1>{{ $prod['itemDescription']}}</h1>
+                                            @if(isset($prod['defaultpictures']['medium_url'])
+                                                && $prod['defaultpictures']['medium_url'] != ''
+                                                )
+                                                <img src="{{ $prod['defaultpictures']['medium_url'] }}" class="img-responsive" >
+                                            @else
+                                                <img src="{{ URL::to('/') }}/images/th_default.png" class="img-responsive" >
+                                            @endif
+                                            buy now for IDR {{ Ks::idr($prod['priceRegular']) }}
+                                        </a>
 
-                            </a>
-                            <img src="{{ URL::to('/') }}/images/dummy/detail_rel_1.jpg" class="img-responsive" >
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <a href="{{ URL::to('shop/detail')}}">
-                                <h1>Cinema Ticket Pillow</h1>
-                                buy now for IDR 350.000
-
-                                <img src="{{ URL::to('/') }}/images/dummy/detail_rel_2.jpg" class="img-responsive" >
-                            </a>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="item">
-                            <a href="{{ URL::to('shop/detail')}}">
-                                <h1>Film Counter Pillow</h1>
-                                buy now for IDR 2.350.000
-
-                            </a>
-                            <img src="{{ URL::to('/') }}/images/dummy/detail_rel_1.jpg" class="img-responsive" >
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <a href="{{ URL::to('shop/detail')}}">
-                                <h1>Cinema Ticket Pillow</h1>
-                                buy now for IDR 350.000
-
-                                <img src="{{ URL::to('/') }}/images/dummy/detail_rel_2.jpg" class="img-responsive" >
-                            </a>
-                        </div>
-                    </li>
-
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endif
                 </ul>
             </div>
             <div class="col-md-6">
                     <h2>RECOMMENDED</h2>
                     <ul id="recommended" class="item-col">
-                        <li>
-                            <div class="item">
-                                <a href="{{ URL::to('shop/detail')}}">
-                                    <h1>Film Dressing Table</h1>
-                                    buy now for IDR 2.350.000
+                        @if(isset( $product['recommendedProducts'] ))
+                            @foreach(Commerce::splitProductTag($product['recommendedProducts']) as $prod )
+                                <li>
+                                    <div class="item">
+                                        <a href="{{ URL::to('shop/detail/'.$prod['_id'])}}">
+                                            <h1>{{ $prod['itemDescription']}}</h1>
+                                            @if(isset($prod['defaultpictures']['medium_url'])
+                                                && $prod['defaultpictures']['medium_url'] != ''
+                                                )
+                                                <img src="{{ $prod['defaultpictures']['medium_url'] }}" class="img-responsive" >
+                                            @else
+                                                <img src="{{ URL::to('/') }}/images/th_default.png" class="img-responsive" >
+                                            @endif
+                                            buy now for IDR {{ Ks::idr($prod['priceRegular']) }}
+                                        </a>
 
-                                    <img src="{{ URL::to('/') }}/images/dummy/detail_rec_1.jpg" class="img-responsive" >
-                                </a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item">
-                                <a href="{{ URL::to('shop/detail')}}">
-                                    <h1>Film Side Table</h1>
-                                    buy now for IDR 350.000
-
-                                    <img src="{{ URL::to('/') }}/images/dummy/detail_rec_2.jpg" class="img-responsive" >
-                                </a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item">
-                                <a href="{{ URL::to('shop/detail')}}">
-                                    <h1>Film Dressing Table</h1>
-                                    buy now for IDR 2.350.000
-
-                                    <img src="{{ URL::to('/') }}/images/dummy/detail_rec_1.jpg" class="img-responsive" >
-                                </a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item">
-                                <a href="{{ URL::to('shop/detail')}}">
-                                    <h1>Film Side Table</h1>
-                                    buy now for IDR 350.000
-
-                                    <img src="{{ URL::to('/') }}/images/dummy/detail_rec_2.jpg" class="img-responsive" >
-                                </a>
-                            </div>
-                        </li>
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endif
                     </ul>
             </div>
 

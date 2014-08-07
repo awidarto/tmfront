@@ -89,4 +89,15 @@ class Commerce{
         }
     }
 
+    public static function splitProductTag($tag, $as_array = true){
+        $tag =explode(',', $tag);
+        $products = Product::whereIn('SKU',$tag)->get();
+
+        if($as_array){
+            $products = $products->toArray();
+        }
+
+        return $products;
+    }
+
 }

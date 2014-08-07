@@ -587,6 +587,11 @@ ul#other-picture li{
     height: auto;
 }
 
+.item img.img-responsive {
+    display: block;
+    margin-left: 0px;
+}
+
 .bx-wrapper .bx-next{
     right:-5px;
 }
