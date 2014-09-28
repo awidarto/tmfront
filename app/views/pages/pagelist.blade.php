@@ -9,14 +9,14 @@
             </div>
             <ul id="col-list">
                 @for($i = 0; $i < count($pages);$i++)
-                    <li class="item-col">
+                    <li class="">
                         <div class="item">
                             <a href="{{ URL::to('page/view/'.$pages[$i]['slug'])}}">
                                 <h1>{{ $pages[$i]['title'] }}</h1>
                                 <p>
-                                    {{ str_limit(strip_tags($pages[$i]['body']), 150, '...')  }}
+                                    {{ str_limit(strip_tags($pages[$i]['body']), 350, '...')  }}
                                 </p>
-                                <span>more &raquo;</span>
+                                <span class="pull-right">more &raquo;</span>
                             </a>
                         </div>
                     </li>
@@ -24,9 +24,11 @@
             </ul>
                     <div class="clearfix"></div>
                 <div class="row" style="border:none;">
-                    <div class="pull-left"  >
-                        Items {{ ($current * $perpage) + 1 }} to {{ ( $current * $perpage ) + $currentcount }} of {{$total}}{{-- total (Filtered from {{$alltotal}} entries) --}}
+                    {{--
+                    <div class="pull-right"  >
+                        Items {{ ($current * $perpage) + 1 }} to {{ ( $current * $perpage ) + $currentcount }} of {{$total}} total (Filtered from {{$alltotal}} entries)
                     </div>
+                    --}}
 
                     <div class="pagination">
                         <ul>
