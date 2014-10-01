@@ -39,6 +39,7 @@
 
         </div>
         <div class="col-md-4 visible-lg tm-side item-detail">
+                @include('partials.identity')
                 <h2 style="display:block;padding-left:0px;font-size:24px;font-weight:bold;">{{ $product['itemDescription']}}</h2>
                 buy now for IDR {{ Ks::idr($product['priceRegular']) }}
                 <div id="item-description">
@@ -129,16 +130,55 @@
                     </ul>
                 </div>
                 --}}
-                <div class="buy-box">
-                    <span class="xlabel">Select Quantity</span>
-                    <select>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select><br />
-                    <span class="xlabel">Add to Cart</span> <i class="icon-shopping-cart icon-2x"></i>
+                <div class="buy-box form-inline">
+                    <span class="xlabel">Select Quantity</span><br />
+                    <span id="qty-select">
+                    {{ Commerce::getAvailableCount($product['SKU'],Config::get('site.outlet_id'))->availableToSelection()->availableSelectionToHtml('quantity','') }}
+                    </span>
+                    <span class="btn btn-primary btn-sm" id="add-to-cart" ><i class="fa fa-shopping-cart fa-lg"></i> Add to Cart</span>
                 </div>
+                @if(Auth::check())
+                    <script type="text/javascript">
+                        $(document).ready(function(){
+                            $('#add-to-cart').on('click',function(){
+
+                                var sku = '{{ $product['SKU'] }}';
+                                var qty = $('#quantity').val();
+                                var cart = '{{ Auth::user()->activeCart }}';
+
+                                $.post('{{ URL::to('shop/addtocart' ) }}',
+                                    {
+                                        sku : sku,
+                                        qty : qty,
+                                        cart : cart
+                                    },
+                                    function(data){
+                                        if(data.result == 'OK'){
+                                            $('span#cart-qty').html(data.total_count);
+
+                                            $('select#quantity').html();
+                                        }else{
+                                            alert( 'Failed adding to cart')
+                                        }
+                                    },'json'
+                                );
+
+                            });
+
+                            function updateselector(count){
+                                var opt = '';
+                                for(var i = 1; i <= count;i++){
+                                    opt += '<option value="' + i + '">' + i +'</option>';
+                                }
+                                return opt;
+                            }
+                        });
+
+
+                    </script>
+                @else
+
+                @endif
 
             {{--
             @include('partials.identity')

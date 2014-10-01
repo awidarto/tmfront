@@ -4,7 +4,7 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.1.*",
+		"laravel/framework": "4.2.*",
         "jenssegers/mongodb": "*",
         "nitmedia/wkhtml2pdf": "dev-master",
         "noherczeg/breadcrumb": "dev-master",
@@ -13,7 +13,7 @@
         "intervention/imagecache": "dev-master",
         "intervention/helper": "dev-master",
         "intervention/validation": "dev-master",
-        "alexwhitman/view-themes": "1.1.2",
+        "alexwhitman/view-themes": "1.2.*",
         "mj/breadcrumb": "dev-master",
         "knplabs/knp-snappy": "*",
         "barryvdh/laravel-snappy": "dev-master",

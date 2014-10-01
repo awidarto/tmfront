@@ -197,7 +197,7 @@ Route::post('login',function(){
             // user does not exist in database
             // return them to login with message
             Session::flash('loginError', 'This user does not exist.');
-            return Redirect::to('login');
+            return Redirect::to('signup');
         }
 
     }
@@ -207,6 +207,77 @@ Route::post('login',function(){
 Route::get('logout',function(){
     Auth::logout();
     return Redirect::to('/');
+});
+
+Route::get('signup',function(){
+    Former::framework('TwitterBootstrap3');
+    return View::make('pages.register')->with('title','Sign Up');
+});
+
+Route::post('signup',function(){
+    // validate the info, create rules for the inputs
+    $rules = array(
+        'firstname'    => 'required',
+        'lastname'    => 'required',
+        'email'    => 'required|email|unique:members',
+        'pass' => 'required|alphaNum|min:3|same:repass'
+    );
+
+    // run the validation rules on the inputs from the form
+    $validator = Validator::make(Input::all(), $rules);
+
+    // if the validator fails, redirect back to the form
+    if ($validator->fails()) {
+
+        Event::fire('log.a',array('create account','createaccount',Input::get('email'),'validation fail'));
+
+        Session::flash('signupError', $validator->messages() );
+        return Redirect::to('signup');
+    } else {
+
+        $data = Input::get();
+
+        unset($data['csrf_token']);
+
+        $model = new Buyer();
+
+        $activation = str_random(15);
+
+        $data['activation'] = $activation;
+        $data['activeCart'] = '';
+
+        $data['createdDate'] = new MongoDate();
+        $data['lastUpdate'] = new MongoDate();
+
+        unset($data['repass']);
+        $data['pass'] = Hash::make($data['pass']);
+
+        $data['fullname'] = $data['firstname'].' '.$data['lastname'];
+
+
+        if($obj = $model->insert($data)){
+            Event::fire('log.a',array('create account','createaccount',Input::get('email'),'account created'));
+            //Event::fire('product.createformadmin',array($obj['_id'],$passwordRandom,$obj['conventionPaymentStatus']));
+            //return Redirect::to('account/success');
+
+            //$newuser = User::where('activation', $activation)->first()->toArray();
+
+            Session::flash('signupSuccess', 'Thank you and welcome to '.Config::get('site.name').' ! ');
+            return Redirect::to('/');
+
+        }else{
+
+            Event::fire('log.a',array('create account','createaccount',Input::get('email'),'fail to create account'));
+
+            //return Redirect::to($this->backlink)->with('notify_success',ucfirst(Str::singular($controller_name)).' saving failed');
+            Session::flash('signupError', 'Failed to create membership');
+            return Redirect::to('signup');
+        }
+
+    }
+
+
+    return View::make('pages.createaccount');
 });
 
 /* Filters */

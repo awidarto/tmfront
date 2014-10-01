@@ -55,7 +55,6 @@ class Prefs {
             $ret[$c->{$value}] = $c->{$label};
         }
 
-
         return $ret;
     }
 

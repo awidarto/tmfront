@@ -39,7 +39,11 @@ class HtmlTable {
         if(!is_null($this->header)) {
             $table .= '<thead><tr>';
             foreach ($this->header as $value) {
-                $table .= '<th>' . ucfirst($value) . '</th>';
+                if(is_array($value)){
+                    $table .= '<th '.$value['attr'].'>' . $value['value'] . '</th>';
+                }else{
+                    $table .= '<th>' . $value . '</th>';
+                }
             }
             $table .= '</thead></tr>';
         }
@@ -58,7 +62,11 @@ class HtmlTable {
         if(is_null($array)) return false;
             $row = '<tr>';
             foreach ($array as $value) {
-                $row .= '<td>' . $value . '</td>';
+                if(is_array($value)){
+                    $row .= '<td '.$value['attr'].'>' . $value['value'] . '</td>';
+                }else{
+                    $row .= '<td>' . $value . '</td>';
+                }
             }
             $row .= '</tr>';
             return $row;
