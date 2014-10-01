@@ -50,6 +50,9 @@
             {{ Former::text('search','')->placeholder('Search')->id('search')->class('search') }}
         {{ Form::close() }}
         <div class="clearfix"></div>
+        <p>
+            Not yet registered ? <a href="{{ URL::to('signup')}}">sign up here</a>
+        </p>
     </div>
     <script type="text/javascript">
         $(document).ready(function(){
