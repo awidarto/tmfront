@@ -33,6 +33,12 @@ Route::group( array('domain'=>'{sub}.toimoi.co.id'), function(){
     });
 });
 
+Route::group( array('domain'=>'toimoi.co.id'), function(){
+    Route::get('/',function(){
+        return View::make('pages.under');
+    });
+});
+
 Route::get('/', 'HomeController@getIndex');
 
 Route::get('hashme/{mypass}',function($mypass){
