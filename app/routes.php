@@ -22,7 +22,6 @@ Route::controller('press', 'PressController');
 Route::controller('location', 'LocationController');
 
 
-Route::get('/', 'HomeController@getIndex');
 
 Route::get('under',function(){
     return View::make('pages.under');
@@ -34,6 +33,7 @@ Route::group( array('domain'=>'toimoi.co.id'), function(){
     });
 });
 
+Route::get('/', 'HomeController@getIndex');
 
 Route::get('hashme/{mypass}',function($mypass){
 
