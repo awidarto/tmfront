@@ -60,16 +60,21 @@
     <div id="wrap">
         <!-- topmost header -->
         <div id="tm-head" class="visible-md visible-lg">
-            <div class="container">
-                <div class="col-lg-8" id="tm-logo-container">
-                    <a href="{{ URL::to('/') }}"><img class="img-responsive" src="{{ URL::to('images/').'/tmlogotrans.png' }}"></a>
+            @if($head = Prefs::getHeader())
+                {{ $head }}
+            @else
+                <div class="container">
+                    <div class="col-lg-8" id="tm-logo-container">
+                        <a href="{{ URL::to('/') }}"><img class="img-responsive" src="{{ URL::to('images/').'/tmlogotrans.png' }}"></a>
+                    </div>
+                    <div class="col-lg-4" id="tm-side-head">
+                        @if(isset($tmhead) && is_array($tmhead) && !empty($tmhead))
+                            {{ $tmhead[0]['body'] }}
+                        @endif
+                    </div>
                 </div>
-                <div class="col-lg-4" id="tm-side-head">
-                    @if(isset($tmhead) && is_array($tmhead) && !empty($tmhead))
-                        {{ $tmhead[0]['body'] }}
-                    @endif
-                </div>
-            </div>
+
+            @endif
         </div>
         <!-- Fixed navbar -->
         <div class="navbar navbar-default "  id="tm-head-navbar">

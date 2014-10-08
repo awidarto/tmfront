@@ -304,7 +304,7 @@ Route::filter('auth', function()
 
     if (Auth::guest()){
         Session::put('redirect',URL::full());
-        return Redirect::to('login');
+        return Redirect::to('/');
     }
 
     if($redirect = Session::get('redirect')){

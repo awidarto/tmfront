@@ -1,6 +1,11 @@
 @extends('layout.front')
 
 @section('content')
+<style type="text/css">
+    td input.itemqty {
+        margin-right:4px;
+    }
+</style>
 <div id="home">
     <div class="row">
         <div class="col-md-8" id="main">
@@ -20,4 +25,29 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.update-qty').on('click',function(){
+            var item = $(this).prev('input');
+            console.log(item.val());
+            $.post('{{ URL::to('shop/changeqty')}}',
+            {
+                sku : item.data('sku'),
+                prevqty : item.data('preval'),
+                qty : item.val(),
+                session : '{{ Auth::user()->activeCart }}'
+            },function(data){
+                if(data.result == 'OK:SUB'){
+                    console.log(data.affected);
+                    window.location = '{{ URL::to('shop/cart')}}';
+                }else if(data.result == 'OK:ADD'){
+                    console.log(data.affected.item_count);
+                    window.location = '{{ URL::to('shop/cart')}}';
+                }else{
+                    alert('No changes made to cart');
+                }
+            },'json');
+        });
+    });
+</script>
 @stop

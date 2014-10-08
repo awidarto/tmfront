@@ -11,7 +11,7 @@
         color: #222;
     }
 
-    button#submit{
+    button#print{
         text-transform: uppercase;
         color: #FFF;
         font-size: 12px;
@@ -24,11 +24,9 @@
             <div class="col-md-4 visible-xs">
                 @include('partials.identity')
             </div>
-            <h2>Shopping Cart</h2>
+            <h2>Purchase Receipt</h2>
             <div style="display:block;font-size:12px;">
-                <form id="paymethod" action="{{ URL::to('shop/review')}}" method="post" >
                     {{ $itemtable }}
-                    {{ Former::hidden('status','final') }}
                     <div class="row">
                         <div class="col-md-6">
                             <h6>Pay using</h6>
@@ -43,16 +41,17 @@
                     </div>
                     <div class="row" >
                         <div class="col-md-4">
-                            <a href="{{ URL::to('shop/cart')}}" class="btn btn-primary pull-left" id="to-cart"><i class="fa fa-arrow-left"></i> back to cart</a>
+                        <div class="col-md-4 center">
+                            <a href="{{ URL::to('shop/purchases')}}" class="btn btn-primary pull-left" id="confirm">back to my purchases</a>
+                        </div>
                         </div>
                         <div class="col-md-4 center">
-                            <a href="{{ URL::to('shop/cancel')}}" class="btn btn-danger pull-right" id="cancel">cancel purchase</a>
+                            <a href="{{ URL::to('shop/confirm')}}" class="btn btn-primary pull-left" id="confirm">confirm payment</a>
                         </div>
                         <div class="col-md-4">
-                            <button class="btn btn-primary pull-right" id="submit">check out</a>
+                            <a href="{{ URL::to('shop/print/'.$purchase_id)}}" class="btn btn-primary pull-right" id="print">print receipt</a>
                         </div>
                     </div>
-                </form>
             </div>
         </div>
         <div class="col-md-4 visible-lg tm-side">

@@ -5,6 +5,7 @@
     </div>
     <div>
         <p>You have <span id="cart-qty" >{{ Commerce::getCartItemCount(Auth::user()->activeCart,Config::get('site.outlet_id') )}}</span> items in your shopping cart<br />
+            <a class="pull-left" href="{{ URL::to('shop/purchases')}}"><i class="fa fa-money"></i> My Purchases</a>
             <a class="pull-right" href="{{ URL::to('shop/cart')}}"><i class="fa fa-shopping-cart"></i> View Cart</a>
         </p>
     </div>

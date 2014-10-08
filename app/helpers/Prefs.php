@@ -212,5 +212,14 @@ class Prefs {
     {
         return Config::get('kickstart.default_theme');
     }
+    public static function getHeader()
+    {
+        $head = Siteheader::where('publishing','published')->first()->toArray();
+        if(count($head) > 0){
+            return $head['body'];
+        }else{
+            return false;
+        }
+    }
 
 }
