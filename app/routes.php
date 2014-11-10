@@ -21,6 +21,7 @@ Route::controller('event', 'EventController');
 Route::controller('press', 'PressController');
 Route::controller('location', 'LocationController');
 
+Route::controller('doku', 'DokuController');
 
 
 Route::get('under',function(){
