@@ -20,6 +20,11 @@ class DokuController extends BaseController {
 
     }
 
+    public function getPayment()
+    {
+        return View::make('doku.request');
+    }
+
     public function postRedirect()
     {
         $in = Input::get();
@@ -51,7 +56,6 @@ class DokuController extends BaseController {
         $verifyscore = $in['VERIFYSCORE'];
         $verifystatus = $in['VERIFYSTATUS'];
 
-    // Basic SQL
         $doku = Doku::where('transidmerchant',$order_number)
                     ->where('trxstatus','Requested')
                     ->first();
