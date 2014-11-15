@@ -26,7 +26,11 @@
             </div>
             <h2>My Purchases</h2>
             <div style="display:block;font-size:12px;">
-                {{ $itemtable }}
+                @if($nopurchase)
+                    {{ $itemtable }}
+                @else
+                    <p>You have no purchase before, would you like to <a href="{{ URL::to('/') }}" alt="shop home">look around the shop ?</a></p>
+                @endif
             </div>
         </div>
         <div class="col-md-4 visible-lg tm-side">

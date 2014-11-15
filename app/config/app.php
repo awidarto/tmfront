@@ -109,14 +109,15 @@ return array(
 
         'Jenssegers\Mongodb\MongodbServiceProvider',
         'Former\FormerServiceProvider',
-        'Noherczeg\Breadcrumb\BreadcrumbServiceProvider',
+        //'Noherczeg\Breadcrumb\BreadcrumbServiceProvider',
         'Intervention\Validation\ValidationServiceProvider',
         'Intervention\Image\ImageServiceProvider',
         'Intervention\Helper\DateServiceProvider',
         'Intervention\Helper\StringServiceProvider',
         'Thujohn\Twitter\TwitterServiceProvider',
         'Elevencodes\InstagramLaravel\InstagramLaravelServiceProvider',
-        'Buzz\BuzzServiceProvider'
+        'Buzz\BuzzServiceProvider',
+        'Creitive\Breadcrumbs\BreadcrumbsServiceProvider',
 	),
 
 	/*
@@ -185,7 +186,8 @@ return array(
         'View'            => 'Illuminate\Support\Facades\View',
 
         'Former'          => 'Former\Facades\Former',
-        'Breadcrumb'      => 'Noherczeg\Breadcrumb\Facades\Breadcrumb',
+        //'Breadcrumb'      => 'Noherczeg\Breadcrumb\Facades\Breadcrumb',
+        'Breadcrumbs'     => 'Creitive\Breadcrumbs\Facades\Breadcrumbs',
         'Date'            => 'Intervention\Helper\Facades\Date',
         'String'          => 'Intervention\Helper\Facades\String',
         'Image'           => 'Intervention\Image\Facades\Image',

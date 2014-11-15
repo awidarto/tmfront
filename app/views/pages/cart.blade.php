@@ -14,8 +14,14 @@
             </div>
             <h2>Shopping Cart</h2>
             <div style="display:block;font-size:12px;">
+                @if($nocart)
                 {{ $itemtable }}
                 <a href="{{ URL::to('shop/methods')}}" class="btn btn-primary pull-right" id="check-out">select payment & delivery method</a>
+                @else
+                    <p>
+                        You have no active shopping cart, would you like to <a href="{{ URL::to('/') }}" alt="shop home">look around the shop ?</a>
+                    </p>
+                @endif
             </div>
         </div>
         <div class="col-md-4 visible-lg tm-side">

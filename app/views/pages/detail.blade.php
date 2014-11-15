@@ -2,6 +2,7 @@
 
 @section('content')
 {{-- print_r($product)--}}
+{{ Breadcrumbs::render() }}
 <div id="home">
     <div class="row" id="item-picture" style="border-bottom:none;">
         <div class="col-md-8">

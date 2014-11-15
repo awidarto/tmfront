@@ -17,6 +17,11 @@ class ShopController extends BaseController {
     public function __construct(){
         date_default_timezone_set('Asia/Jakarta');
         $this->beforeFilter('auth', array('on'=>'get', 'only'=>array('getCart','getMethods','getReview','getCommit') ));
+
+        Breadcrumbs::setDivider('');
+        Breadcrumbs::setCssClasses('breadcrumb');
+        Breadcrumbs::addCrumb('Home','/');
+        Breadcrumbs::addCrumb('Shop','shop');
     }
 
 
@@ -29,6 +34,9 @@ class ShopController extends BaseController {
     {
 
         $product = Product::find($id);
+
+        Breadcrumbs::addCrumb('Detail','detail');
+        Breadcrumbs::addCrumb($product->itemDescription,'detail');
 
         return View::make('pages.detail')->with('product',$product);
     }
@@ -143,7 +151,9 @@ class ShopController extends BaseController {
         $t = new HtmlTable($tab_data, $attr, $header);
         $itemtable = $t->build();
 
-        return View::make('pages.cart')->with('itemtable',$itemtable);
+        $nocart = ($session_id == '')?false:true;
+
+        return View::make('pages.cart')->with('itemtable',$itemtable)->with('nocart',$nocart);
     }
 
     public function postCart()
@@ -487,6 +497,8 @@ class ShopController extends BaseController {
             'purchase status'
         );
 
+        $tab_data = array();
+
         foreach($purchases->toArray() as $p){
             $tab_data[] = array($p['createdDate'],
                 '<a href="'.URL::to('shop/receipt/'.$p['sessionId'] ).'">'.$p['sessionId'].'</a>',
@@ -494,11 +506,13 @@ class ShopController extends BaseController {
                 $p['transactionstatus'] );
         }
 
+        $nopurchase = (count($tab_data) == 0)?false:true;
+
         $attr = array('class'=>'table', 'id'=>'transTab', 'style'=>'width:100%;', 'border'=>'0');
         $t = new HtmlTable($tab_data, $attr, $header);
         $itemtable = $t->build();
 
-        return View::make('pages.purchases')->with('itemtable',$itemtable);
+        return View::make('pages.purchases')->with('itemtable',$itemtable)->with('nopurchase',$nopurchase);
     }
 
     public function getOrders()
