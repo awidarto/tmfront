@@ -20,8 +20,7 @@ class ShopController extends BaseController {
 
         Breadcrumbs::setDivider('');
         Breadcrumbs::setCssClasses('breadcrumb');
-        Breadcrumbs::addCrumb('Home','/');
-        Breadcrumbs::addCrumb('Shop','shop');
+        Breadcrumbs::addCrumb('Home',URL::to('/'));
     }
 
 
@@ -35,7 +34,8 @@ class ShopController extends BaseController {
 
         $product = Product::find($id);
 
-        Breadcrumbs::addCrumb('Detail','detail');
+        Breadcrumbs::addCrumb($product->category,URL::to('shop/collection').'/'.$product->categoryLink);
+
         Breadcrumbs::addCrumb($product->itemDescription,'detail');
 
         return View::make('pages.detail')->with('product',$product);
@@ -49,7 +49,7 @@ class ShopController extends BaseController {
 
         $perpage = Config::get('shop.pagination_itemperpage');
 
-        //$categories = Prefs::getProductCategory()->productCatToSelection('slug', 'title', false );
+        $categories = Prefs::getProductCategory()->productCatToSelection('slug', 'title', false );
 
         $products = Product::where('categoryLink',$category)
                         ->where('status','active')
@@ -66,6 +66,10 @@ class ShopController extends BaseController {
         $total_all = Product::count();
 
         $paging = floor($total_found / $perpage);
+
+        $categoryName = $categories[$category];
+
+        Breadcrumbs::addCrumb($categoryName,URL::to('shop/collection').'/'.$category);
 
         return View::make('pages.collection')
             ->with('products',$products)

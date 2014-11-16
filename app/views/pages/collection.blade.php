@@ -17,7 +17,7 @@
                 @include('partials.identity')
             </div>
 
-
+            {{ Breadcrumbs::render() }}
             @if(count($products) > 0 )
                 <div id="col-list" class="item-col">
                     @for($i = 0; $i < count($products);$i++)

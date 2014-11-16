@@ -620,3 +620,13 @@ b.fa{
 td.right{
     text-align: right;
 }
+
+.breadcrumb>.active {
+    color: #777;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.breadcrumb{
+    background-color: transparent;
+}
