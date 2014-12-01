@@ -7,6 +7,7 @@
             <div class="col-md-4 visible-xs">
                 @include('partials.identity')
             </div>
+            {{ Breadcrumbs::render() }}
             @if(is_null($content))
                 <h2>Page Doesn't Exists</h2>
             @else

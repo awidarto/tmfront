@@ -7,6 +7,7 @@
             <div class="col-md-4 visible-xs">
                 @include('partials.identity')
             </div>
+            {{ Breadcrumbs::render() }}
             <ul id="col-list">
                 @for($i = 0; $i < count($pages);$i++)
                     <li class="">

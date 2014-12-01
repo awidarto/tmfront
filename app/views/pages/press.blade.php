@@ -30,6 +30,9 @@
             <div class="col-md-4 visible-xs">
                 @include('partials.identity')
             </div>
+
+            {{ Breadcrumbs::render() }}
+
             <h2>{{ $title }}</h2>
             @foreach($pages as $page)
                 <div id="{{ $page['title'] }}" class="gridcontainer">

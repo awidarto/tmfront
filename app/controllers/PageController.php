@@ -14,6 +14,12 @@ class PageController extends BaseController {
     |   Route::get('/', 'HomeController@showWelcome');
     |
     */
+    public function __construct(){
+        date_default_timezone_set('Asia/Jakarta');
+        Breadcrumbs::setDivider('');
+        Breadcrumbs::setCssClasses('breadcrumb');
+        Breadcrumbs::addCrumb('Home',URL::to('/'));
+    }
 
     public function getIndex()
     {
@@ -60,6 +66,9 @@ class PageController extends BaseController {
         $total_all = Page::count();
 
         $paging = floor($total_found / $perpage);
+
+        Breadcrumbs::addCrumb($section,URL::to('shop/projects').'/'.$section);
+        Breadcrumbs::addCrumb($category,URL::to('shop/projectds').'/'.$category);
 
         return View::make('pages.pagelist')
                     ->with('pages',$pages)

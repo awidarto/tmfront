@@ -14,9 +14,18 @@ class NewsController extends BaseController {
     |   Route::get('/', 'HomeController@showWelcome');
     |
     */
+    public function __construct(){
+        date_default_timezone_set('Asia/Jakarta');
+        Breadcrumbs::setDivider('');
+        Breadcrumbs::setCssClasses('breadcrumb');
+        Breadcrumbs::addCrumb('Home',URL::to('/'));
+    }
 
     public function getIndex()
     {
+
+        Breadcrumbs::addCrumb('project',URL::to('shop/projects').'/'.$tag);
+        Breadcrumbs::addCrumb($tag,URL::to('shop/projectds').'/'.$tag);
         return View::make('pages.news');
     }
 

@@ -14,6 +14,12 @@ class ProjectsController extends BaseController {
     |   Route::get('/', 'HomeController@showWelcome');
     |
     */
+    public function __construct(){
+        date_default_timezone_set('Asia/Jakarta');
+        Breadcrumbs::setDivider('');
+        Breadcrumbs::setCssClasses('breadcrumb');
+        Breadcrumbs::addCrumb('Home',URL::to('/'));
+    }
 
     public function getIndex($tag)
     {
@@ -37,6 +43,9 @@ class ProjectsController extends BaseController {
         $total_all = Showcase::count();
 
         $paging = floor($total_found / $perpage);
+
+        Breadcrumbs::addCrumb('project',URL::to('shop/projects').'/'.$tag);
+        Breadcrumbs::addCrumb($tag,URL::to('shop/projectds').'/'.$tag);
 
         return View::make('pages.press')
             ->with('title', ucfirst($tag).' Projects')
