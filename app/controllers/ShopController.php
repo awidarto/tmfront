@@ -1,4 +1,6 @@
 <?php
+use Doku\Doku;
+use Doku\DokuParams;
 
 class ShopController extends BaseController {
 
@@ -216,7 +218,20 @@ class ShopController extends BaseController {
     public function postReview()
     {
         $in = Input::get();
-
+        var_dump($in);
+        $dokuParams = new DokuParams("5P6bc6P4nxAA");
+        $dokuParams->MAILID = "1091";
+        $dokuParams->AMOUNT = $in['totalprice'];
+        $dokuParams->prepareAll();
+        echo "\n\n<br/> =============================== \n\n<br/>";
+        var_dump($dokuParams);
+        $doku = new Doku($dokuParams);
+        echo "\n\n<br/> =============================== \n\n<br/>";
+        var_dump($doku);
+        echo "\n\n<br/> =============================== \n\n<br/>";
+        var_dump($doku->requestDoku());
+        
+/*
         $trx = Payment::where('sessionId', Auth::user()->activeCart )->first();
 
         if($trx){
@@ -301,7 +316,7 @@ class ShopController extends BaseController {
                 $sales->payable_amount = $in['payable_amount'];
                 $sales->cash_amount = $in['cash_amount'];
                 $sales->cash_change = $in['cash_change'];
-                */
+                *//*
 
                 $sales->buyer_id = Auth::user()->_id;
                 $sales->buyer_name = Auth::user()->fullname;
@@ -324,13 +339,15 @@ class ShopController extends BaseController {
                 $sales->transactionstatus = 'checkout';
                 $sales->save();
             }
+            
+            
 
         if($in['status'] == 'final'){
             return Redirect::to('shop/receipt');
         }else{
             return Redirect::to('shop/review');
         }
-
+*/
     }
 
     public function getReview()
