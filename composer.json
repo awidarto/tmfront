@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-        "jenssegers/mongodb": "*",
+        "jenssegers/mongodb": "dev-master",
         "nitmedia/wkhtml2pdf": "dev-master",
         "noherczeg/breadcrumb": "dev-master",
         "anahkiasen/former": "dev-develop",
