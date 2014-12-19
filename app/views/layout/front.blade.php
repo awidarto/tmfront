@@ -24,6 +24,7 @@
     {{ HTML::style('css/bootstrap-magnify.min.css') }}
     {{ HTML::style('css/multizoom.css') }}
 
+    {{ HTML::style('css/flick/jquery-ui-1.9.2.custom.min.css')}}
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -42,9 +43,8 @@
 
     {{ HTML::script('js/zoomsl-3.0.min.js') }}
 
-    {{ HTML::script('js/gmap3/gmap3.js') }}
+    {{ HTML::script('js/accounting.min.js') }}
 
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=en" />
 
     <script type="text/javascript">
         $(document).ready(function(){

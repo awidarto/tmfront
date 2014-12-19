@@ -630,3 +630,7 @@ td.right{
 .breadcrumb{
     background-color: transparent;
 }
+
+.bold{
+    font-weight: bolder;
+}

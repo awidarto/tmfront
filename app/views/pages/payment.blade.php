@@ -22,58 +22,29 @@
             </div>
             <h2>Shopping Cart</h2>
             <div class="container" style="display:block;font-size:12px;">
-                {{ Former::open_vertical('shop/methods')->id('paymethod')}}
+                {{ Former::open_vertical('shop/paynow')->id('paymethod')}}
                     {{ $itemtable }}
                     {{ Former::hidden('status','review') }}
                     <div class="row">
                         <div class="col-md-12">
-                            <h5>Deliver to</h5>
-
-                            {{ Former::text('recipientname','To')->class('form-control')->value(Auth::user()->fullname) }}
-
-                            {{ Former::textarea('shipping_address', 'Shipping Address')->class('form-control')->value(Auth::user()->address) }}
-                            {{ Former::text('city','City')->class('form-control')->value(Auth::user()->city) }}
-                            {{ Former::text('countryOfOrigin','Country')->class('form-control')->value(Auth::user()->countryOfOrigin) }}
-                            {{ Former::text('phone','Phone')->class('form-control')->value(Auth::user()->phone) }}
-
-
-                            <h5>Deliver using</h5>
+                            <h5>Delivered To</h5>
                             @if( $warn = Session::get('methodFail'))
                                 <p class="bg-danger bold">
                                     {{ $warn }}
                                 </p>
                             @endif
                             <div class="clearfix"></div>
+                            <p>
+                                {{ $pay['by_name']}}<br />
+                                {{ $pay['by_address']}}<br />
+                            </p>
                             <h6>JNE</h6>
-                            <div class="form-inline">
-
-                            {{ Former::text('jne_origin','Origin')->class('form-control jne_origin_auto col-md-4')->id('jne-origin')}}
-                            {{ Former::text('jne_dest','Destination')->class('form-control jne_dest_auto')->id('jne-dest')}}
-                            {{ Former::text('jne_weight','Weight')->class('form-control jne_weight_auto')
-                                ->value($weight)->id('jne-weight')}}
-                            <br />
-                            {{ Former::select('jne_tariff','Tariff')->class('form-control jne_tariff')
-                                ->options(array(''=>'Specify Origin , Destination & Weight then click Get Tariff'))->id('jne-tariff')}}
-                            <br />
-                            <button class="btn btn-primary" id="jne-get-tariff">Get Tariff</button><span id="loading-indicator" style="display:none;">Loading...</span>
-                            </div>
+                            <p>
+                                Origin : {{ $pay['jne_origin'] }} <i class="fa fa-arrow-right"></i> Dest : {{$pay['jne_dest']}}<br />
+                                Delivery Cost : IDR {{ Ks::idr($pay['jne_tariff']) }}
+                            </p>
                         </div>
                     </div>
-                    {{--
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h6>Pay using</h6>
-                            <label class="form-control" >
-                                <input type="radio" name="payment" selected="selected" value="transfer" /> Bank Transfer
-                            </label>
-                            <label class="form-control" >
-                                <input type="radio" name="payment" value="cc" /> Credit Card
-                            </label>
-                        </div>
-                    </div>
-
-                    --}}
                     <div class="row" >
                         <div class="col-md-4">
                             <a href="{{ URL::to('shop/cart')}}" class="btn btn-primary pull-left" id="to-cart"><i class="fa fa-arrow-left"></i> back to cart</a>
@@ -82,7 +53,7 @@
                             <a href="{{ URL::to('shop/cancel')}}" class="btn btn-danger pull-right" id="cancel">cancel purchase</a>
                         </div>
                         <div class="col-md-4">
-                            <button class="btn btn-primary pull-right" id="submit">proceed to payment</button>
+                            <button class="btn btn-primary pull-right" id="submit">Pay Now</button>
                         </div>
                     </div>
                 {{Former::close()}}

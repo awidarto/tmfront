@@ -118,6 +118,7 @@ return array(
         'Elevencodes\InstagramLaravel\InstagramLaravelServiceProvider',
         'Buzz\BuzzServiceProvider',
         'Creitive\Breadcrumbs\BreadcrumbsServiceProvider',
+        'Mattbrown\Laracurl\LaracurlServiceProvider'
 	),
 
 	/*

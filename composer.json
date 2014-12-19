@@ -23,7 +23,9 @@
         "fishmarket/instaphp": "dev-master",
         "pingpong/menus": "1.0.*",
         "sirsquall/buzz": "v0.12",
-        "creitive/breadcrumbs": "dev-master"
+        "creitive/breadcrumbs": "dev-master",
+        "mattbrown/laracurl": "dev-master"
+
 	},
 	"autoload": {
 		"classmap": [

@@ -172,7 +172,7 @@ class ShopController extends BaseController {
         $itemtable = '';
         $session_id = Auth::user()->activeCart;
         $trx = Transaction::where('sessionId',$session_id)->get()->toArray();
-        $pay = Payment::where('sessionId',$session_id)->get()->toArray();
+        $pay = Payment::where('sessionId',$session_id)->first()->toArray();
 
         $tab = array();
         foreach($trx as $t){
@@ -181,11 +181,13 @@ class ShopController extends BaseController {
             $tab[ $t['SKU'] ]['qty'] = ( isset($tab[ $t['SKU'] ]['qty']) )? $tab[ $t['SKU'] ]['qty'] + 1:1;
             $tab[ $t['SKU'] ]['tagprice'] = $t['productDetail']['priceRegular'];
             $tab[ $t['SKU'] ]['total'] = ( isset($tab[ $t['SKU'] ]['total']) )? $tab[ $t['SKU'] ]['total'] + $t['productDetail']['priceRegular']:$t['productDetail']['priceRegular'];
+            $tab[ $t['SKU'] ]['weight'] = ( isset($tab[ $t['SKU'] ]['weight']) )? $tab[ $t['SKU'] ]['weight']:1;
 
         }
 
         $tab_data = array();
         $gt = 0;
+        $weight = 0;
         foreach($tab as $k=>$v){
             $tab_data[] = array(
                     array('value'=>$v['description'], 'attr'=>'class="left"'),
@@ -194,11 +196,19 @@ class ShopController extends BaseController {
                     array('value'=>Ks::idr($v['total']), 'attr'=>'class="right" id="total_'.$k.'"'),
                 );
             $gt += $v['total'];
+            $weight += ($v['qty'] * $v['weight']);
         }
 
-        $totalform = Former::hidden('totalprice',$gt);
+        $dc = (isset($pay['delivery_charge']))?$pay['delivery_charge']:'';
+        $tc = (isset($pay['total_charge_after_delivery']))?$pay['total_charge_after_delivery']:'';
 
-        $tab_data[] = array('','',$totalform,array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
+        $totalform = Former::hidden('totalprice',$gt);
+        $totalcost = Former::hidden('totalcost','');
+        $deliverycost = Former::hidden('deliverycost','');
+
+        $tab_data[] = array('',$totalform,array('value'=>'Sub Total'.'<input type="hidden" value="'.$gt.'" id="sub-total" />', 'attr'=>'class="right" ' ) ,array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
+        $tab_data[] = array('',$deliverycost,array('value'=>'Delivery Cost'.'<input type="hidden" name="delivery_charge" value="" id="delivery-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($dc), 'attr'=>'class="right" id="delivery-cost"'));
+        $tab_data[] = array('',$totalcost,array('value'=>'Total'.'<input type="hidden" name="total_charge" value="" id="total-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tc), 'attr'=>'class="right bold" id="total-cost"'));
 
         $header = array(
             'things to buy',
@@ -211,14 +221,136 @@ class ShopController extends BaseController {
         $t = new HtmlTable($tab_data, $attr, $header);
         $itemtable = $t->build();
 
-        return View::make('pages.method')->with('itemtable',$itemtable);
+        return View::make('pages.method')->with('itemtable',$itemtable)->with('weight',$weight);
 
     }
 
-    public function postReview()
+    public function postMethods(){
+
+        $datain = Input::get();
+
+        $validator = array(
+            'total_charge'=>'required',
+            'delivery_charge'=>'required'
+        );
+
+
+        $validation = Validator::make($input = $datain, $validator);
+
+        if($validation->fails()){
+
+            Session::flash('methodFail', 'Please select delivery method and tariff.');
+
+            return Redirect::to('shop/methods')->withErrors($validation)->withInput(Input::all());
+
+        }else{
+
+            $session_id = Auth::user()->activeCart;
+            $trx = Transaction::where('sessionId',$session_id)->first();
+            $pay = Payment::where('sessionId',$session_id)->first();
+
+            print_r($datain);
+
+            print_r($pay->toArray());
+
+            print_r($trx->toArray());
+            /*
+            [totalprice] => 4650000
+            [deliverycost] =>
+            [delivery_charge] => 385000
+            [totalcost] =>
+            [total_charge] => 5035000
+            [status] => review
+            [jne_origin] => CGK10000
+            [jne_dest] => BDO10000
+            [jne_weight] => 2
+            [jne_tariff] => 385000
+            */
+            $pay->delivery_charge = $datain['delivery_charge'];
+            $pay->total_charge_after_delivery = $datain['total_charge'];
+            $pay->jne_origin = $datain['jne_origin'];
+            $pay->jne_dest = $datain['jne_dest'];
+            $pay->jne_weight = $datain['jne_weight'];
+            $pay->jne_tariff = $datain['jne_tariff'];
+            $pay->status = 'setdelivery';
+
+            $pay->save();
+
+            return Redirect::to('shop/payment');
+
+        }
+
+
+
+    }
+
+    public function getPayment()
+    {
+        $itemtable = '';
+        $session_id = Auth::user()->activeCart;
+        $trx = Transaction::where('sessionId',$session_id)->get()->toArray();
+        $pay = Payment::where('sessionId',$session_id)->first()->toArray();
+
+        $tab = array();
+        foreach($trx as $t){
+
+            $tab[ $t['SKU'] ]['description'] = $t['productDetail']['itemDescription'];
+            $tab[ $t['SKU'] ]['qty'] = ( isset($tab[ $t['SKU'] ]['qty']) )? $tab[ $t['SKU'] ]['qty'] + 1:1;
+            $tab[ $t['SKU'] ]['tagprice'] = $t['productDetail']['priceRegular'];
+            $tab[ $t['SKU'] ]['total'] = ( isset($tab[ $t['SKU'] ]['total']) )? $tab[ $t['SKU'] ]['total'] + $t['productDetail']['priceRegular']:$t['productDetail']['priceRegular'];
+            $tab[ $t['SKU'] ]['weight'] = ( isset($tab[ $t['SKU'] ]['weight']) )? $tab[ $t['SKU'] ]['weight']:1;
+
+        }
+
+        $tab_data = array();
+        $gt = 0;
+        $weight = 0;
+        foreach($tab as $k=>$v){
+            $tab_data[] = array(
+                    array('value'=>$v['description'], 'attr'=>'class="left"'),
+                    array('value'=>$v['qty'], 'attr'=>'class="center"'),
+                    array('value'=>Ks::idr($v['tagprice']), 'attr'=>'class="right"'),
+                    array('value'=>Ks::idr($v['total']), 'attr'=>'class="right" id="total_'.$k.'"'),
+                );
+            $gt += $v['total'];
+            $weight += ($v['qty'] * $v['weight']);
+        }
+
+        $dc = (isset($pay['delivery_charge']))?$pay['delivery_charge']:'';
+        $tc = (isset($pay['total_charge_after_delivery']))?$pay['total_charge_after_delivery']:'';
+
+        $totalform = Former::hidden('totalprice',$gt);
+        $totalcost = Former::hidden('totalcost',$tc);
+        $deliverycost = Former::hidden('deliverycost',$dc);
+
+        $tab_data[] = array('',$totalform,array('value'=>'Sub Total'.'<input type="hidden" value="'.$gt.'" id="sub-total" />', 'attr'=>'class="right" ' ) ,array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
+        $tab_data[] = array('',$deliverycost,array('value'=>'Delivery Cost'.'<input type="hidden" name="delivery_charge" value="" id="delivery-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($dc), 'attr'=>'class="right" id="delivery-cost"'));
+        $tab_data[] = array('',$totalcost,array('value'=>'Total'.'<input type="hidden" name="total_charge" value="" id="total-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tc), 'attr'=>'class="right bold" id="total-cost"'));
+
+        $header = array(
+            'things to buy',
+            'unit',
+            'tagprice',
+            array('value'=>'price to pay', 'attr'=>'style="text-align:right"')
+            );
+
+        $attr = array('class'=>'table', 'id'=>'transTab', 'style'=>'width:100%;', 'border'=>'0');
+        $t = new HtmlTable($tab_data, $attr, $header);
+        $itemtable = $t->build();
+
+        return View::make('pages.payment')
+            ->with('itemtable',$itemtable)
+            ->with('pay',$pay)
+            ->with('weight',$weight);
+
+    }
+
+    public function postPaynow()
     {
         $in = Input::get();
         var_dump($in);
+
+        //die();
         $dokuParams = new DokuParams("5P6bc6P4nxAA");
         $dokuParams->MAILID = "1091";
         $dokuParams->AMOUNT = $in['totalprice'];
@@ -230,7 +362,7 @@ class ShopController extends BaseController {
         var_dump($doku);
         echo "\n\n<br/> =============================== \n\n<br/>";
         var_dump($doku->requestDoku());
-        
+
 /*
         $trx = Payment::where('sessionId', Auth::user()->activeCart )->first();
 
@@ -339,8 +471,8 @@ class ShopController extends BaseController {
                 $sales->transactionstatus = 'checkout';
                 $sales->save();
             }
-            
-            
+
+
 
         if($in['status'] == 'final'){
             return Redirect::to('shop/receipt');

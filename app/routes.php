@@ -298,6 +298,106 @@ Route::post('signup',function(){
     return View::make('pages.createaccount');
 });
 
+Route::get('jne/origin',function(){
+    $q = Input::get('term');
+
+    $url = Laracurl::buildUrl(Config::get('jne.base_url').'origin/key/'.$q,[]);
+    $resp = Laracurl::post($url, ['username' =>Config::get('jne.username') ,'api_key'=>Config::get('jne.key')]);
+
+    $res = json_decode($resp->body);
+
+    $result = array();
+
+    foreach($res->detail as $r){
+        $result[] = array('id'=>$r->code,'value'=>$r->code,'label'=>$r->label );
+    }
+
+    return Response::json($result);
+});
+
+Route::get('jne/dest',function(){
+
+    $q = Input::get('term');
+
+    $url = Laracurl::buildUrl(Config::get('jne.base_url').'dest/key/'.$q,[]);
+    $resp = Laracurl::post($url, ['username' =>Config::get('jne.username') ,'api_key'=>Config::get('jne.key')]);
+
+    $res = json_decode($resp->body);
+
+    $result = array();
+
+    foreach($res->detail as $r){
+        $result[] = array('id'=>$r->code,'value'=>$r->code,'label'=>$r->label );
+    }
+
+    return Response::json($result);
+});
+
+Route::post('jne/price',function(){
+
+    $from = Input::get('from');
+    $thru = Input::get('dest');
+    $weight = Input::get('from');
+
+    $url = Laracurl::buildUrl(Config::get('jne.base_url').'price',[]);
+    $resp = Laracurl::post($url, array(
+            'username' =>Config::get('jne.username') ,
+            'api_key'=>Config::get('jne.key'),
+            'from'=>$from,
+            'thru'=>$thru,
+            'weight'=>$weight )
+    );
+
+    print_r($resp);
+
+    //return Response::json( $resp );
+    /*
+    try{
+
+    }catch(Exception $e){
+        return Response::json( array('err'=>e ) );
+    }
+    */
+
+});
+
+Route::get('jne/price/{from}/{thru}/{weight}',function($from, $thru, $weight){
+
+    $url = Laracurl::buildUrl(Config::get('jne.base_url').'price',[]);
+    $resp = Laracurl::post($url, array(
+            'username' =>Config::get('jne.username') ,
+            'api_key'=>Config::get('jne.key'),
+            'from'=>$from,
+            'thru'=>$thru,
+            'weight'=>$weight )
+    );
+
+    //print_r($resp->body);
+
+    $response = json_decode($resp->body,true);
+
+    foreach( $response['price'] as $p){
+        $tar = new Jne();
+        foreach($p as $k=>$v){
+            $tar->{$k} = $v;
+        }
+        $tar->origin_code = $from;
+        $tar->destination_code = $thru;
+        $tar->createdDate = new MongoDate();
+        $tar->save();
+    }
+
+    return Response::json( array('result'=>'OK', 'price'=>$response['price'] ) );
+    /*
+    try{
+
+    }catch(Exception $e){
+        return Response::json( array('err'=>e ) );
+    }
+    */
+
+});
+
 /* Filters */
 
 Route::filter('auth', function()
