@@ -172,7 +172,7 @@ class ShopController extends BaseController {
         $itemtable = '';
         $session_id = Auth::user()->activeCart;
         $trx = Transaction::where('sessionId',$session_id)->get()->toArray();
-        $pay = Payment::where('sessionId',$session_id)->first()->toArray();
+        //$pay = Payment::where('sessionId',$session_id)->first()->toArray();
 
         $tab = array();
         foreach($trx as $t){
@@ -199,8 +199,11 @@ class ShopController extends BaseController {
             $weight += ($v['qty'] * $v['weight']);
         }
 
-        $dc = (isset($pay['delivery_charge']))?$pay['delivery_charge']:'';
-        $tc = (isset($pay['total_charge_after_delivery']))?$pay['total_charge_after_delivery']:'';
+        //$dc = (isset($pay['delivery_charge']))?$pay['delivery_charge']:'';
+        //$tc = (isset($pay['total_charge_after_delivery']))?$pay['total_charge_after_delivery']:'';
+
+        $dc = '';
+        $tc = '';
 
         $totalform = Former::hidden('totalprice',$gt);
         $totalcost = Former::hidden('totalcost','');
@@ -251,8 +254,6 @@ class ShopController extends BaseController {
 
             print_r($datain);
 
-            print_r($pay->toArray());
-
             print_r($trx->toArray());
             /*
             [totalprice] => 4650000
@@ -266,6 +267,27 @@ class ShopController extends BaseController {
             [jne_weight] => 2
             [jne_tariff] => 385000
             */
+            if($pay){
+
+            }else{
+                $pay = new Payment();
+                $pay->sessionId = $session_id;
+                $pay->createdDate = new MongoDate();
+                $pay->sessionStatus = 'review';
+                $pay->cc_amount = '';
+                $pay->cc_number = '';
+                $pay->cc_expiry = '';
+                $pay->dc_amount = '';
+                $pay->dc_number = '';
+                $pay->cash_amount = 0;
+                $pay->cash_change = 0;
+                $pay->lastUpdate = new MongoDate();
+                $pay->invoice_number = '';
+            }
+
+            $pay->by_name = $datain['recipientname'];
+            $pay->by_address = $datain['shipping_address'];
+            $pay->payable_amount = $datain['totalprice'];
             $pay->delivery_charge = $datain['delivery_charge'];
             $pay->total_charge_after_delivery = $datain['total_charge'];
             $pay->jne_origin = $datain['jne_origin'];
