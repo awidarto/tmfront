@@ -2,7 +2,7 @@
 namespace Doku;
 class DokuParams
 {
-	public $MAILID = "";
+	public $MALLID = "";
 	public $CHAINMERCHANT = "";
 	public $AMOUNT = "";
 	public $PURCHASEAMOUNT = "";
@@ -21,20 +21,20 @@ class DokuParams
 	public $SHIPPING_STATE = "";
 	public $SHIPPING_COUNTRY = "";
 	public $SHIPPING_ZIPCODE = "";
-	
+
 	private $shared_key;
-	
+
 	public function  __construct($key)
 	{
 		$this->shared_key = $key;
 	}
-	
+
 	public function prepareAll()
 	{
 		$this->WORDS = $this->generateWords();
 		$this->REQUESTDATETIME = date("YmdHis");
 	}
-	
+
 	private function generateWords()
 	{
 		/*
@@ -52,13 +52,13 @@ class DokuParams
 		if($this->CURRENCY == "360")
 		{
 			$retval = sha1(
-							$this->AMOUNT 
-						. 	$this->MAILID
+							$this->AMOUNT
+						. 	$this->MALLID
 						.	$this->shared_key
-						.	$this->TRANSIDMERCHANT 
+						.	$this->TRANSIDMERCHANT
 					);
 		}
-		else 
+		else
 		{
 			$retval = sha1(
 					$this->AMOUNT
@@ -67,7 +67,7 @@ class DokuParams
 					.	$this->TRANSIDMERCHANT
 					.	$this->CURRENCY
 			);
-				
+
 		}
 		return $retval;
 	}

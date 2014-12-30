@@ -28,6 +28,11 @@ class ShopController extends BaseController {
 
     public function getIndex()
     {
+        $headslider = Homeslider::where('publishing','published')
+                        ->where('widgetLocation','Home Top')
+                        ->orderBy('sequence','asc')
+                        ->get()->toArray();
+
         return View::make('pages.home');
     }
 
@@ -43,7 +48,7 @@ class ShopController extends BaseController {
         return View::make('pages.detail')->with('product',$product);
     }
 
-    public function getCollection($category = null)
+    public function getCollection($category = 'art')
     {
 
         $page = Input::get('page');
@@ -252,9 +257,9 @@ class ShopController extends BaseController {
             $trx = Transaction::where('sessionId',$session_id)->first();
             $pay = Payment::where('sessionId',$session_id)->first();
 
-            print_r($datain);
+            //print_r($datain);
 
-            print_r($trx->toArray());
+            //print_r($trx->toArray());
             /*
             [totalprice] => 4650000
             [deliverycost] =>
@@ -367,15 +372,462 @@ class ShopController extends BaseController {
 
     }
 
-    public function postPaynow()
+    public function postPaytransfer()
     {
+        $session_id = Auth::user()->activeCart;
         $in = Input::get();
-        var_dump($in);
+        //var_dump($in);
 
-        //die();
+            $trx = Transaction::where('sessionId',$session_id)->get();
+
+            $pay = Payment::where('sessionId',$session_id)->first();
+
+            $apay = $pay->toArray();
+            $pay->payment_method = 'transfer';
+
+            $pay->status = 'final';
+            $pay->save();
+
+            $pay = $apay;
+
+            $tab = array();
+
+            $atrx = $trx->toArray();
+
+            foreach($trx as $t){
+                $t->sessionStatus = 'final';
+                $t->save();
+
+                $t = $t->toArray();
+
+                $tab[ $t['SKU'] ]['description'] = $t['productDetail']['itemDescription'];
+                $tab[ $t['SKU'] ]['qty'] = ( isset($tab[ $t['SKU'] ]['qty']) )? $tab[ $t['SKU'] ]['qty'] + 1:1;
+                $tab[ $t['SKU'] ]['tagprice'] = $t['productDetail']['priceRegular'];
+                $tab[ $t['SKU'] ]['total'] = ( isset($tab[ $t['SKU'] ]['total']) )? $tab[ $t['SKU'] ]['total'] + $t['productDetail']['priceRegular']:$t['productDetail']['priceRegular'];
+                $tab[ $t['SKU'] ]['weight'] = ( isset($tab[ $t['SKU'] ]['weight']) )? $tab[ $t['SKU'] ]['weight']:1;
+
+            }
+
+            $tab_data = array();
+            $gt = 0;
+            $weight = 0;
+            foreach($tab as $k=>$v){
+                $tab_data[] = array(
+                        array('value'=>$v['description'], 'attr'=>'class="left"'),
+                        array('value'=>$v['qty'], 'attr'=>'class="center"'),
+                        array('value'=>Ks::idr($v['tagprice']), 'attr'=>'class="right"'),
+                        array('value'=>Ks::idr($v['total']), 'attr'=>'class="right" id="total_'.$k.'"'),
+                    );
+                $gt += $v['total'];
+                $weight += ($v['qty'] * $v['weight']);
+            }
+
+            $dc = (isset($pay['delivery_charge']))?$pay['delivery_charge']:'';
+            $tc = (isset($pay['total_charge_after_delivery']))?$pay['total_charge_after_delivery']:'';
+
+            $totalform = Former::hidden('totalprice',$gt);
+            $totalcost = Former::hidden('totalcost',$tc);
+            $deliverycost = Former::hidden('deliverycost',$dc);
+
+            $tab_data[] = array('',$totalform,array('value'=>'Sub Total'.'<input type="hidden" value="'.$gt.'" id="sub-total" />', 'attr'=>'class="right" ' ) ,array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
+            $tab_data[] = array('',$deliverycost,array('value'=>'Delivery Cost'.'<input type="hidden" name="delivery_charge" value="" id="delivery-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($dc), 'attr'=>'class="right" id="delivery-cost"'));
+            $tab_data[] = array('',$totalcost,array('value'=>'Total'.'<input type="hidden" name="total_charge" value="" id="total-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tc), 'attr'=>'class="right bold" id="total-cost"'));
+
+            $header = array(
+                'things to buy',
+                'unit',
+                'tagprice',
+                array('value'=>'price to pay', 'attr'=>'style="text-align:right"')
+                );
+
+            $attr = array('class'=>'table', 'id'=>'transTab', 'style'=>'width:100%;', 'border'=>'0');
+            $t = new HtmlTable($tab_data, $attr, $header);
+            $itemtable = $t->build();
+            /* make user no mre use of session id in auth session */
+
+            $items = $trx;
+            foreach($items as $item){
+                //print_r($item->toArray());
+                $outletId = $item->outletId;
+                $outletName = $item->outletName;
+
+                $item->sessionStatus = 'final';
+
+                $unit = Stockunit::find($item->unitId);
+                //print_r($unit);
+                $unit->status = 'sold';
+                $unit->lastUpdate = new MongoDate();
+
+                $itarray[] = $item->toArray();
+                $unitarr[] = $unit->toArray();
+
+                $unit->save();
+                $item->save();
+            }
+
+
+            $sales = Sales::where('sessionId', Auth::user()->activeCart )->first();
+
+            if($sales){
+
+            }else{
+                $sales = new Sales();
+                $sales->sessionId = Auth::user()->activeCart;
+                $sales->createdDate = new MongoDate();
+            }
+
+            $outlet = Outlet::find(Config::get('site.outlet_id'));
+
+            $sales->outletId = Config::get('site.outlet_id');
+            $sales->outletName = $outlet->name;
+
+            $sales->buyer_id = Auth::user()->_id;
+            $sales->buyer_name = Auth::user()->fullname;
+            $sales->buyer_address = Auth::user()->address;
+            $sales->buyer_city = Auth::user()->city;
+            $sales->cc_amount = 0;
+            $sales->cc_number = '';
+            $sales->cc_expiry = '';
+            $sales->dc_amount = 0;
+            $sales->dc_number = '';
+            $sales->payable_amount = $tc;
+            $sales->cash_amount = 0;
+            $sales->cash_change = 0;
+            $sales->lastUpdate = new MongoDate();
+
+            $sales->payment_method = 'transfer';
+            $sales->transaction = $itarray;
+            $sales->stockunit = $unitarr;
+            $sales->payment = $apay;
+            $sales->transactiontype = 'online';
+            $sales->transactionstatus = 'checkout';
+            $sales->save();
+
+            //remove session data
+            //Auth::user()->activeCart = '';
+
+            return View::make('pages.transferlanding')
+                ->with('itemtable',$itemtable)
+                ->with('session_id',$session_id)
+                ->with('pay',$pay)
+                ->with('totalprice',$gt)
+                ->with('totalcost',$tc)
+                ->with('deliverycost',$dc)
+                ->with('weight',$weight);
+
+    }
+
+    public function postPaydoku()
+    {
+        $session_id = Auth::user()->activeCart;
+        $in = Input::get();
+        //var_dump($in);
+
+            $trx = Transaction::where('sessionId',$session_id)->get();
+
+            $pay = Payment::where('sessionId',$session_id)->first();
+
+            $apay = $pay->toArray();
+            $pay->payment_method = 'transfer';
+
+            $pay->status = 'final';
+            $pay->save();
+
+            $pay = $apay;
+
+            $tab = array();
+
+            $atrx = $trx->toArray();
+
+            $basket = '';
+
+            foreach($trx as $t){
+                $t->sessionStatus = 'final';
+                $t->save();
+
+                $t = $t->toArray();
+
+                $tab[ $t['SKU'] ]['description'] = $t['productDetail']['itemDescription'];
+                $tab[ $t['SKU'] ]['qty'] = ( isset($tab[ $t['SKU'] ]['qty']) )? $tab[ $t['SKU'] ]['qty'] + 1:1;
+                $tab[ $t['SKU'] ]['tagprice'] = $t['productDetail']['priceRegular'];
+                $tab[ $t['SKU'] ]['total'] = ( isset($tab[ $t['SKU'] ]['total']) )? $tab[ $t['SKU'] ]['total'] + $t['productDetail']['priceRegular']:$t['productDetail']['priceRegular'];
+                $tab[ $t['SKU'] ]['weight'] = ( isset($tab[ $t['SKU'] ]['weight']) )? $tab[ $t['SKU'] ]['weight']:1;
+
+            }
+
+
+
+            $tab_data = array();
+            $gt = 0;
+            $weight = 0;
+            foreach($tab as $k=>$v){
+                $tab_data[] = array(
+                        array('value'=>$v['description'], 'attr'=>'class="left"'),
+                        array('value'=>$v['qty'], 'attr'=>'class="center"'),
+                        array('value'=>Ks::idr($v['tagprice']), 'attr'=>'class="right"'),
+                        array('value'=>Ks::idr($v['total']), 'attr'=>'class="right" id="total_'.$k.'"'),
+                    );
+
+                $basket_data[] = $v['description'].','.number_format($v['tagprice'],2,'.','').','.$v['qty'].','.number_format($v['total'],2,'.','');
+
+                $gt += $v['total'];
+                $weight += ($v['qty'] * $v['weight']);
+            }
+
+            $dc = (isset($pay['delivery_charge']))?$pay['delivery_charge']:'';
+            $tc = (isset($pay['total_charge_after_delivery']))?$pay['total_charge_after_delivery']:'';
+
+            $totalform = Former::hidden('totalprice',$gt);
+            $totalcost = Former::hidden('totalcost',$tc);
+            $deliverycost = Former::hidden('deliverycost',$dc);
+
+            $tab_data[] = array('',$totalform,array('value'=>'Sub Total'.'<input type="hidden" value="'.$gt.'" id="sub-total" />', 'attr'=>'class="right" ' ) ,array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
+            $tab_data[] = array('',$deliverycost,array('value'=>'Delivery Cost'.'<input type="hidden" name="delivery_charge" value="" id="delivery-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($dc), 'attr'=>'class="right" id="delivery-cost"'));
+            $tab_data[] = array('',$totalcost,array('value'=>'Total'.'<input type="hidden" name="total_charge" value="" id="total-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tc), 'attr'=>'class="right bold" id="total-cost"'));
+
+            $basket_data[] = 'JNE Shipping'.','.number_format($dc,2,'.','').','.'1'.','.number_format($dc,2,'.','');
+
+            $header = array(
+                'things to buy',
+                'unit',
+                'tagprice',
+                array('value'=>'price to pay', 'attr'=>'style="text-align:right"')
+                );
+
+            $attr = array('class'=>'table', 'id'=>'transTab', 'style'=>'width:100%;', 'border'=>'0');
+            $t = new HtmlTable($tab_data, $attr, $header);
+            $itemtable = $t->build();
+            /* make user no mre use of session id in auth session */
+
+            $items = $trx;
+            foreach($items as $item){
+                //print_r($item->toArray());
+                $outletId = $item->outletId;
+                $outletName = $item->outletName;
+
+                $item->sessionStatus = 'final';
+
+                $unit = Stockunit::find($item->unitId);
+                //print_r($unit);
+                $unit->status = 'sold';
+                $unit->lastUpdate = new MongoDate();
+
+                $itarray[] = $item->toArray();
+                $unitarr[] = $unit->toArray();
+
+                $unit->save();
+                $item->save();
+            }
+
+
+            $sales = Sales::where('sessionId', Auth::user()->activeCart )->first();
+
+            if($sales){
+
+            }else{
+                $sales = new Sales();
+                $sales->sessionId = Auth::user()->activeCart;
+                $sales->createdDate = new MongoDate();
+            }
+
+            $outlet = Outlet::find(Config::get('site.outlet_id'));
+
+            $dokusession = str_random(12);
+            $payment_session = str_random(20);
+            $request_time = date('YmdHis',time());
+
+            $trx_words = sha1(
+                    $totalcost.Config::get('doku.dev_mallid').Config::get('doku.shared_key').$dokusession
+                );
+
+            $sales->outletId = Config::get('site.outlet_id');
+            $sales->outletName = $outlet->name;
+
+            $sales->buyer_id = Auth::user()->_id;
+            $sales->buyer_name = Auth::user()->fullname;
+            $sales->buyer_address = Auth::user()->address;
+            $sales->buyer_city = Auth::user()->city;
+            $sales->cc_amount = 0;
+            $sales->cc_number = '';
+            $sales->cc_expiry = '';
+            $sales->dc_amount = 0;
+            $sales->dc_number = '';
+            $sales->payable_amount = $tc;
+            $sales->cash_amount = 0;
+            $sales->cash_change = 0;
+            $sales->lastUpdate = new MongoDate();
+
+            $sales->payment_method = 'doku';
+            $sales->payment_id = $dokusession;
+            $sales->payment_session = $payment_session;
+            $sales->request_time = $dokusession;
+            $sales->transaction = $itarray;
+            $sales->stockunit = $unitarr;
+            $sales->payment = $apay;
+            $sales->transactiontype = 'online';
+            $sales->transactionstatus = 'checkout';
+
+            $sales->save();
+
+            $basket = implode(',', $basket_data);
+
+            //remove session data
+            //Auth::user()->activeCart = '';
+
+            Former::framework('TwitterBootstrap3');
+
+            return View::make('doku.checkout')
+                ->with('itemtable',$itemtable)
+                ->with('session_id',$session_id)
+                ->with('basket',$basket)
+                ->with('pay',$pay)
+                ->with('payment_id',$dokusession)
+                ->with('payment_session',$payment_session)
+                ->with('request_time',$request_time)
+                ->with('words',$trx_words)
+                ->with('totalprice',$gt)
+                ->with('totalcost',$tc)
+                ->with('deliverycost',$dc)
+                ->with('weight',$weight);
+
+    }
+
+    public function postPaydokus()
+    {
+        $session_id = Auth::user()->activeCart;
+        $in = Input::get();
+        //var_dump($in);
+
+        $trx = Transaction::where('sessionId',$session_id)->get();
+
+        $pay = Payment::where('sessionId',$session_id)->first();
+
+        $apay = $pay->toArray();
+        $pay->payment_method = 'transfer';
+
+        $pay->status = 'final';
+        $pay->save();
+
+        $pay = $apay;
+
+        $tab = array();
+
+        $atrx = $trx->toArray();
+
+        foreach($trx as $t){
+            $t->sessionStatus = 'final';
+            $t->save();
+
+            $t = $t->toArray();
+
+            $tab[ $t['SKU'] ]['description'] = $t['productDetail']['itemDescription'];
+            $tab[ $t['SKU'] ]['qty'] = ( isset($tab[ $t['SKU'] ]['qty']) )? $tab[ $t['SKU'] ]['qty'] + 1:1;
+            $tab[ $t['SKU'] ]['tagprice'] = $t['productDetail']['priceRegular'];
+            $tab[ $t['SKU'] ]['total'] = ( isset($tab[ $t['SKU'] ]['total']) )? $tab[ $t['SKU'] ]['total'] + $t['productDetail']['priceRegular']:$t['productDetail']['priceRegular'];
+            $tab[ $t['SKU'] ]['weight'] = ( isset($tab[ $t['SKU'] ]['weight']) )? $tab[ $t['SKU'] ]['weight']:1;
+
+        }
+
+        $tab_data = array();
+        $gt = 0;
+        $weight = 0;
+        foreach($tab as $k=>$v){
+            $tab_data[] = array(
+                    array('value'=>$v['description'], 'attr'=>'class="left"'),
+                    array('value'=>$v['qty'], 'attr'=>'class="center"'),
+                    array('value'=>Ks::idr($v['tagprice']), 'attr'=>'class="right"'),
+                    array('value'=>Ks::idr($v['total']), 'attr'=>'class="right" id="total_'.$k.'"'),
+                );
+            $gt += $v['total'];
+            $weight += ($v['qty'] * $v['weight']);
+        }
+
+        $dc = (isset($pay['delivery_charge']))?$pay['delivery_charge']:'';
+        $tc = (isset($pay['total_charge_after_delivery']))?$pay['total_charge_after_delivery']:'';
+
+        $totalform = Former::hidden('totalprice',$gt);
+        $totalcost = Former::hidden('totalcost',$tc);
+        $deliverycost = Former::hidden('deliverycost',$dc);
+
+        $tab_data[] = array('',$totalform,array('value'=>'Sub Total'.'<input type="hidden" value="'.$gt.'" id="sub-total" />', 'attr'=>'class="right" ' ) ,array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
+        $tab_data[] = array('',$deliverycost,array('value'=>'Delivery Cost'.'<input type="hidden" name="delivery_charge" value="" id="delivery-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($dc), 'attr'=>'class="right" id="delivery-cost"'));
+        $tab_data[] = array('',$totalcost,array('value'=>'Total'.'<input type="hidden" name="total_charge" value="" id="total-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tc), 'attr'=>'class="right bold" id="total-cost"'));
+
+        $header = array(
+            'things to buy',
+            'unit',
+            'tagprice',
+            array('value'=>'price to pay', 'attr'=>'style="text-align:right"')
+            );
+
+        $attr = array('class'=>'table', 'id'=>'transTab', 'style'=>'width:100%;', 'border'=>'0');
+        $t = new HtmlTable($tab_data, $attr, $header);
+        $itemtable = $t->build();
+        /* make user no mre use of session id in auth session */
+        $items = $trx;
+        foreach($items as $item){
+            //print_r($item->toArray());
+            $outletId = $item->outletId;
+            $outletName = $item->outletName;
+
+            $item->sessionStatus = 'final';
+
+            $unit = Stockunit::find($item->unitId);
+            //print_r($unit);
+            $unit->status = 'sold';
+            $unit->lastUpdate = new MongoDate();
+
+            $itarray[] = $item->toArray();
+            $unitarr[] = $unit->toArray();
+
+            $unit->save();
+            $item->save();
+        }
+
+
+        $sales = Sales::where('sessionId', Auth::user()->activeCart )->first();
+
+        if($sales){
+
+        }else{
+            $sales = new Sales();
+            $sales->sessionId = Auth::user()->activeCart;
+            $sales->createdDate = new MongoDate();
+        }
+
+        $outlet = Outlet::find(Config::get('site.outlet_id'));
+
+        $sales->outletId = Config::get('site.outlet_id');
+        $sales->outletName = $outlet->name;
+
+        $sales->buyer_id = Auth::user()->_id;
+        $sales->buyer_name = Auth::user()->fullname;
+        $sales->buyer_address = Auth::user()->address;
+        $sales->buyer_city = Auth::user()->city;
+        $sales->cc_amount = 0;
+        $sales->cc_number = '';
+        $sales->cc_expiry = '';
+        $sales->dc_amount = 0;
+        $sales->dc_number = '';
+        $sales->payable_amount = $tc;
+        $sales->cash_amount = 0;
+        $sales->cash_change = 0;
+        $sales->lastUpdate = new MongoDate();
+
+        $sales->payment_method = 'transfer';
+        $sales->transaction = $itarray;
+        $sales->stockunit = $unitarr;
+        $sales->payment = $apay;
+        $sales->transactiontype = 'online';
+        $sales->transactionstatus = 'checkout';
+        $sales->save();
+
+        //remove session data
+        //Auth::user()->activeCart = '';
+
         $dokuParams = new DokuParams("5P6bc6P4nxAA");
-        $dokuParams->MAILID = "1091";
-        $dokuParams->AMOUNT = $in['totalprice'];
+        $dokuParams->MALLID = "882";
+        $dokuParams->AMOUNT = $totalcost;
         $dokuParams->prepareAll();
         echo "\n\n<br/> =============================== \n\n<br/>";
         var_dump($dokuParams);
@@ -385,124 +837,9 @@ class ShopController extends BaseController {
         echo "\n\n<br/> =============================== \n\n<br/>";
         var_dump($doku->requestDoku());
 
-/*
-        $trx = Payment::where('sessionId', Auth::user()->activeCart )->first();
 
-        if($trx){
-
-        }else{
-            $trx = new Payment();
-            $trx->sessionId = Auth::user()->activeCart;
-            $trx->createdDate = new MongoDate();
-            $trx->sessionStatus = 'open';
-        }
-
-        if($in['status'] == 'final'){
-            $trx->sessionStatus = 'final';
-        }
-
-        $trx->payment_method = $in['payment'];
-        $trx->delivery_method = $in['delivery'];
-
-        $trx->by_name = Auth::user()->fullname;
-        $trx->by_address = Auth::user()->address;
-        $trx->cc_amount = 0;
-        $trx->cc_number = '';
-        $trx->cc_expiry = '';
-        $trx->dc_amount = 0;
-        $trx->dc_number = '';
-        $trx->payable_amount = $in['totalprice'];
-        $trx->cash_amount = 0;
-        $trx->cash_change = 0;
-        $trx->lastUpdate = new MongoDate();
-
-        $payment = $trx->toArray();
-
-        $trx->save();
-
-            if($in['status'] == 'final'){
-
-                $itarray = array();
-                $unitarr = array();
-
-                $items = Transaction::where('sessionId',Auth::user()->activeCart )->get();
-                $outlet_id = '';
-                $outlet_name = '';
-                foreach($items as $item){
-                    //print_r($item->toArray());
-                    $outletId = $item->outletId;
-                    $outletName = $item->outletName;
-
-                    $item->sessionStatus = 'final';
-
-                    $unit = Stockunit::find($item->unitId);
-                    //print_r($unit);
-                    $unit->status = 'sold';
-                    $unit->lastUpdate = new MongoDate();
-
-                    $itarray[] = $item->toArray();
-                    $unitarr[] = $unit->toArray();
-
-                    $unit->save();
-                    $item->save();
-                }
-
-                $sales = Sales::where('sessionId', Auth::user()->activeCart )->first();
-
-                if($sales){
-
-                }else{
-                    $sales = new Sales();
-                    $sales->sessionId = Auth::user()->activeCart;
-                    $sales->createdDate = new MongoDate();
-                }
-                $sales->outletId = $outletId;
-                $sales->outletName = $outletName;
-
-                /*
-                $sales->buyer_name = $in['by_name'];
-                $sales->buyer_address = $in['by_address'];
-                $sales->cc_amount = $in['cc_amount'];
-                $sales->cc_number = $in['cc_number'];
-                $sales->cc_expiry = $in['cc_expiry'];
-                $sales->dc_amount = $in['dc_amount'];
-                $sales->dc_number = $in['dc_number'];
-                $sales->payable_amount = $in['payable_amount'];
-                $sales->cash_amount = $in['cash_amount'];
-                $sales->cash_change = $in['cash_change'];
-                *//*
-
-                $sales->buyer_id = Auth::user()->_id;
-                $sales->buyer_name = Auth::user()->fullname;
-                $sales->buyer_address = Auth::user()->address;
-                $sales->buyer_city = Auth::user()->city;
-                $sales->cc_amount = 0;
-                $sales->cc_number = '';
-                $sales->cc_expiry = '';
-                $sales->dc_amount = 0;
-                $sales->dc_number = '';
-                $sales->payable_amount = $in['totalprice'];
-                $sales->cash_amount = 0;
-                $sales->cash_change = 0;
-                $sales->lastUpdate = new MongoDate();
-
-                $sales->transaction = $itarray;
-                $sales->stockunit = $unitarr;
-                $sales->payment = $payment;
-                $sales->transactiontype = 'online';
-                $sales->transactionstatus = 'checkout';
-                $sales->save();
-            }
-
-
-
-        if($in['status'] == 'final'){
-            return Redirect::to('shop/receipt');
-        }else{
-            return Redirect::to('shop/review');
-        }
-*/
     }
+
 
     public function getReview()
     {
@@ -552,6 +889,7 @@ class ShopController extends BaseController {
 
     }
 
+
     public function getReceipt($id = null)
     {
         $itemtable = '';
@@ -562,7 +900,7 @@ class ShopController extends BaseController {
             $session_id = $id;
         }
         $trx = Transaction::where('sessionId',$session_id)->get()->toArray();
-        $pay = Payment::where('sessionId',$session_id)->get()->toArray();
+        $pay = Payment::where('sessionId',$session_id)->first()->toArray();
 
         $tab = array();
         foreach($trx as $t){
@@ -586,7 +924,18 @@ class ShopController extends BaseController {
             $gt += $v['total'];
         }
 
+        //print_r($pay);
+
+        $dc = (isset($pay['delivery_charge']))?$pay['delivery_charge']:'';
+        $tc = (isset($pay['total_charge_after_delivery']))?$pay['total_charge_after_delivery']:'';
+
         $totalform = Former::hidden('totalprice',$gt);
+        $totalcost = Former::hidden('totalcost',$tc);
+        $deliverycost = Former::hidden('deliverycost',$dc);
+
+        $tab_data[] = array('',$totalform,array('value'=>'Sub Total'.'<input type="hidden" value="'.$gt.'" id="sub-total" />', 'attr'=>'class="right" ' ) ,array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
+        $tab_data[] = array('',$deliverycost,array('value'=>'Delivery Cost'.'<input type="hidden" name="delivery_charge" value="" id="delivery-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($dc), 'attr'=>'class="right" id="delivery-cost"'));
+        $tab_data[] = array('',$totalcost,array('value'=>'Total'.'<input type="hidden" name="total_charge" value="" id="total-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tc), 'attr'=>'class="right bold" id="total-cost"'));
 
         $tab_data[] = array('','',$totalform,array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
 
@@ -601,8 +950,11 @@ class ShopController extends BaseController {
         $t = new HtmlTable($tab_data, $attr, $header);
         $itemtable = $t->build();
 
-        return View::make('pages.receipt')->with('itemtable',$itemtable)->with('payment',$pay[0])
-                    ->with('purchase_id',$session_id);
+
+        return View::make('pages.receipt')
+                ->with('itemtable',$itemtable)
+                ->with('payment',$pay)
+                ->with('purchase_id',$session_id);
 
     }
 
@@ -616,7 +968,7 @@ class ShopController extends BaseController {
             $session_id = $id;
         }
         $trx = Transaction::where('sessionId',$session_id)->get()->toArray();
-        $pay = Payment::where('sessionId',$session_id)->get()->toArray();
+        $pay = Payment::where('sessionId',$session_id)->first()->toArray();
 
         $tab = array();
         foreach($trx as $t){
@@ -640,9 +992,16 @@ class ShopController extends BaseController {
             $gt += $v['total'];
         }
 
-        $totalform = Former::hidden('totalprice',$gt);
+        $dc = (isset($pay['delivery_charge']))?$pay['delivery_charge']:'';
+        $tc = (isset($pay['total_charge_after_delivery']))?$pay['total_charge_after_delivery']:'';
 
-        $tab_data[] = array('','',$totalform,array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
+        $totalform = Former::hidden('totalprice',$gt);
+        $totalcost = Former::hidden('totalcost',$tc);
+        $deliverycost = Former::hidden('deliverycost',$dc);
+
+        $tab_data[] = array('',$totalform,array('value'=>'Sub Total'.'<input type="hidden" value="'.$gt.'" id="sub-total" />', 'attr'=>'class="right" ' ) ,array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
+        $tab_data[] = array('',$deliverycost,array('value'=>'Delivery Cost'.'<input type="hidden" name="delivery_charge" value="" id="delivery-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($dc), 'attr'=>'class="right" id="delivery-cost"'));
+        $tab_data[] = array('',$totalcost,array('value'=>'Total'.'<input type="hidden" name="total_charge" value="" id="total-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tc), 'attr'=>'class="right bold" id="total-cost"'));
 
         $header = array(
             'things to buy',
@@ -655,7 +1014,7 @@ class ShopController extends BaseController {
         $t = new HtmlTable($tab_data, $attr, $header);
         $itemtable = $t->build();
 
-        return View::make('pages.printreceipt')->with('itemtable',$itemtable)->with('payment',$pay[0]);
+        return View::make('pages.printreceipt')->with('itemtable',$itemtable)->with('payment',$pay);
 
     }
 

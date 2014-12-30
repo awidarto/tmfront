@@ -22,10 +22,40 @@
             </div>
             <h2>Shopping Cart</h2>
             <div class="container" style="display:block;font-size:12px;">
+                <p>
+                    Thank you for your purchase, this is your Transaction Code :
+                </p>
+                    <div style="font-size:24pt;font-weight:bold;display:block;text-align:center;padding:8px;">{{ $session_id }}</div>
+                <p>
+                    please keep it handy, you will need it to confirm your payment later.<br />
+                    If you have made your transfer payment , you may confirm your payment here :<br />
+                </p>
+                <div class="clearfix center" style="text-align:center;">
+                    <a href="{{ URL::to('shop/confirm')}}" class="btn btn-danger" id="cancel">Confirm Payment</a>
+                </div>
+
+                <p>
+                    or call us and use this the transaction code.
+                    Have a good day !
+                </p>
+                {{ Former::open_vertical('')->id('paymethod')}}
                     {{ $itemtable }}
+                    {{ Former::hidden('status','final') }}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>Payment Method</h5>
+                            <div class="clearfix"></div>
+                            <h6>Bank Transfer</h6>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-12">
                             <h5>Delivered To</h5>
+                            @if( $warn = Session::get('methodFail'))
+                                <p class="bg-danger bold">
+                                    {{ $warn }}
+                                </p>
+                            @endif
                             <div class="clearfix"></div>
                             <p>
                                 {{ $pay['by_name']}}<br />
@@ -38,39 +68,12 @@
                             </p>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h5>How Do You Want To Pay ?</h5>
-                                <p>
-                                    Make a bank transfer to this account, then notify us :
-                                    BCA a/c : 123456789
-                                    BCA Cab. Kemang
-                                </p>
-                            {{ Former::open_vertical('shop/paytransfer')->id('paymethod')}}
-                            {{ Former::hidden('status','review') }}
-                                <button class="btn btn-primary pull-right" id="submit">Pay Using Bank Transfer</button>
-                            {{Former::close()}}
-
-                            <div class="clearfix"></div>
-                            <p>
-                                Or, use Doku if you want to pay using credit cards, and many other options other than bank transfer
-                            </p>
-                            {{ Former::open_vertical('shop/paydoku')->id('paymethod')}}
-                                {{ Former::hidden('status','review') }}
-                                <button class="btn btn-primary pull-right" id="submit">Pay Using Doku</button>
-                            {{Former::close()}}
-                        </div>
-                    </div>
                     <div class="row" >
-                        <div class="col-md-4">
-                            <a href="{{ URL::to('shop/cart')}}" class="btn btn-primary pull-left" id="to-cart"><i class="fa fa-arrow-left"></i> back to cart</a>
-                        </div>
-                        <div class="col-md-4 center">
-                            <a href="{{ URL::to('shop/cancel')}}" class="btn btn-danger pull-right" id="cancel">cancel purchase</a>
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-12">
+                            <a href="{{ URL::to('shop/collection')}}" class="btn btn-danger pull-right" id="cancel">Back to Shop</a>
                         </div>
                     </div>
+                {{Former::close()}}
             </div>
         </div>
         <div class="col-md-4 visible-lg tm-side">

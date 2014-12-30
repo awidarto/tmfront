@@ -6,17 +6,17 @@ class Doku
 	private $url = "http://103.10.129.17/Suite/Receive";
 	private $DokuParams;
 	public $postFields;
-	
+
 	public function __construct(DokuParams $params)
 	{
-		$this->DokuParams = $params;		
+		$this->DokuParams = $params;
 		$this->postFields = $this->generatePostFields();
 	}
-	
+
 	private function generatePostFields()
 	{
 		$postfield = array(
-			"MAILID" => $this->DokuParams->MAILID,
+			"MALLID" => $this->DokuParams->MALLID,
 			"CHAINMERCHANT" => $this->DokuParams->CHAINMERCHANT,
 			"AMOUNT" => $this->DokuParams->AMOUNT,
 			"PURCHASEAMOUNT" => $this->DokuParams->PURCHASEAMOUNT,
@@ -36,9 +36,9 @@ class Doku
 			"SHIPPING_COUNTRY" => $this->DokuParams->SHIPPING_COUNTRY,
 			"SHIPPING_ZIPCODE" => $this->DokuParams->SHIPPING_ZIPCODE
 		);
-		return $postfield;	
+		return $postfield;
 	}
-	
+
 	public function requestDoku()
 	{
 		$ch = curl_init();
@@ -49,7 +49,7 @@ class Doku
 		curl_setopt($ch, CURLOPT_POST, true);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $this->postFields);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		
+
 		$retval = curl_exec($ch);
 		curl_close($ch);
 		return $retval;
