@@ -519,6 +519,14 @@ class ShopController extends BaseController {
 
     public function postPaydoku()
     {
+        if(Config::get('doku.mode') == 'dev'){
+            $doku_mall_id = Config::get('doku.dev_mallid');
+            $doku_submit = Config::get('doku.dev_submit');
+        }else{
+            $doku_mall_id = Config::get('doku.prod_mallid');
+            $doku_submit = Config::get('doku.prod_submit');
+        }
+
         $session_id = Auth::user()->activeCart;
         $in = Input::get();
         //var_dump($in);
@@ -637,7 +645,7 @@ class ShopController extends BaseController {
             $request_time = date('YmdHis',time());
 
             $trx_words = sha1(
-                    $totalcost.Config::get('doku.dev_mallid').Config::get('doku.shared_key').$dokusession
+                    $totalcost.$doku_mall_id.Config::get('doku.shared_key').$dokusession
                 );
 
             $sales->outletId = Config::get('site.outlet_id');
@@ -699,6 +707,7 @@ class ShopController extends BaseController {
             Former::framework('TwitterBootstrap3');
 
             return View::make('doku.checkout')
+                ->with('doku_submit',$doku_submit)
                 ->with('itemtable',$itemtable)
                 ->with('session_id',$session_id)
                 ->with('basket',$basket)
