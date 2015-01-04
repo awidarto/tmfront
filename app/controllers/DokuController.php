@@ -70,7 +70,7 @@ class DokuController extends BaseController {
 
         if (!$hasil) {
 
-          echo 'Stop1';
+            echo 'Stop1';
 
         } else {
 

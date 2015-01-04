@@ -1,6 +1,6 @@
 <?php
-use Doku\Doku;
-use Doku\DokuParams;
+//use Doku\Doku;
+//use Doku\DokuParams;
 
 class ShopController extends BaseController {
 
@@ -668,6 +668,28 @@ class ShopController extends BaseController {
             $sales->transactionstatus = 'checkout';
 
             $sales->save();
+
+                $doku = new Doku();
+
+                $doku->transidmerchant = $dokusession ;
+                $doku->totalamount = number_format($tc,2,'.','');
+                $doku->words    = $trx_words;
+                $doku->statustype = '';
+                $doku->response_code = '';
+                $doku->approvalcode   = '';
+                $doku->status         = '';
+                $doku->paymentchannel = '';
+                $doku->paymentcode = '';
+                $doku->session_id = $payment_session;
+                $doku->bank_issuer = '';
+                $doku->cardnumber = '';
+                $doku->payment_date_time = '';
+                $doku->verifyid = '';
+                $doku->verifyscore = '';
+                $doku->verifystatus = '';
+                $doku->trxstatus = 'Requested';
+
+                $doku->save();
 
             $basket = implode(',', $basket_data);
 
