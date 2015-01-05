@@ -708,6 +708,7 @@ class ShopController extends BaseController {
 
             return View::make('doku.checkout')
                 ->with('doku_submit',$doku_submit)
+                ->with('doku_mall_id',$doku_mall_id)
                 ->with('itemtable',$itemtable)
                 ->with('session_id',$session_id)
                 ->with('basket',$basket)

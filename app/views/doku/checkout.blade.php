@@ -26,7 +26,7 @@
                 {{ Former::open_for_files_vertical($doku_submit,'POST',array('class'=>'custom'))}}
                     <div class="row">
                         <div class="col-md-12">
-                            {{ Former::text('MALLID','MALLID')->value(Config::get('doku.dev_mallid')) }}
+                            {{ Former::text('MALLID','MALLID')->value($doku_mall_id) }}
                             {{ Former::text('CHAINMERCHANT','CHAINMERCHANT')->value('NA') }}
                             {{ Former::text('AMOUNT','AMOUNT')->value(number_format($totalcost,2,'.','')) }}
                             {{ Former::text('PURCHASEAMOUNT','PURCHASEAMOUNT')->value(number_format($totalcost,2,'.','')) }}
