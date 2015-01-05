@@ -644,9 +644,11 @@ class ShopController extends BaseController {
             $payment_session = str_random(20);
             $request_time = date('YmdHis',time());
 
-            $trx_words = sha1(
-                    $totalcost.$doku_mall_id.Config::get('doku.shared_key').$dokusession
-                );
+            $doku_shared_key = Config::get('doku.shared_key');
+
+        //var msg = document.MerchatPaymentPage.AMOUNT.value + document.MerchatPaymentPage.MALLID.value + "5P6bc6P4nxAA" + document.MerchatPaymentPage.TRANSIDMERCHANT.value;
+
+            $trx_words = sha1( $totalcost.$doku_mall_id.$doku_shared_key.$dokusession );
 
             $sales->outletId = Config::get('site.outlet_id');
             $sales->outletName = $outlet->name;
