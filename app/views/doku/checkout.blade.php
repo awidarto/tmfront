@@ -41,11 +41,18 @@
                             {{ Former::text('EMAIL','EMAIL')->value( Auth::user()->email ) }}
                             {{ Former::text('ADDITIONALDATA','ADDITIONALDATA') }}
                             {{ Former::text('BASKET','BASKET')->value($basket) }}
-                            {{ Former::text('SHIPPING_ADDRESS','SHIPPING_ADDRESS')->value(Auth::user()->address) }}
-                            {{ Former::text('SHIPPING_CITY','SHIPPING_CITY')->value(Auth::user()->address) }}
-                            {{ Former::text('SHIPPING_STATE','SHIPPING_STATE')->value(Auth::user()->state) }}
-                            {{ Former::text('SHIPPING_COUNTRY','SHIPPING_COUNTRY')->value(Auth::user()->countryOfOrigin) }}
-                            {{ Former::text('SHIPPING_ZIPCODE','SHIPPING_ZIPCODE')->value(Auth::user()->zipCode) }}
+                            {{ Former::text('ADDRESS','SHIPPING_ADDRESS')->value(Auth::user()->address) }}
+                            {{ Former::text('CITY','CITY')->value(Auth::user()->address) }}
+                            {{ Former::text('STATE','STATE')->value(Auth::user()->state) }}
+                            {{ Former::text('PROVINCE','PROVINCE')->value(Auth::user()->state) }}
+                            {{ Former::text('COUNTRY','COUNTRY')->value(Auth::user()->countryOfOrigin) }}
+                            {{ Former::text('ZIPCODE','ZIPCODE')->value(Auth::user()->zipCode) }}
+
+                            {{ Former::text('MOBILEPHONE','MOBILEPHONE')->value('0217998391') }}
+                            {{ Former::text('HOMEPHONE','HOMEPHONE')->value('0217998391') }}
+                            {{ Former::text('WORKPHONE','WORKPHONE')->value('0217998391') }}
+                            {{ Former::text('BIRTHDATE','BIRTHDATE')->value('19880101') }}
+
                         </div>
                     </div>
                     <div class="row" >
