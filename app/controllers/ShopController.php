@@ -48,6 +48,27 @@ class ShopController extends BaseController {
         return View::make('pages.detail')->with('product',$product);
     }
 
+    public function getCancel()
+    {
+        if(isset(Auth::user()->activeCart) && Auth::user()->activeCart != ''){
+            Payment::where('sessionId', Auth::user()->activeCart )->update(array('sessionStatus'=>'canceled'));
+            Transaction::where('sessionId', Auth::user()->activeCart )->update(array('sessionStatus'=>'canceled'));
+            Sales::where('sessionId', Auth::user()->activeCart )->update(array('payment.sessionStatus'=>'canceled','transactionstatus'=>'canceled'));
+            //update stockunit status
+            $sales = Sales::where('sessionId', Auth::user()->activeCart )->first();
+            foreach($sales->stockunit as $st){
+                print_r($st);
+                Stockunit::where('_id', $st['_id'])->update(array('status'=>'available'));
+            }
+
+            Auth::user()->activeCart = '';
+            User::where('_id',Auth::user()->_id)->update(array('activeCart'=>''));
+
+            return Redirect::to('shop/cart');
+
+        }
+    }
+
     public function getCollection($category = 'art')
     {
 
