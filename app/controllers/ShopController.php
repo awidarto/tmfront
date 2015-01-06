@@ -648,7 +648,10 @@ class ShopController extends BaseController {
 
         //var msg = document.MerchatPaymentPage.AMOUNT.value + document.MerchatPaymentPage.MALLID.value + "5P6bc6P4nxAA" + document.MerchatPaymentPage.TRANSIDMERCHANT.value;
 
-            $trx_words = sha1( $tc.$doku_mall_id.$doku_shared_key.$dokusession );
+            $total_word = number_format($tc,2,'.','');
+
+            $trx_words = sha1( $total_word.$doku_mall_id.$doku_shared_key.$dokusession );
+            //$trx_words = $total_word.$doku_mall_id.$doku_shared_key.$dokusession;
 
             $sales->outletId = Config::get('site.outlet_id');
             $sales->outletName = $outlet->name;
