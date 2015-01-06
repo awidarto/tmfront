@@ -705,6 +705,7 @@ class ShopController extends BaseController {
 
                 $doku = new Doku();
 
+                $doku->cartId = Auth::user()->activeCart;
                 $doku->transidmerchant = $dokusession ;
                 $doku->totalamount = number_format($tc,2,'.','');
                 $doku->words    = $trx_words;
