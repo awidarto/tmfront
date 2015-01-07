@@ -56,9 +56,11 @@ class ShopController extends BaseController {
             Sales::where('sessionId', Auth::user()->activeCart )->update(array('payment.sessionStatus'=>'canceled','transactionstatus'=>'canceled'));
             //update stockunit status
             $sales = Sales::where('sessionId', Auth::user()->activeCart )->first();
-            foreach($sales->stockunit as $st){
-                print_r($st);
-                Stockunit::where('_id', $st['_id'])->update(array('status'=>'available'));
+            if($sales){
+                foreach($sales->stockunit as $st){
+                    //print_r($st);
+                    Stockunit::where('_id', $st['_id'])->update(array('status'=>'available'));
+                }
             }
 
             Auth::user()->activeCart = '';
@@ -116,7 +118,7 @@ class ShopController extends BaseController {
         if(isset(Auth::user()->activeCart) && Auth::user()->activeCart != '' ){
             $cart = Auth::user()->activeCart;
         }else{
-            $cart = str_random(5);
+            $cart = str_random(12);
             $user = Buyer::find(Auth::user()->_id);
             $user->activeCart = $cart;
             $user->save();
@@ -661,7 +663,7 @@ class ShopController extends BaseController {
 
             $outlet = Outlet::find(Config::get('site.outlet_id'));
 
-            $dokusession = str_random(12);
+            $dokusession = Auth::user()->activeCart;
             $payment_session = str_random(20);
             $request_time = date('YmdHis',time());
 
@@ -671,7 +673,9 @@ class ShopController extends BaseController {
 
             $total_word = number_format($tc,2,'.','');
 
-            $trx_words = sha1( $total_word.$doku_mall_id.$doku_shared_key.$dokusession );
+            $words_plain = $total_word.$doku_mall_id.$doku_shared_key.$dokusession;
+
+            $trx_words = sha1( $words_plain );
             //$trx_words = $total_word.$doku_mall_id.$doku_shared_key.$dokusession;
 
             $sales->outletId = Config::get('site.outlet_id');
@@ -744,6 +748,7 @@ class ShopController extends BaseController {
                 ->with('payment_session',$payment_session)
                 ->with('request_time',$request_time)
                 ->with('words',$trx_words)
+                ->with('words_plain',$words_plain)
                 ->with('totalprice',$gt)
                 ->with('totalcost',$tc)
                 ->with('deliverycost',$dc)

@@ -16,7 +16,17 @@
             <div style="display:block;font-size:12px;">
                 @if($nocart)
                 {{ $itemtable }}
-                <a href="{{ URL::to('shop/methods')}}" class="btn btn-primary pull-right" id="check-out">select payment & delivery method</a>
+                    <div class="row" >
+                        <div class="col-md-4">
+                            <a href="{{ URL::to('shop/collection')}}" class="btn btn-primary pull-left" id="to-cart"><i class="fa fa-arrow-left"></i> back to shop</a>
+                        </div>
+                        <div class="col-md-4 center">
+                            <a href="{{ URL::to('shop/cancel')}}" class="btn btn-danger pull-right" id="cancel">cancel purchase</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ URL::to('shop/methods')}}" class="btn btn-primary pull-right" id="check-out">process cart <i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
                 @else
                     <p>
                         You have no active shopping cart, would you like to <a href="{{ URL::to('/') }}" alt="shop home">look around the shop ?</a>
