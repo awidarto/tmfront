@@ -47,7 +47,7 @@
                             <h6>JNE</h6>
                             <div class="form-inline">
 
-                            {{ Former::text('jne_origin','Origin')->class('form-control jne_origin_auto col-md-4')->id('jne-origin')}}
+                            {{ Former::text('jne_origin','Origin')->class('form-control jne_origin_auto col-md-4')->id('jne-origin')->value(Config::get('default_origin'))}}
                             {{ Former::text('jne_dest','Destination')->class('form-control jne_dest_auto')->id('jne-dest')}}
                             {{ Former::text('jne_weight','Weight')->class('form-control jne_weight_auto')
                                 ->value($weight)->id('jne-weight')}}
