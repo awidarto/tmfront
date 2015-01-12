@@ -365,6 +365,7 @@ Route::post('jne/price',function(){
 Route::get('jne/price/{from}/{thru}/{weight}',function($from, $thru, $weight){
 
     $url = Laracurl::buildUrl(Config::get('jne.base_url').'price',[]);
+    $from = Config::get('jne.default_origin');
     $resp = Laracurl::post($url, array(
             'username' =>Config::get('jne.username') ,
             'api_key'=>Config::get('jne.key'),
@@ -377,18 +378,25 @@ Route::get('jne/price/{from}/{thru}/{weight}',function($from, $thru, $weight){
 
     $response = json_decode($resp->body,true);
 
-    foreach( $response['price'] as $p){
-        $tar = new Jne();
-        foreach($p as $k=>$v){
-            $tar->{$k} = $v;
-        }
-        $tar->origin_code = $from;
-        $tar->destination_code = $thru;
-        $tar->createdDate = new MongoDate();
-        $tar->save();
-    }
+    //print_r($response);
 
-    return Response::json( array('result'=>'OK', 'price'=>$response['price'] ) );
+    if(isset($response['price'])){
+        foreach( $response['price'] as $p){
+            $tar = new Jne();
+            foreach($p as $k=>$v){
+                $tar->{$k} = $v;
+            }
+            $tar->origin_code = $from;
+            $tar->destination_code = $thru;
+            $tar->createdDate = new MongoDate();
+            $tar->save();
+        }
+
+        return Response::json( array('result'=>'OK', 'price'=>$response['price'] ) );
+
+    }else{
+        return Response::json( array('result'=>'ERR:PRICENOTFOUND', 'price'=>array() ) );
+    }
     /*
     try{
 

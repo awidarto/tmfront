@@ -51,15 +51,17 @@ class ShopController extends BaseController {
     public function getCancel()
     {
         if(isset(Auth::user()->activeCart) && Auth::user()->activeCart != ''){
+            $units = Transaction::where('sessionId', Auth::user()->activeCart )->get();
+
             Payment::where('sessionId', Auth::user()->activeCart )->update(array('sessionStatus'=>'canceled'));
             Transaction::where('sessionId', Auth::user()->activeCart )->update(array('sessionStatus'=>'canceled'));
             Sales::where('sessionId', Auth::user()->activeCart )->update(array('payment.sessionStatus'=>'canceled','transactionstatus'=>'canceled'));
             //update stockunit status
             $sales = Sales::where('sessionId', Auth::user()->activeCart )->first();
-            if($sales){
-                foreach($sales->stockunit as $st){
-                    //print_r($st);
-                    Stockunit::where('_id', $st['_id'])->update(array('status'=>'available'));
+            if($units){
+                foreach($units as $u){
+                    //print_r($u);
+                    Stockunit::where('_id', $u->unitId )->update(array('status'=>'available'));
                 }
             }
 
@@ -1014,7 +1016,6 @@ class ShopController extends BaseController {
         $t = new HtmlTable($tab_data, $attr, $header);
         $itemtable = $t->build();
 
-
         return View::make('pages.receipt')
                 ->with('itemtable',$itemtable)
                 ->with('payment',$pay)
@@ -1098,7 +1099,7 @@ class ShopController extends BaseController {
         $tab_data = array();
 
         foreach($purchases->toArray() as $p){
-            $tab_data[] = array($p['createdDate'],
+            $tab_data[] = array( date('d-m-Y H:i:s', $p['createdDate']->sec) ,
                 '<a href="'.URL::to('shop/receipt/'.$p['sessionId'] ).'">'.$p['sessionId'].'</a>',
                 array('value'=>'IDR '.Ks::idr($p['payable_amount']), 'attr'=>'style="text-align:right;font-weight:bold;"'),
                 $p['transactionstatus'] );

@@ -27,6 +27,8 @@
             <h2>Purchase Receipt</h2>
             <div style="display:block;font-size:12px;">
                     {{ $itemtable }}
+                    @if($payment['sessionStatus'] != 'canceled')
+
                     <div class="row">
                         <div class="col-md-6">
                             <h6>Pay using</h6>
@@ -39,6 +41,7 @@
                             {{ Former::hidden('delivery',$payment['delivery_method'])}}
                         </div>
                     </div>
+                    @endif
                     <div class="row" >
                         <div class="col-md-4">
                         <div class="col-md-4 center">
@@ -46,7 +49,9 @@
                         </div>
                         </div>
                         <div class="col-md-4 center">
-                            <a href="{{ URL::to('shop/confirm')}}" class="btn btn-primary pull-left" id="confirm">confirm payment</a>
+                            @if($payment['sessionStatus'] != 'canceled')
+                                <a href="{{ URL::to('shop/confirm')}}" class="btn btn-primary pull-left" id="confirm">confirm payment</a>
+                            @endif
                         </div>
                         <div class="col-md-4">
                             <a href="{{ URL::to('shop/print/'.$purchase_id)}}" class="btn btn-primary pull-right" id="print">print receipt</a>

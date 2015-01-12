@@ -47,15 +47,25 @@
                             <h6>JNE</h6>
                             <div class="form-inline">
 
-                            {{ Former::text('jne_origin','Origin')->class('form-control jne_origin_auto col-md-4')->id('jne-origin')->value(Config::get('jne.default_origin'))}}
-                            {{ Former::text('jne_dest','Destination')->class('form-control jne_dest_auto')->id('jne-dest')}}
-                            {{ Former::text('jne_weight','Weight')->class('form-control jne_weight_auto')
-                                ->value($weight)->id('jne-weight')}}
-                            <br />
+                            {{ Former::hidden('jne_origin','Origin')->class('form-control jne_origin_auto col-md-4')->id('jne-origin')->value(Config::get('jne.default_origin'))}}
+
                             {{ Former::select('jne_tariff','Tariff')->class('form-control jne_tariff')
                                 ->options(array(''=>'Specify Origin , Destination & Weight then click Get Tariff'))->id('jne-tariff')}}
-                            <br />
-                            <button class="btn btn-primary" id="jne-get-tariff">Get Tariff</button><span id="loading-indicator" style="display:none;">Loading...</span>
+
+                            <div class="row" style="border:none;">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    {{ Former::text('jne_dest','Destination')->class('form-control jne_dest_auto')->id('jne-dest')}}
+                                </div>
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    {{ Former::text('jne_weight','Weight')->class('form-control jne_weight_auto')
+                                        ->value($weight)->id('jne-weight')}}
+                                </div>
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <button style="margin-top: 20px;" class="btn btn-primary" id="jne-get-tariff">Get Tariff</button>
+                                </div>
+                            </div>
+                            <span id="loading-indicator" style="display:none;">Loading...</span>
+
                             </div>
                         </div>
                     </div>
