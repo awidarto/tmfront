@@ -29,7 +29,7 @@ class DokuController extends BaseController {
     {
         $in = Input::get();
         return View::make('doku.redirect')
-            ->('redirect_url',URL::to('doku/result'))
+            ->with('redirect_url',URL::to('doku/result'))
             ->with('in',$in);
     }
 
