@@ -23,7 +23,7 @@
             <h2>Shopping Cart</h2>
             <div class="container" style="display:block;font-size:12px;">
                 {{ $itemtable }}
-                {{ Former::open_for_files_vertical($doku_submit,'POST',array('class'=>'custom'))}}
+                {{ Former::open_vertical($doku_submit,'POST',array('class'=>'custom'))}}
                     <div class="row">
                         <div class="col-md-12">
                             {{ Former::text('MALLID','MALLID')->value($doku_mall_id) }}
