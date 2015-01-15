@@ -666,6 +666,10 @@ class ShopController extends BaseController {
             $outlet = Outlet::find(Config::get('site.outlet_id'));
 
             $dokusession = Auth::user()->activeCart;
+
+            //for test, randomize
+            $dokusession = str_random(20);
+
             $payment_session = str_random(20);
             $request_time = date('YmdHis',time());
 
