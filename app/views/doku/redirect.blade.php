@@ -31,6 +31,6 @@
         ?>
         {{ $dokuform }}
         <noscript>
-        If you are not redirected please <a href="<?php echo $redirect_url; ?>">click here</a> to confirm your order.
+        If you are not redirected please <a href="{{ $redirect_url }}">click here</a> to confirm your order.
         </noscript>
 @stop

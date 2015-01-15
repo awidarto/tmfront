@@ -28,7 +28,9 @@ class DokuController extends BaseController {
     public function postRedirect()
     {
         $in = Input::get();
-        return View::make('doku.redirect')->with('in',$in);
+        return View::make('doku.redirect')
+            ->('redirect_url',URL::to('doku/result'))
+            ->with('in',$in);
     }
 
     public function postNotify()
@@ -116,7 +118,12 @@ class DokuController extends BaseController {
 
     public function postResult()
     {
+        print_r(Input::get());
+    }
 
+    public function getResult()
+    {
+        print_r(Input::get());
     }
 
     public function missingMethod($parameter = array()){
