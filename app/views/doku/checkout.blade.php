@@ -26,34 +26,34 @@
                 {{ Former::open_vertical($doku_submit,'POST',array('class'=>'custom'))}}
                     <div class="row">
                         <div class="col-md-12">
-                            {{ Former::text('MALLID','MALLID')->value($doku_mall_id) }}
-                            {{ Former::text('CHAINMERCHANT','CHAINMERCHANT')->value('NA') }}
-                            {{ Former::text('AMOUNT','AMOUNT')->value(number_format($totalcost,2,'.','')) }}
-                            {{ Former::text('PURCHASEAMOUNT','PURCHASEAMOUNT')->value(number_format($totalcost,2,'.','')) }}
-                            {{ Former::text('TRANSIDMERCHANT','TRANSIDMERCHANT')->value($payment_id) }}
+                            {{ Former::hidden('MALLID','MALLID')->value($doku_mall_id) }}
+                            {{ Former::hidden('CHAINMERCHANT','CHAINMERCHANT')->value('NA') }}
+                            {{ Former::hidden('AMOUNT','AMOUNT')->value(number_format($totalcost,2,'.','')) }}
+                            {{ Former::hidden('PURCHASEAMOUNT','PURCHASEAMOUNT')->value(number_format($totalcost,2,'.','')) }}
+                            {{ Former::hidden('TRANSIDMERCHANT','TRANSIDMERCHANT')->value($payment_id) }}
                             <!-- unencypted WORDS : {{ $words_plain }} , test only, To Do : remove when production ready -->
-                            {{ Former::text('WORDS','WORDS')->value($words) }}
-                            {{ Former::text('REQUESTDATETIME','REQUESTDATETIME')->value( $request_time ) }}
-                            {{ Former::text('CURRENCY','CURRENCY')->value('360') }}
-                            {{ Former::text('PURCHASECURRENCY','PURCHASECURRENCY')->value('360') }}
-                            {{ Former::text('SESSIONID','SESSIONID')->value($payment_session) }}
+                            {{ Former::hidden('WORDS','WORDS')->value($words) }}
+                            {{ Former::hidden('REQUESTDATETIME','REQUESTDATETIME')->value( $request_time ) }}
+                            {{ Former::hidden('CURRENCY','CURRENCY')->value('360') }}
+                            {{ Former::hidden('PURCHASECURRENCY','PURCHASECURRENCY')->value('360') }}
+                            {{ Former::hidden('SESSIONID','SESSIONID')->value($payment_session) }}
                             {{ Former::select('PAYMENTCHANNEL','PAYMENTCHANNEL')->options(Config::get('doku.channel'))}}
-                            {{ Former::text('NAME','NAME')->value(Auth::user()->fullname ) }}
-                            {{ Former::text('EMAIL','EMAIL')->value( Auth::user()->email ) }}
-                            {{ Former::text('ADDITIONALDATA','ADDITIONALDATA') }}
-                            {{ Former::text('BASKET','BASKET')->value($basket) }}
-                            {{ Former::text('ADDRESS','SHIPPING_ADDRESS')->value(Auth::user()->address) }}
-                            {{ Former::text('CITY','CITY')->value(Auth::user()->city) }}
-                            {{ Former::text('STATE','STATE')->value(Auth::user()->state) }}
-                            {{ Former::text('PROVINCE','PROVINCE')->value(Auth::user()->state) }}
-                            {{ Former::text('COUNTRY','COUNTRY')->value(Auth::user()->countryOfOrigin) }}
-                            {{ Former::text('ZIPCODE','ZIPCODE')->value(Auth::user()->zipCode) }}
+                            {{ Former::text('NAME','Name')->value(Auth::user()->fullname ) }}
+                            {{ Former::text('EMAIL','Email')->value( Auth::user()->email ) }}
+                            {{ Former::hidden('ADDITIONALDATA','ADDITIONALDATA') }}
+                            {{ Former::hidden('BASKET','BASKET')->value($basket) }}
+                            {{ Former::text('ADDRESS','Shipping Address')->value(Auth::user()->address) }}
+                            {{ Former::text('CITY','City')->value(Auth::user()->city) }}
+                            {{ Former::text('STATE','State')->value(Auth::user()->state) }}
+                            {{ Former::text('PROVINCE','Province')->value(Auth::user()->state) }}
+                            {{ Former::text('COUNTRY','Country')->value(Auth::user()->countryOfOrigin) }}
+                            {{ Former::text('ZIPCODE','Zip Code')->value(Auth::user()->zipCode) }}
 
                             <!-- data taken from Doku example form -->
-                            {{ Former::text('MOBILEPHONE','MOBILEPHONE')->value('0217998391') }}
-                            {{ Former::text('HOMEPHONE','HOMEPHONE')->value('0217998391') }}
-                            {{ Former::text('WORKPHONE','WORKPHONE')->value('0217998391') }}
-                            {{ Former::text('BIRTHDATE','BIRTHDATE')->value('19880101') }}
+                            {{ Former::text('MOBILEPHONE','Mobile Phone') }}
+                            {{ Former::text('HOMEPHONE','Home Phone') }}
+                            {{ Former::text('WORKPHONE','Work Phone') }}
+                            {{ Former::text('BIRTHDATE','Birth Date')->placeholder('YYYYMMDD') }}
 
                         </div>
                     </div>
