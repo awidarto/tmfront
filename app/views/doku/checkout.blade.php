@@ -26,22 +26,22 @@
                 {{ Former::open_vertical($doku_submit,'POST',array('class'=>'custom'))}}
                     <div class="row">
                         <div class="col-md-12">
-                            {{ Former::hidden('MALLID','MALLID')->value($doku_mall_id) }}
-                            {{ Former::hidden('CHAINMERCHANT','CHAINMERCHANT')->value('NA') }}
-                            {{ Former::hidden('AMOUNT','AMOUNT')->value(number_format($totalcost,2,'.','')) }}
-                            {{ Former::hidden('PURCHASEAMOUNT','PURCHASEAMOUNT')->value(number_format($totalcost,2,'.','')) }}
-                            {{ Former::hidden('TRANSIDMERCHANT','TRANSIDMERCHANT')->value($payment_id) }}
+                            {{ Former::hidden('MALLID')->value($doku_mall_id) }}
+                            {{ Former::hidden('CHAINMERCHANT')->value('NA') }}
+                            {{ Former::hidden('AMOUNT')->value(number_format($totalcost,2,'.','')) }}
+                            {{ Former::hidden('PURCHASEAMOUNT')->value(number_format($totalcost,2,'.','')) }}
+                            {{ Former::hidden('TRANSIDMERCHANT')->value($payment_id) }}
                             <!-- unencypted WORDS : {{ $words_plain }} , test only, To Do : remove when production ready -->
-                            {{ Former::hidden('WORDS','WORDS')->value($words) }}
-                            {{ Former::hidden('REQUESTDATETIME','REQUESTDATETIME')->value( $request_time ) }}
-                            {{ Former::hidden('CURRENCY','CURRENCY')->value('360') }}
-                            {{ Former::hidden('PURCHASECURRENCY','PURCHASECURRENCY')->value('360') }}
-                            {{ Former::hidden('SESSIONID','SESSIONID')->value($payment_session) }}
-                            {{ Former::select('PAYMENTCHANNEL','PAYMENTCHANNEL')->options(Config::get('doku.channel'))}}
+                            {{ Former::hidden('WORDS')->value($words) }}
+                            {{ Former::hidden('REQUESTDATETIME')->value( $request_time ) }}
+                            {{ Former::hidden('CURRENCY')->value('360') }}
+                            {{ Former::hidden('PURCHASECURRENCY')->value('360') }}
+                            {{ Former::hidden('SESSIONID')->value($payment_session) }}
+                            {{ Former::select('PAYMENTCHANNEL','Payment Method')->options(Config::get('doku.channel'))}}
                             {{ Former::text('NAME','Name')->value(Auth::user()->fullname ) }}
                             {{ Former::text('EMAIL','Email')->value( Auth::user()->email ) }}
-                            {{ Former::hidden('ADDITIONALDATA','ADDITIONALDATA') }}
-                            {{ Former::hidden('BASKET','BASKET')->value($basket) }}
+                            {{ Former::hidden('ADDITIONALDATA')->value('') }}
+                            {{ Former::hidden('BASKET')->value($basket) }}
                             {{ Former::text('ADDRESS','Shipping Address')->value(Auth::user()->address) }}
                             {{ Former::text('CITY','City')->value(Auth::user()->city) }}
                             {{ Former::text('STATE','State')->value(Auth::user()->state) }}
