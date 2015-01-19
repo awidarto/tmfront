@@ -33,13 +33,13 @@ Route::group( array('domain'=>'{sub}.toimoi.co.id'), function(){
         return View::make('pages.under');
     });
 });
-*/
 
 Route::group( array('domain'=>'toimoi.co.id'), function(){
     Route::get('/',function(){
         return View::make('pages.under');
     });
 });
+*/
 
 Route::get('/', 'HomeController@getIndex');
 
