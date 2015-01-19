@@ -36,7 +36,7 @@ Route::group( array('domain'=>'{sub}.toimoi.co.id'), function(){
 */
 
 Route::group( array('domain'=>'toimoi.co.id'), function(){
-    Redirect::to('http://www.toimoi.co.id');
+    return Redirect::to('http://www.toimoi.co.id');
 });
 
 Route::get('/', 'HomeController@getIndex');
