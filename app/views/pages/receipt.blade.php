@@ -37,8 +37,13 @@
                         </div>
                         <div class="col-md-6">
                             <h6>Deliver using</h6>
-                            <h5>{{ strtoupper($payment['delivery_method'])  }}</h5>
-                            {{ Former::hidden('delivery',$payment['delivery_method'])}}
+                            @if(isset($payment['delivery_method']))
+                                <h5>{{ strtoupper($payment['delivery_method'])  }}</h5>
+                                {{ Former::hidden('delivery',$payment['delivery_method'])}}
+                            @else
+                                <h5>JNE</h5>
+                                {{ Former::hidden('delivery','JNE')}}
+                            @endif
                         </div>
                     </div>
                     @endif

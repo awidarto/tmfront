@@ -28,6 +28,48 @@ class DokuController extends BaseController {
     public function postRedirect()
     {
         $in = Input::get();
+
+        $transidmerchant = $in['TRANSIDMERCHANT'];
+        $purchase_amt = $in['AMOUNT'];
+        $status_code = $in['STATUSCODE'];
+        $words = $in['WORDS'];
+        $paymentchannel = $in['PAYMENTCHANNEL'];
+        $session_id = $in['SESSIONID'];
+        $paymentcode = $in['PAYMENTCODE'];
+
+        /*
+        "_id": ObjectId("54b793e9fa0c6de66b1aa014"),
+   "approvalcode": "118274",
+   "bank_issuer": "CIMB NIAGA",
+   "cardnumber": "5***********3593",
+   "cartId": "EIoHmzkrErXo",
+   "created_at": ISODate("2015-01-15T10:18:17.460Z"),
+   "payment_date_time": "20150115172002",
+   "paymentchannel": "01",
+   "paymentcode": "",
+   "response_code": "0000",
+   "session_id": "K2pt9Rypd0N03VUdqyen",
+   "status": "SUCCESS",
+   "statustype": "P",
+   "totalamount": "27000.00",
+   "transidmerchant": "QFiM7a2HU2DvN2pYslnG",
+   "trxstatus": "Requested",
+   "updated_at": ISODate("2015-01-15T10:20:03.191Z"),
+   "verifyid": "",
+   "verifyscore": "50",
+   "verifystatus": "REVIEW",
+   "words": "67a7b363c22b513883b78c622691939be8fd6bd1"
+        */
+
+        $trx = Doku::where('transidmerchant',$transidmerchant)->first();
+
+        if($trx){
+            $trx->statuscode = $status_code;
+            $trx->paymentchannel = $paymentchannel;
+            $trx->paymentcode = $paymentcode;
+            $trx->save();
+        }
+
         return View::make('doku.redirect')
             ->with('redirect_url',URL::to('doku/result'))
             ->with('in',$in);
@@ -118,12 +160,32 @@ class DokuController extends BaseController {
 
     public function postResult()
     {
-        print_r(Input::get());
+
+        $in = Input::get();
+
+        /*
+        [order_number] => ZgcptW3fWNrw3nPvUF37
+        [purchase_amt] => 316000.00
+        [status_code] => 5510
+        [words] => c71adbb806150a7edfa5987ced0d41830f73fe61
+        [paymentchannel] => 01
+        [session_id] => tnHU8PMiVRPGw2JifzJX
+        [paymentcode] =>
+        */
+
+        $doku = Doku::where('transidmerchant',$in['order_number'])->first();
+
+        //print_r(Input::get());
+        return View::make('doku.result')
+            ->with('doku',$doku)
+            ->with('in',$in);
     }
 
     public function getResult()
     {
-        print_r(Input::get());
+        //print_r(Input::get());
+        return View::make('doku.result')
+            ->with('in',Input::get());
     }
 
     public function missingMethod($parameter = array()){

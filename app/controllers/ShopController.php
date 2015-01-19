@@ -36,6 +36,29 @@ class ShopController extends BaseController {
         return View::make('pages.home');
     }
 
+    public function getConfirm()
+    {
+        return View::make('pages.confirm');
+    }
+
+    public function postConfirm()
+    {
+        $in = Input::get();
+        $in['createdDate'] = new MongoDate();
+        $in['lastUpdate'] = new MongoDate();
+
+        $cid = Confirmation::insertGetId($in);
+
+        if($cid){
+            $result = true;
+        }else{
+            $result = false;
+        }
+
+        return View::make('pages.confirmresult')->with('result',$result);
+
+    }
+
     public function getDetail($id = null)
     {
 
@@ -321,6 +344,7 @@ class ShopController extends BaseController {
             $pay->delivery_charge = $datain['delivery_charge'];
             $pay->total_charge_after_delivery = $datain['total_charge'];
             $pay->jne_origin = $datain['jne_origin'];
+            $pay->delivery_method = 'JNE';
             $pay->jne_dest = $datain['jne_dest'];
             $pay->jne_weight = $datain['jne_weight'];
             $pay->jne_tariff = $datain['jne_tariff'];
@@ -529,7 +553,9 @@ class ShopController extends BaseController {
             $sales->save();
 
             //remove session data
-            //Auth::user()->activeCart = '';
+            Auth::user()->activeCart = '';
+
+            User::where('_id',Auth::user()->_id)->update(array('activeCart'=>''));
 
             return View::make('pages.transferlanding')
                 ->with('itemtable',$itemtable)
@@ -1007,7 +1033,7 @@ class ShopController extends BaseController {
         $tab_data[] = array('',$deliverycost,array('value'=>'Delivery Cost'.'<input type="hidden" name="delivery_charge" value="" id="delivery-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($dc), 'attr'=>'class="right" id="delivery-cost"'));
         $tab_data[] = array('',$totalcost,array('value'=>'Total'.'<input type="hidden" name="total_charge" value="" id="total-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tc), 'attr'=>'class="right bold" id="total-cost"'));
 
-        $tab_data[] = array('','',$totalform,array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
+        //$tab_data[] = array('','',$totalform,array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
 
         $header = array(
             'things to buy',
