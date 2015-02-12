@@ -41,7 +41,7 @@
         </div>
         <div class="col-md-4 visible-lg tm-side item-detail">
                 @include('partials.identity')
-                <h2 style="display:block;padding-left:0px;font-size:24px;font-weight:bold;">{{ $product['itemDescription']}}</h2>
+                <h2 style="display:block;padding-left:0px;font-size:24px;font-weight:bold;margin-top:24px;">{{ $product['itemDescription']}}</h2>
                 buy now for IDR {{ Ks::idr($product['priceRegular']) }}
                 <div id="item-description">
                     <p>
