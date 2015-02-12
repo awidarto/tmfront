@@ -181,6 +181,15 @@
 
                 @endif
 
+        @if($_SERVER['HTTP_HOST'] != 'localhost')
+
+            <iframe src="//www.facebook.com/plugins/like.php?href={{ urlencode( URL::full() ) }}&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=true&amp;font=verdana&amp;colorscheme=light&amp;action=like&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>
+            <br />
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="toimoi" data-hashtags="toimoiindonesia">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+        @endif
+
             {{--
             @include('partials.identity')
             @include('partials.location')
