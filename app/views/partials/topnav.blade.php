@@ -59,7 +59,7 @@
 
           <ul class="nav navbar-nav" id="tm-socmed">
             <li>
-              <a class="social" href="https://twitter.com/share?text={{ urlencode({{ Config::get('site.name') }}) }}&url={{ urlencode( URL::full() ) }}" ><img src="{{ URL::to('/')}}/images/twitter.png"></a></li>
+              <a class="social" href="https://twitter.com/share?text={{ urlencode( Config::get('site.name') ) }}&url={{ urlencode( URL::full() ) }}" ><img src="{{ URL::to('/')}}/images/twitter.png"></a></li>
             <li><a class="social" href="../navbar-static-top/"><img src="{{ URL::to('/')}}/images/facebook.png"></a></li>
             <li><a class="social" href="../navbar-static-top/"><img src="{{ URL::to('/')}}/images/instagram.png"></a></li>
             <li><a class="social" href="../navbar-static-top/"><img src="{{ URL::to('/')}}/images/pinterest.png"></a></li>
