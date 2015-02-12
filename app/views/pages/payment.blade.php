@@ -33,7 +33,7 @@
                             </p>
                             <h6>JNE</h6>
                             <p>
-                                Origin : {{ $pay['jne_origin'] }} <i class="fa fa-arrow-right"></i> Dest : {{$pay['jne_dest']}}<br />
+                                Origin : {{ $pay['jne_origin'] }} <i class="fa fa-chevron-right"></i> Dest : {{$pay['jne_dest']}}<br />
                                 Delivery Cost : IDR {{ Ks::idr($pay['jne_tariff']) }}
                             </p>
                         </div>

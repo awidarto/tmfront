@@ -24,7 +24,7 @@
                             <a href="{{ URL::to('shop/cancel')}}" class="btn btn-danger pull-right" id="cancel">cancel purchase</a>
                         </div>
                         <div class="col-md-4">
-                            <a href="{{ URL::to('shop/methods')}}" class="btn btn-primary pull-right" id="check-out">process cart <i class="fa fa-arrow-right"></i></a>
+                            <a href="{{ URL::to('shop/methods')}}" class="btn btn-primary pull-right" id="check-out">process cart</a>
                         </div>
                     </div>
                 @else
