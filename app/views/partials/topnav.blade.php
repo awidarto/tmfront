@@ -59,11 +59,7 @@
 
           <ul class="nav navbar-nav" id="tm-socmed">
             <li>
-              <style type="text/css" media="screen">
-                #custom-tweet-button a { display: block; padding: 20px 0px 0px 20px; background:url('{{ URL::to('/')}}/images/twitter.png') no-repeat; border: 0px;}
-                </style>
-              <a class="social" href="https://twitter.com/share?text=your_text&url= your_page_url"target="_blank"></a>
-              <a class="social" href="../navbar-static-top/"><img src="{{ URL::to('/')}}/images/twitter.png"></a></li>
+              <a class="social" href="https://twitter.com/share?text={{ urlencode({{ Config::get('site.name') }}) }}&url={{ urlencode( URL::full() ) }}" ><img src="{{ URL::to('/')}}/images/twitter.png"></a></li>
             <li><a class="social" href="../navbar-static-top/"><img src="{{ URL::to('/')}}/images/facebook.png"></a></li>
             <li><a class="social" href="../navbar-static-top/"><img src="{{ URL::to('/')}}/images/instagram.png"></a></li>
             <li><a class="social" href="../navbar-static-top/"><img src="{{ URL::to('/')}}/images/pinterest.png"></a></li>
