@@ -182,7 +182,7 @@
                 @endif
 
         @if($_SERVER['HTTP_HOST'] != 'localhost')
-            <div>
+            <div style="padding:10px 0;">
             <iframe src="//www.facebook.com/plugins/like.php?href={{ urlencode( URL::full() ) }}&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=true&amp;font=verdana&amp;colorscheme=light&amp;action=like&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>
             <br />
             <a href="https://twitter.com/share" class="twitter-share-button" data-via="toimoi" data-hashtags="toimoiindonesia">Tweet</a>
