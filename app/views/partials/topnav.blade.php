@@ -59,7 +59,7 @@
 
           <ul class="nav navbar-nav" id="tm-socmed">
             <?php
-              if(isset($product['itemDescription'])){
+              if(isset($product) && isset($product['itemDescription'])){
                 $stext = Config::get('site.name').' - '.$product['itemDescription'];
               }else{
                 $stext = $product['itemDescription'];
