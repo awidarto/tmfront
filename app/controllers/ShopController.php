@@ -108,6 +108,8 @@ class ShopController extends BaseController {
 
         $products = Product::where('categoryLink',$category)
                         ->where('status','active')
+                        ->orderBy('itemDescription','asc')
+                        ->orderBy('colour','asc')
                         ->skip($page * $perpage)
                         ->take($perpage)
                         ->get()->toArray();
