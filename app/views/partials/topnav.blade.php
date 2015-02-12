@@ -62,7 +62,7 @@
               if(isset($product) && isset($product['itemDescription'])){
                 $stext = Config::get('site.name').' - '.$product['itemDescription'];
               }else{
-                $stext = $product['itemDescription'];
+                $stext = Config::get('site.name');
               }
             ?>
             <li>
