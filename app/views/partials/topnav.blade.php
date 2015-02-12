@@ -60,9 +60,9 @@
           <ul class="nav navbar-nav" id="tm-socmed">
             <li>
               <a class="social" href="https://twitter.com/share?text={{ urlencode( Config::get('site.name') ) }}&url={{ urlencode( URL::full() ) }}" target="_blank" ><img src="{{ URL::to('/')}}/images/twitter.png"></a></li>
-            <li><a class="social" href="http://www.facebook.com/share.php?u={{ urlencode( URL::full() ) }}&title={{ urlencode( Config::get('site.name') ) }}"><img src="{{ URL::to('/')}}/images/facebook.png"></a></li>
+            <li><a class="social" href="http://www.facebook.com/sharer/sharer.php?u={{ urlencode( URL::full() ) }}&title={{ urlencode( Config::get('site.name') ) }}"><img src="{{ URL::to('/')}}/images/facebook.png" target="_blank" ></a></li>
             <li><a class="social" href="../navbar-static-top/"><img src="{{ URL::to('/')}}/images/instagram.png"></a></li>
-            <li><a class="social" href="http://pinterest.com/pin/create/bookmarklet/?url={{ urlencode( URL::full() ) }}&is_video=false&description={{ urlencode( Config::get('site.name') ) }}" ><img src="{{ URL::to('/')}}/images/pinterest.png"></a></li>
+            <li><a class="social" href="http://pinterest.com/pin/create/bookmarklet/?url={{ urlencode( URL::full() ) }}&is_video=false&description={{ urlencode( Config::get('site.name') ) }}" target="_blank" ><img src="{{ URL::to('/')}}/images/pinterest.png"></a></li>
             {{--
             <li><a class="social" href="../navbar-static-top/"><img src="{{ URL::to('/')}}/images/gplus.png"></a></li>
             --}}
