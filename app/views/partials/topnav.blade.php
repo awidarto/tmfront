@@ -62,7 +62,7 @@
               <a class="social" href="https://twitter.com/share?text={{ urlencode( Config::get('site.name') ) }}&url={{ urlencode( URL::full() ) }}" target="_blank" ><img src="{{ URL::to('/')}}/images/twitter.png"></a></li>
             <li><a class="social" href="../navbar-static-top/"><img src="{{ URL::to('/')}}/images/facebook.png"></a></li>
             <li><a class="social" href="../navbar-static-top/"><img src="{{ URL::to('/')}}/images/instagram.png"></a></li>
-            <li><a class="social" href="../navbar-static-top/"><img src="{{ URL::to('/')}}/images/pinterest.png"></a></li>
+            <li><a class="social" http://pinterest.com/pin/create/bookmarklet/?url={{ urlencode( URL::full() ) }}&is_video=false&description={{ urlencode( Config::get('site.name') ) }}><img src="{{ URL::to('/')}}/images/pinterest.png"></a></li>
             {{--
             <li><a class="social" href="../navbar-static-top/"><img src="{{ URL::to('/')}}/images/gplus.png"></a></li>
             --}}
