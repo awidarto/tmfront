@@ -43,7 +43,7 @@
                     </div>
                     <div class="row" >
                         <div class="col-md-4">
-                            <a href="{{ URL::to('shop/cart')}}" class="btn btn-primary pull-left" id="to-cart"><i class="fa fa-arrow-left"></i> back to cart</a>
+                            <a href="{{ URL::to('shop/cart')}}" class="btn btn-primary pull-left" id="to-cart">back to cart</a>
                         </div>
                         <div class="col-md-4 center">
                             <a href="{{ URL::to('shop/cancel')}}" class="btn btn-danger pull-right" id="cancel">cancel purchase</a>

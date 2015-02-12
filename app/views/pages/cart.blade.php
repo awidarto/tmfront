@@ -18,7 +18,7 @@
                 {{ $itemtable }}
                     <div class="row" >
                         <div class="col-md-4">
-                            <a href="{{ URL::to('shop/collection')}}" class="btn btn-primary pull-left" id="to-cart"><i class="fa fa-arrow-left"></i> back to shop</a>
+                            <a href="{{ URL::to('shop/collection')}}" class="btn btn-primary pull-left" id="to-cart">back to shop</a>
                         </div>
                         <div class="col-md-4 center">
                             <a href="{{ URL::to('shop/cancel')}}" class="btn btn-danger pull-right" id="cancel">cancel purchase</a>

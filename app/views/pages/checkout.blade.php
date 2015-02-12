@@ -37,7 +37,7 @@
                 </div>
                 <div class="row" >
                     <div class="col-md-4">
-                        <button class="btn btn-primary pull-left" id="to-cart"><i class="fa fa-arrow-left"></i> back to cart</button>
+                        <button class="btn btn-primary pull-left" id="to-cart">back to cart</button>
                     </div>
                     <div class="col-md-4 center">
                         <button class="btn btn-danger pull-right" id="cancel">cancel purchase</button>
