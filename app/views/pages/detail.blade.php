@@ -157,7 +157,7 @@
                                         if(data.result == 'OK'){
                                             $('span#cart-qty').html(data.total_count);
                                             alert( 'item added to cart');
-                                            //$('select#quantity').html();
+                                            $('select#quantity').html( updateselector(data.available_count) );
                                         }else{
                                             alert( 'Failed adding to cart')
                                         }
