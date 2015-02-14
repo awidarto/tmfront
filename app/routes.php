@@ -91,7 +91,10 @@ Route::get('media',function(){
 
 Route::get('testwit',function(){
     $toimoitwit = Twitter::getSearch(array('q'=>'toimoi','lang'=>'id','include_entities'=>1));
+    print_r($toimoitwit);
     $toimoitwit = Twitter::getSearch(array('q'=>'@toimoiindonesia','lang'=>'id','include_entities'=>1));
+    print_r($toimoitwit);
+    $toimoitwit = Twitter::getSearch(array('q'=>'#toimoiindonesia','lang'=>'id','include_entities'=>1));
     print_r($toimoitwit);
 });
 
