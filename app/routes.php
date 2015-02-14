@@ -90,12 +90,26 @@ Route::get('media',function(){
 });
 
 Route::get('testwit',function(){
-    $toimoitwit = Twitter::getSearch(array('q'=>'toimoi','lang'=>'id','include_entities'=>1));
+    $toimoitwit = Twitter::getSearch(array('q'=>'toimoi','include_entities'=>1));
     print_r($toimoitwit);
     $toimoitwit = Twitter::getSearch(array('q'=>'@toimoiindonesia','lang'=>'id','include_entities'=>1));
     print_r($toimoitwit);
     $toimoitwit = Twitter::getSearch(array('q'=>'#toimoiindonesia','lang'=>'id','include_entities'=>1));
     print_r($toimoitwit);
+});
+
+Route::get('sqpic',function(){
+    $dir = public_path().'/storage/media/test.jpg';
+
+    $sq = Image::make($dir)
+        ->resize(300, 300, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
+    $canvas = Image::canvas(310, 310, '#FFFFFF');
+
+    return $canvas->insert($sq,'center')
+        ->response('jpg');
 });
 
 Route::get('regeneratepic',function(){

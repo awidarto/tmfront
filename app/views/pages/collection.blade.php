@@ -24,10 +24,10 @@
                             <div class="item">
                                 <a href="{{ URL::to('shop/detail/'.$products[$i]['_id'])}}">
                                     <h1>{{ $products[$i]['itemDescription']}}</h1>
-                                    @if(isset($products[$i]['defaultpictures']['medium_url'])
-                                        && $products[$i]['defaultpictures']['medium_url'] != ''
+                                    @if(isset($products[$i]['defaultpictures']['thumbnail_url'])
+                                        && $products[$i]['defaultpictures']['thumbnail_url'] != ''
                                         )
-                                        <img src="{{ $products[$i]['defaultpictures']['medium_url'] }}" class="img-responsive" >
+                                        <img src="{{ $products[$i]['defaultpictures']['thumbnail_url'] }}" class="img-responsive" >
                                     @else
                                         <img src="{{ URL::to('/') }}/images/th_default.png" class="img-responsive" >
                                     @endif
