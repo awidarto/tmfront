@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.12",
-        "jenssegers/mongodb": "dev-master",
+        "jenssegers/mongodb": "*",
         "nitmedia/wkhtml2pdf": "dev-master",
         "noherczeg/breadcrumb": "dev-master",
         "anahkiasen/former": "dev-develop",
@@ -16,7 +16,7 @@
         "alexwhitman/view-themes": "1.2.*",
         "mj/breadcrumb": "dev-master",
         "knplabs/knp-snappy": "*",
-        "barryvdh/laravel-snappy": "dev-master",
+        "barryvdh/laravel-snappy": "0.1.*",
         "thujohn/twitter": "dev-master",
         "php-instagram-api/php-instagram-api": "dev-master",
         "elevencodes/instagram-laravel": "2.0.*@dev",

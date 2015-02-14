@@ -5,10 +5,14 @@
 return array(
 	'API_URL'             => 'api.twitter.com',
 	'API_VERSION'         => '1.1',
+	'AUTHENTICATE_URL'    => 'https://api.twitter.com/oauth/authenticate',
+	'AUTHORIZE_URL'       => 'https://api.twitter.com/oauth/authorize',
+	'ACCESS_TOKEN_URL'    => 'oauth/access_token',
+	'REQUEST_TOKEN_URL'   => 'oauth/request_token',
 	'USE_SSL'             => true,
 
-	'CONSUMER_KEY'        => 'Bn2eli3qMRuRFWkb5AZ0bND1x',
-	'CONSUMER_SECRET'     => 'sBTtWstTy5Tm7wUsIIb39cJCL3vIeV3Gf2JHiN8vTATdHzc36r',
-	'ACCESS_TOKEN'        => '46893111-l16FsfZQWLeCB2tWlRcZrqgRtsKmIhBu8mLlZFQQY',
-	'ACCESS_TOKEN_SECRET' => 'MHRAlRzgaSlSLjTF7s0jt1D2nUYIr8icJeNbcJT8q6qZN',
+	'CONSUMER_KEY'        => 'zqpNmeKB7xsT1RHJbP2k5Zjox',
+	'CONSUMER_SECRET'     => 'oG6Iwi96D6jYeuisRKV7dIVWiAyG7SUOE96Cnavxw3T8RyG8Ts',
+	'ACCESS_TOKEN'        => '46893111-h8shXP0Xrd5VBbRfihDRW2KqEewulsZWBpAQNBK9v',
+	'ACCESS_TOKEN_SECRET' => '6uWvWKj4eGSyWZT5a9nc68UC6BTs52QUmJ37LB6naZFUW',
 );
