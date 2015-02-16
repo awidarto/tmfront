@@ -47,15 +47,22 @@ class ShopController extends BaseController {
         $in['createdDate'] = new MongoDate();
         $in['lastUpdate'] = new MongoDate();
 
+        $sid = $in['toimoicode'];
+
         $cid = Confirmation::insertGetId($in);
 
         if($cid){
             $result = true;
+            $sales = Sales::where('sessionId',$sid)->first();
+            $sales->transactionstatus = 'confirmed';
+            $msales = $sales->toArray();
+            $sales->save();
+            $mailres = Emailer::confirmationsuccess($msales);
         }else{
             $result = false;
         }
 
-        return View::make('pages.confirmresult')->with('result',$result);
+        return View::make('pages.confirmresult')->with('result',$result)->with('email',$mailres);
 
     }
 
@@ -535,6 +542,7 @@ class ShopController extends BaseController {
             $sales->buyer_id = Auth::user()->_id;
             $sales->buyer_name = Auth::user()->fullname;
             $sales->buyer_address = Auth::user()->address;
+            $sales->buyer_email = Auth::user()->email;
             $sales->buyer_city = Auth::user()->city;
             $sales->cc_amount = 0;
             $sales->cc_number = '';
@@ -718,6 +726,7 @@ class ShopController extends BaseController {
             $sales->buyer_id = Auth::user()->_id;
             $sales->buyer_name = Auth::user()->fullname;
             $sales->buyer_address = Auth::user()->address;
+            $sales->buyer_email = Auth::user()->email;
             $sales->buyer_city = Auth::user()->city;
             $sales->cc_amount = 0;
             $sales->cc_number = '';

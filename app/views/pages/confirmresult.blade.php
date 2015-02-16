@@ -26,6 +26,11 @@
                     <p>
                         Thank you for your payment confirmation, we will verify and proceed with shipment
                     </p>
+                    @if($mailres == true)
+                    <p>
+                        A confirmation email has been sent to you for your record.
+                    </p>
+                    @endif
                     <p>
                         or call us and use this the transaction code.
                         Have a good day !
