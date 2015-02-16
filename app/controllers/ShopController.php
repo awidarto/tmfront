@@ -767,7 +767,7 @@ class ShopController extends BaseController {
             $basket = implode(',', $basket_data);
 
             //remove session data
-            //Auth::user()->activeCart = '';
+            Auth::user()->activeCart = '';
 
             Former::framework('TwitterBootstrap3');
 
