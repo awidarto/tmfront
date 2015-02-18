@@ -94,6 +94,7 @@
                     .zoom-thumb{
                         border: thin solid black;
                         cursor: pointer;
+                        width: 80px;
                     }
 
                     #viewer img{
