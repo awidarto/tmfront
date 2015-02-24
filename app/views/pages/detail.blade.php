@@ -47,6 +47,22 @@
                     <p>
                         {{ $product['itemDescription'] }}
                     </p>
+                    <p>
+                        Color : {{ $product['colour'] }}
+                    </p>
+                    <p>
+                        Dimension : {{ $product['W'].' cm x '.$product['H'].' cm x '.$product['L'].' cm' }}
+                    </p>
+                    <p>
+                        <?php
+                            if(isset($product['ShipmentQty']) && $product['ShipmentQty'] > 1){
+                                $sunit = $product['ShipmentQty'].' units';
+                            }else{
+                                $sunit = ' units';
+                            }
+                        ?>
+                        Shipping Weight : {{ $product['Weight'] }} kg / {{ $sunit }}
+                    </p>
                 </div>
                 <style type="text/css">
                     ul.color-list{
@@ -109,6 +125,21 @@
                         margin-bottom: 10px;
                     }
 
+                    #variant-box{
+                        display: block;
+                    }
+
+                    .color-thumb{
+                        width: 65px;
+                        margin-left:0px !important;
+                    }
+
+                    #variant-box a{
+                        padding: 6px;
+                        display: block;
+                        float: left;
+                    }
+
                 </style>
                 {{--
                 <div class="color-box">
@@ -133,11 +164,15 @@
                 </div>
                 --}}
                 <div class="buy-box form-inline">
-                    <span class="xlabel">Select Quantity</span><br />
-                    <span id="qty-select">
-                    {{ Commerce::getAvailableCount($product['SKU'],Config::get('site.outlet_id'))->availableToSelection()->availableSelectionToHtml('quantity','') }}
-                    </span>
-                    <span class="btn btn-primary btn-sm" id="add-to-cart" ><i class="fa fa-shopping-cart fa-lg"></i> Add to Cart</span>
+                    @if( Commerce::getAvailableCount($product['SKU'],Config::get('site.outlet_id'))->availableToCount() > 0)
+                        <span class="xlabel">Select Quantity</span><br />
+                        <span id="qty-select">
+                        {{ Commerce::getAvailableCount($product['SKU'],Config::get('site.outlet_id'))->availableToSelection()->availableSelectionToHtml('quantity','') }}
+                        </span>
+                        <span class="btn btn-primary btn-sm" id="add-to-cart" ><i class="fa fa-shopping-cart fa-lg"></i> Add to Cart</span>
+                    @else
+                        <h4>{{ Config::get('shop.none_available')}}</h4>
+                    @endif
                 </div>
                 @if(Auth::check())
                     <script type="text/javascript">
@@ -182,6 +217,37 @@
 
                 @endif
 
+                @if(count($colors) > 0)
+                <div id="variant-box">
+                    <h6>Available In</h6>
+                    <div class="clearfix"></div>
+                    <b id="colour-display">{{ $colors[0]->colour }}</b>
+                    <div class="clearfix"></div>
+                    @foreach ($colors as $c)
+                        <?php $c = $c->toArray(); ?>
+                        <a href="{{ URL::to('shop/detail/'.$c['_id'])}}">
+                            @if(isset($c['defaultpictures']['medium_url']) && $c['defaultpictures']['medium_url'] != '')
+                                <img data-color="{{ $c['colour']}}" src="{{ $c['defaultpictures']['medium_url'] }}" class="color-thumb img-responsive" >
+                            @else
+                                <img data-color="{{ $c['colour']}}" src="{{ URL::to('/') }}/images/th_default.png" class="color-thumb img-responsive" >
+                            @endif
+                        </a>
+                    @endforeach
+                    <div class="clearfix"></div>
+                </div>
+
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $('.color-thumb').on('mouseover',function(){
+                            var color = $(this).data('color');
+
+                            $('#colour-display').html(color);
+                        })
+                    });
+
+                </script>
+
+                @endif
         @if($_SERVER['HTTP_HOST'] != 'localhost')
             <div style="padding:10px 0;">
             <iframe src="//www.facebook.com/plugins/like.php?href={{ urlencode( URL::full() ) }}&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=true&amp;font=verdana&amp;colorscheme=light&amp;action=like&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>

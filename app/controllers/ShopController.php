@@ -75,7 +75,15 @@ class ShopController extends BaseController {
 
         Breadcrumbs::addCrumb($product->itemDescription,'detail');
 
-        return View::make('pages.detail')->with('product',$product);
+        $color_variant = array();
+
+        if(isset($product->colorVariantArray)){
+            if( count( $product->colorVariantArray ) ){
+                $color_variant = Product::whereIn('SKU',$product->colorVariantArray)->get();
+            }
+        }
+
+        return View::make('pages.detail')->with('product',$product)->with('colors',$color_variant);
     }
 
     public function getCancel()
@@ -115,6 +123,7 @@ class ShopController extends BaseController {
 
         $products = Product::where('categoryLink',$category)
                         ->where('status','active')
+                        ->where('colorVariantParent','yes')
                         ->orderBy('itemDescription','asc')
                         ->orderBy('colour','asc')
                         ->skip($page * $perpage)
