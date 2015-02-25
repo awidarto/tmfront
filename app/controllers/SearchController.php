@@ -29,12 +29,12 @@ class SearchController extends BaseController {
         $query = array(
                     'status'=>'active',
                     'colorVariantParent'=>'yes',
-                    'itemDescription'=>$keyword
-    /*                    '$or'=>array(
+                    //'itemDescription'=>$keyword
+                        '$or'=>array(
                                 array('itemDescription'=>$keyword),
                                 array('SKU'=>$keyword)
                              )
-    */
+
                 );
 
         $products = Product::whereRaw($query)
