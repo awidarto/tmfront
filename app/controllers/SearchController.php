@@ -26,7 +26,7 @@ class SearchController extends BaseController {
 
         $keyword = new MongoRegex('/'.$search.'/i');
 
-        $query = array('status'=>'active','colorVariantParent'=>'yes', $or=>array(
+        $query = array('status'=>'active','colorVariantParent'=>'yes', '$or'=>array(
             array('itemDescription',$keyword),
             array('SKU',$keyword)
          ));
