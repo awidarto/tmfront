@@ -16,7 +16,7 @@ class SearchController extends BaseController {
 
     public function getCollection()
     {
-        $search = Input::get('q');
+        $search = Input::get('search');
         $page = Input::get('page');
         $page = (is_null($page))?0:$page;
 
