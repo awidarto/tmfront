@@ -25,7 +25,7 @@ class SearchController extends BaseController {
         $categories = Prefs::getProductCategory()->productCatToSelection('slug', 'title', false );
 
         $keyword = new MongoRegex('/'.$search.'/i');
-        $products = Product::where(function($query){
+        $products = Product::where(function($query) use($keyword){
                             $query->orWhere('itemDescription',$keyword)
                                 ->orWhere('SKU',$keyword);
                         })
