@@ -51,9 +51,7 @@ class SearchController extends BaseController {
 
         $paging = floor($total_found / $perpage);
 
-        $categoryName = $categories[$category];
-
-        Breadcrumbs::addCrumb($categoryName,URL::to('shop/collection').'/'.$category);
+        Breadcrumbs::addCrumb('Search Result',URL::to('search/collection'));
 
         return View::make('pages.collection')
             ->with('products',$products)
@@ -63,7 +61,6 @@ class SearchController extends BaseController {
             ->with('perpage',$perpage)
             ->with('currentcount',$currentcount)
             ->with('paging',$paging)
-            ->with('category',$category)
             ->with('colname',$category);
 
 
