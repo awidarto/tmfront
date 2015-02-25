@@ -1,18 +1,15 @@
 <?php
 
-class SearchController extends AdminController {
+class SearchController extends BaseController {
 
     public function __construct()
     {
-        parent::__construct();
+        date_default_timezone_set('Asia/Jakarta');
+        $this->beforeFilter('auth', array('on'=>'get', 'only'=>array('getCart','getMethods','getReview','getCommit') ));
 
-        $this->controller_name = str_replace('Controller', '', get_class());
-
-        //$this->crumb = new Breadcrumb();
-        $this->crumb->append('Home','left',true);
-        $this->crumb->append(strtolower($this->controller_name));
-
-        $this->model = new Product();
+        Breadcrumbs::setDivider('');
+        Breadcrumbs::setCssClasses('breadcrumb');
+        Breadcrumbs::addCrumb('Home',URL::to('/'));
 
     }
 
