@@ -27,8 +27,8 @@ class SearchController extends BaseController {
         $keyword = new MongoRegex('/'.$search.'/i');
 
         $query = array('status'=>'active','colorVariantParent'=>'yes', '$or'=>array(
-            array('itemDescription',$keyword),
-            array('SKU',$keyword)
+            array('itemDescription'=>$keyword),
+            array('SKU'=>$keyword)
          ));
 
         $products = Product::whereRaw($query)
