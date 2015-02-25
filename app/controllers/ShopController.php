@@ -134,6 +134,7 @@ class ShopController extends BaseController {
 
         $total_found = Product::where('categoryLink',$category)
                         ->where('status','active')
+                        ->where('colorVariantParent','yes')
                         ->count();
 
         $total_all = Product::count();

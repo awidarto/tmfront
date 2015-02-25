@@ -47,7 +47,24 @@
             {{ Former::submit('Go')->class('btn btn-default btn-sm') }}
         {{ Form::close() }}
         <div class="clearfix"></div>
-        {{ Form::open(array('url' => 'search','class'=>'form-inline', 'role'=>'form')) }}
+        <?php
+            if(strpos(URL::full(), 'shop/collection')){
+                $spage = Input::get('spage');
+                if(is_null($spage) || $spage == ''){
+                    $post = URL::full();
+                }else{
+                    $post = URL::full().'?page='.$spage;
+                }
+            }else{
+                $spage = Input::get('spage');
+                if(is_null($spage) || $spage == ''){
+                    $post = 'shop/collection';
+                }else{
+                    $post = 'shop/collection?page='.$spage;
+                }
+            }
+        ?>
+        {{ Form::open(array('url' => 'search/collection','class'=>'form-inline', 'method'=>'get' ,'role'=>'form')) }}
             {{ Former::text('search','')->placeholder('Search')->id('search')->class('search') }}
         {{ Form::close() }}
         <div class="clearfix"></div>
