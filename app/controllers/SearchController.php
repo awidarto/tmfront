@@ -44,7 +44,7 @@ class SearchController extends BaseController {
 
         $total_found = Product::where(function($query){
                             $query->orWhere('itemDescription',$keyword)
-                                ->orWhere('SKU')
+                                ->orWhere('SKU');
                         })
                         ->where('status','active')
                         ->where('colorVariantParent','yes')
