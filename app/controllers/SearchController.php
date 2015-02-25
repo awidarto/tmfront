@@ -39,7 +39,7 @@ class SearchController extends BaseController {
 
         $currentcount = count($products);
 
-        $total_found = Product::where(function($query){
+        $total_found = Product::where(function($query)use($keyword){
                             $query->orWhere('itemDescription',$keyword)
                                 ->orWhere('SKU',$keyword);
                         })
