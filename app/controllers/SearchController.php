@@ -61,7 +61,8 @@ class SearchController extends BaseController {
             ->with('perpage',$perpage)
             ->with('currentcount',$currentcount)
             ->with('paging',$paging)
-            ->with('colname',$category);
+            ->with('category','All')
+            ->with('colname','All');
 
 
     }
