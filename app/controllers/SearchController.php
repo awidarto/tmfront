@@ -25,12 +25,13 @@ class SearchController extends BaseController {
         $categories = Prefs::getProductCategory()->productCatToSelection('slug', 'title', false );
 
         $keyword = new MongoRegex('/'.$search.'/i');
-        $products = Product::where(function($query) use($keyword){
-                            $query->orWhere('itemDescription',$keyword)
-                                ->orWhere('SKU',$keyword);
-                        })
-                        ->where('status','active')
-                        ->where('colorVariantParent','yes')
+
+        $query = array('status'=>'active','colorVariantParent'=>'yes', $or=>array(
+            array('itemDescription',$keyword),
+            array('SKU',$keyword)
+         ));
+
+        $products = Product::whereRaw($query)
                         ->orderBy('itemDescription','asc')
                         ->orderBy('colour','asc')
                         ->skip($page * $perpage)
@@ -39,12 +40,7 @@ class SearchController extends BaseController {
 
         $currentcount = count($products);
 
-        $total_found = Product::where(function($query)use($keyword){
-                            $query->orWhere('itemDescription',$keyword)
-                                ->orWhere('SKU',$keyword);
-                        })
-                        ->where('status','active')
-                        ->where('colorVariantParent','yes')
+        $total_found = Product::whereRaw($query)
                         ->count();
 
         $total_all = Product::count();
