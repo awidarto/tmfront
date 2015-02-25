@@ -28,15 +28,8 @@
                     </p>
                         <div style="font-size:24pt;font-weight:bold;display:block;text-align:center;padding:8px;">{{ $doku->cartId }}</div>
                     <p>
-                        please keep it handy, you will need it to confirm your payment later.<br />
-                        If you have made your transfer payment , you may confirm your payment here :<br />
-                    </p>
-                    <div class="clearfix center" style="text-align:center;">
-                        <a href="{{ URL::to('shop/confirm')}}" class="btn btn-danger" id="cancel">Confirm Payment</a>
-                    </div>
-
-                    <p>
-                        or call us and use this the transaction code.
+                        please keep it handy, in case you need to enquire your purchase status,
+                        just call us and use this the transaction code.
                         Have a good day !
                     </p>
                 </div>

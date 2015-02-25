@@ -47,14 +47,9 @@
                             <h6>JNE</h6>
                             <div class="form-inline">
 
-                            {{ Former::hidden('jne_origin','Origin')->class('form-control jne_origin_auto col-md-4')->id('jne-origin')->value(Config::get('jne.default_origin'))}}
-
-                            {{ Former::select('jne_tariff','Tariff')->class('form-control jne_tariff')
-                                ->options(array(''=>'Specify Origin , Destination & Weight then click Get Tariff'))->id('jne-tariff')}}
-
                             <div class="row" style="border:none;">
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                    {{ Former::text('jne_dest','Destination')->class('form-control jne_dest_auto')->id('jne-dest')}}
+                                    {{ Former::text('jne_dest','Destination')->class('form-control jne_dest_auto')->id('jne-dest')->help('type in destination city (autocomplete)')}}
                                 </div>
                                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                     {{ Former::text('jne_weight','Weight')->class('form-control jne_weight_auto')
@@ -64,6 +59,16 @@
                                     <button style="margin-top: 20px;" class="btn btn-primary" id="jne-get-tariff">Get Tariff</button>
                                 </div>
                             </div>
+                            <div class="row" style="border:none;">
+                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                    {{ Former::select('jne_tariff','Tariff')->class('form-control jne_tariff')
+                                        ->options(array(''=>'Specify Origin , Destination & Weight then click Get Tariff'))->id('jne-tariff')}}
+                                </div>
+                            </div>
+
+                            {{ Former::hidden('jne_origin','Origin')->class('form-control jne_origin_auto col-md-4')->id('jne-origin')->value(Config::get('jne.default_origin'))}}
+
+
                             <span id="loading-indicator" style="display:none;">Loading...</span>
 
                             </div>
