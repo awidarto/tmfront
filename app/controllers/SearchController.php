@@ -30,7 +30,7 @@ class SearchController extends BaseController {
         $keyword = new MongoRegex('/'.$search.'/i');
         $products = Product::where(function($query){
                             $query->orWhere('itemDescription',$keyword)
-                                ->orWhere('SKU')
+                                ->orWhere('SKU');
                         })
                         ->where('status','active')
                         ->where('colorVariantParent','yes')
