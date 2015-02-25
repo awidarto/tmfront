@@ -64,6 +64,9 @@
                                     {{ Former::select('jne_tariff','Tariff')->class('form-control jne_tariff')
                                         ->options(array(''=>'Specify Origin , Destination & Weight then click Get Tariff'))->id('jne-tariff')}}
                                 </div>
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <a href="http://wwww.jne.co.id" target="_blank" >go to jne.co.id <i class="fa fa-external-link-square"></i></a>
+                                </div>
                             </div>
 
                             {{ Former::hidden('jne_origin','Origin')->class('form-control jne_origin_auto col-md-4')->id('jne-origin')->value(Config::get('jne.default_origin'))}}
