@@ -19,6 +19,7 @@ Route::controller('page', 'PageController');
 Route::controller('post', 'PostController');
 Route::controller('event', 'EventController');
 Route::controller('press', 'PressController');
+Route::controller('search', 'SearchController');
 Route::controller('location', 'LocationController');
 
 Route::controller('doku', 'DokuController');
