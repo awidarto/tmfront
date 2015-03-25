@@ -38,7 +38,7 @@ class ProjectsController extends BaseController {
 
         $currentcount = count($pages);
 
-        $total_found = Showcase::where('tags','like','%press%')->count();
+        $total_found = Showcase::where('tags','like','%project%')->count();
 
         $total_all = Showcase::count();
 
