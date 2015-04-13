@@ -23,6 +23,11 @@
         display: block;
         clear: both;
     }
+
+    ul.thumbgrid img{
+        width: 100px;
+        height: auto;
+    }
 </style>
 <div id="home">
     <div class="row">
