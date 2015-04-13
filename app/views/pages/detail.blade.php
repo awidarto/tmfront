@@ -54,7 +54,7 @@
                         Dimension : {{ $product['W'].' cm x '.$product['H'].' cm x '.$product['L'].' cm' }}
                     </p>
                     <p>
-                        Diameter : {{ ($product['D'] == '')?'-': $product['D'] }}
+                        Diameter : {{ ($product['D'] == '')?'-': $product['D'] }} cm
                     </p>
                     <p>
                         Material : {{ ($product['material'] == '')?'-': $product['material']}}
