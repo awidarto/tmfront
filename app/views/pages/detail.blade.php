@@ -54,6 +54,12 @@
                         Dimension : {{ $product['W'].' cm x '.$product['H'].' cm x '.$product['L'].' cm' }}
                     </p>
                     <p>
+                        Diameter : {{ ($product['D'] == '')?'-': $product['D'] }}
+                    </p>
+                    <p>
+                        Material : {{ ($product['material'] == '')?'-': $product['material']}}
+                    </p>
+                    <p>
                         <?php
                             if(isset($product['ShipmentQty']) && $product['ShipmentQty'] > 1){
                                 $sunit = $product['ShipmentQty'].' units';
