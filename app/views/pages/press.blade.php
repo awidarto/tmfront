@@ -25,7 +25,7 @@
     }
 
     ul.thumbgrid img{
-        width: 100px;
+        width: 255px;
         height: auto;
     }
 </style>
