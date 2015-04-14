@@ -44,7 +44,9 @@
                         <li>
                             <div class="item home">
                                 @if(isset($hs['defaultpictures']['medium_url']))
+                                    <a class="slide" href="{{ URL::to('shop/detail') }}/{{ $hs['_id']}}">
                                     <img src="{{ $hs['defaultpictures']['medium_url']}}">
+                                    </a>
                                 @endif
                                 <h1>{{ $hs['itemDescription']}}</h1>
                                 <a class="slide" href="{{ URL::to('shop/detail') }}/{{ $hs['_id']}}">buy now for<br />IDR {{ Ks::idr($hs['priceRegular']) }} <b class="fa fa-shopping-cart"></b></a>
@@ -61,7 +63,9 @@
                         <li>
                             <div class="item home">
                                 @if(isset($hs['defaultpictures']['medium_url']))
-                                    <img src="{{ $hs['defaultpictures']['medium_url']}}">
+                                    <a class="slide" href="{{ URL::to('shop/detail') }}/{{ $hs['_id']}}">
+                                        <img src="{{ $hs['defaultpictures']['medium_url']}}">
+                                    </a>
                                 @endif
                                 <h1>{{ $hs['itemDescription']}}</h1>
                                 <a class="slide" href="{{ URL::to('shop/detail') }}/{{ $hs['_id']}}">buy now for<br /><span class="strike">IDR {{ Ks::idr($hs['priceRegular']) }}</span> <span class="discount">IDR {{ (isset($hs['priceDiscount']))?Ks::idr($hs['priceDiscount']):'' }}</span> <b class="fa fa-shopping-cart"></b></a>
