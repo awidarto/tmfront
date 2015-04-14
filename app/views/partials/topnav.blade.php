@@ -8,6 +8,7 @@
     }
 ?>
 
+
       <!-- Static navbar -->
       <div class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
@@ -69,9 +70,18 @@
               <a class="social" href="https://twitter.com/share?text={{ urlencode( $stext ) }}&url={{ urlencode( URL::full() ) }}" target="_blank" ><img src="{{ URL::to('/')}}/images/twitter.png"></a></li>
             <li><a class="social" href="http://www.facebook.com/sharer/sharer.php?u={{ urlencode( URL::full() ) }}&title={{ urlencode( $stext ) }}"><img src="{{ URL::to('/')}}/images/facebook.png" target="_blank" ></a></li>
             <li><a class="social" href="http://pinterest.com/pin/create/bookmarklet/?url={{ urlencode( URL::full() ) }}&is_video=false&description={{ urlencode( $stext ) }}" target="_blank" ><img src="{{ URL::to('/')}}/images/pinterest.png"></a></li>
+
+            <li style="padding-top:5px;">
+                <span class="ig-follow" data-id="e686823c1b" data-handle="toimoiindonesia" data-count="false" data-size="large" data-username="false"></span>
+            </li>
             {{--
             <li><a class="social" href="../navbar-static-top/"><img src="{{ URL::to('/')}}/images/gplus.png"></a></li>
             --}}
           </ul>
+
+  <script type="text/javascript">
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src="//x.instagramfollowbutton.com/follow.js";s.parentNode.insertBefore(g,s);}(document,"script"));
+  </script>
+
 
         </div><!--/.nav-collapse -->

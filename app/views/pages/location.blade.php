@@ -2,6 +2,9 @@
 
 
 @section('content')
+{{ HTML::script('js/gmap3/gmap3.js') }}
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=en" />
+
 <style type="text/css">
     #map{
         width: 640px;
