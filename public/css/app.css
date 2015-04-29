@@ -177,11 +177,11 @@ h3{
 }
 
 #instabox{
-    height:300px;
+    /*height:300px;*/
 }
 
 #instabox img{
-    width: 95%;
+    width: 100%;
     height:auto;
 }
 

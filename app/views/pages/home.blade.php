@@ -9,7 +9,7 @@
         height: 215px;
         max-height: 230px;
         overflow: hidden;
-        border: solid thin #ccc;
+        border: solid thin #eee;
         position: relative;
     }
 
@@ -26,7 +26,7 @@
         height: 215px;
         max-height: 230px;
         overflow: hidden;
-        border: solid thin #ccc;
+        border: solid thin #eee;
         position: relative;
     }
 
@@ -35,6 +35,21 @@
         top: 0;
         left: 0;
         z-index: 100;
+    }
+
+
+    .news-box{
+        height: 230px;
+        overflow: hidden;
+        text-align: left;
+    }
+
+    .news-box h6{
+        margin-top: 25px;
+        background-color: white;
+        color: black;
+        font-weight: bold;
+        display: block;
     }
 </style>
 
@@ -166,36 +181,27 @@
     </div>
 
     <div class="row">
-        <div class="col-md-8">
-
-            <div class="col-md-6">
-
-            </div>
-            <div class="col-md-6">
-            </div>
-        </div>
-        <div class="col-md-4 tm-side">
-            @include('partials.identity')
+        <div class="col-md-3">
             @include('partials.location')
+        </div>
+        <div class="col-md-3">
             @include('partials.twitter')
+        </div>
+        <div class="col-md-3">
             @include('partials.instagram')
         </div>
-    </div>
+        <div class="col-md-3">
 
-    <div class="row">
-        <div class="col-md-8">
-            <div class="col-md-6">
-            </div>
-            <div class="col-md-6">
-            </div>
+            @include('partials.news')
         </div>
-
+    </div>
             <script type="text/javascript">
                 $(document).ready(function(){
                     $('.slider').bxSlider({
                         mode: 'fade',
                         auto: true,
                         pager:false,
+                        controls:false,
                         autoControls: false,
                         pause: 15000
                     });
@@ -208,10 +214,5 @@
 
             </script>
 
-
-        <div class="col-md-4 tm-side">
-            @include('partials.news')
-        </div>
-    </div>
 </div>
 @stop
