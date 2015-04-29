@@ -15,9 +15,14 @@
 
     .slide-box-container a.title{
         position: absolute;
-        top: 0;
+        bottom: 0;
         left: 0;
         z-index: 100;
+    }
+
+    .slide-box-container a.title h2{
+        padding: 5px;
+        margin: 0px;
     }
 
     .three-box-slide{
@@ -30,11 +35,13 @@
         position: relative;
     }
 
-    .three-box-slide a.title{
+    .three-box-slide h2{
         position: absolute;
-        top: 0;
+        bottom: 0;
         left: 0;
         z-index: 100;
+        margin: 0px;
+        padding: 6px;
     }
 
 
@@ -126,56 +133,50 @@
     <div class="row">
         <div class="col-md-4 col-lg-4">
             <div class="three-box-slide">
-                <div class="slide-box" style="width:100%;">
-                    <h2>WE LOVE</h2>
-                    <ul id="slider1" class="slider">
-                        @foreach($welove as $hs)
-                            @if(isset($hs['defaultpictures']['medium_portrait_url']))
-                            <li>
-                                <a href="{{ URL::to('/post/view/'.$hs['slug'])}}" >
-                                    <img src="{{ $hs['defaultpictures']['medium_portrait_url'] }}" />
-                                </a>
-                            </li>
-                            @endif
-                        @endforeach
-                    </ul>
-                </div>
+                <h2>WE LOVE</h2>
+                <ul id="slider1" class="slider">
+                    @foreach($welove as $hs)
+                        @if(isset($hs['defaultpictures']['medium_portrait_url']))
+                        <li>
+                            <a href="{{ URL::to('/post/view/'.$hs['slug'])}}" >
+                                <img src="{{ $hs['defaultpictures']['medium_portrait_url'] }}" />
+                            </a>
+                        </li>
+                        @endif
+                    @endforeach
+                </ul>
             </div>
         </div>
         <div class="col-md-4 col-lg-4">
             <div class="three-box-slide">
-                <div class="slide-box" style="width:100%;">
-                    <h2>IDEAS</h2>
-                    <ul id="slider1" class="slider">
-                        @foreach($idea as $hs)
-                            @if(isset($hs['defaultpictures']['medium_portrait_url']))
-                            <li>
-                                <a href="{{ URL::to('/post/view/'.$hs['slug'])}}" >
-                                    <img src="{{ $hs['defaultpictures']['medium_portrait_url'] }}" />
-                                </a>
-                            </li>
-                            @endif
-                        @endforeach
-                    </ul>
-                </div>
+                <h2>IDEAS</h2>
+                <ul id="slider1" class="slider">
+                    @foreach($idea as $hs)
+                        @if(isset($hs['defaultpictures']['medium_portrait_url']))
+                        <li>
+                            <a href="{{ URL::to('/post/view/'.$hs['slug'])}}" >
+                                <img src="{{ $hs['defaultpictures']['medium_portrait_url'] }}" />
+                            </a>
+                        </li>
+                        @endif
+                    @endforeach
+                </ul>
             </div>
         </div>
         <div class="col-md-4 col-lg-4">
             <div class="three-box-slide">
-                <div class="slide-box" style="width:100%;">
-                    <h2>QUOTE</h2>
-                    <ul id="slider1" class="slider">
-                        @foreach($quotes as $hs)
-                            @if(isset($hs['defaultpictures']['medium_portrait_url']))
-                            <li>
-                                <a href="{{ URL::to('/post/view/'.$hs['slug'])}}" >
-                                    <img src="{{ $hs['defaultpictures']['medium_portrait_url'] }}" />
-                                </a>
-                            </li>
-                            @endif
-                        @endforeach
-                    </ul>
-                </div>
+                <h2>QUOTE</h2>
+                <ul id="slider1" class="slider">
+                    @foreach($quotes as $hs)
+                        @if(isset($hs['defaultpictures']['medium_portrait_url']))
+                        <li>
+                            <a href="{{ URL::to('/post/view/'.$hs['slug'])}}" >
+                                <img src="{{ $hs['defaultpictures']['medium_portrait_url'] }}" />
+                            </a>
+                        </li>
+                        @endif
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>
