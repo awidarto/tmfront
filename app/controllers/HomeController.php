@@ -48,6 +48,10 @@ class HomeController extends BaseController {
                             ->orderBy('createdAt','desc')
                             ->get()->toArray();
 
+        $quotes = Posts::where('tags','like','%quote%')
+                            ->orderBy('createdAt','desc')
+                            ->get()->toArray();
+
         $news = Posts::where('section','news')
                             ->orderBy('createdAt','desc')
                             ->get()->toArray();
@@ -60,6 +64,7 @@ class HomeController extends BaseController {
                 ->with('goodbuy',$goodbuy)
                 ->with('idea',$ideas)
                 ->with('welove',$welove)
+                ->with('quotes',$quotes)
                 ->with('toimoitwit',$twits)
                 ->with('news',$news)
                 ->with('headslider',$headslider);
