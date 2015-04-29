@@ -62,14 +62,18 @@ class AjaxController extends BaseController {
 
         $instagramedia = json_decode( $api->getContent() );
 
-
+        $image_url = array();
         if(isset( $instagramedia->data )){
             $instaimages = $instagramedia->data;
 
+            foreach($instaimages as $in){
+                $image_url[] = $in->images->low_resolution->url;
+            }
+            /*
             $instaimage = $instaimages[0];
 
             $image_url = $instaimage->images->low_resolution->url;
-
+            */
         }
 
         return Response::json(array('result'=>'OK', 'image'=>$image_url));
