@@ -12,7 +12,7 @@
 
 <div id="home">
     <div class="row">
-        <div class="col-md-8" id="main">
+        <div class="col-md-12" id="main">
             <div class="col-md-4 visible-xs">
                 @include('partials.identity')
             </div>
@@ -40,7 +40,7 @@
                 <p>No Product found in this category</p>
             @endif
 
-                <div class="row" style="border:none;">
+                <div class="row" style="border:none;text-align:center;">
                     {{--
                     <div class="pull-right"  >
                         <p>
@@ -48,9 +48,7 @@
                         </p>
                     </div>
                     --}}
-
-                    <div class="pagination pull-right">
-                        <ul>
+                        <ul class="pagination text-center" >
                             <?php
                                 $prev = ($current - 1 < 0 )?0:($current - 1);
                                 $next = ($current + 1 > $paging )?$current:($current + 1);
@@ -102,14 +100,11 @@
                             </li>
 
                         </ul>
+
+                    <div style="text-align:center;display:block;">
                     </div>
                 </div>
 
-        </div>
-        <div class="col-md-4 visible-lg tm-side">
-            @include('partials.identity')
-            @include('partials.location')
-            @include('partials.twitter')
         </div>
     </div>
 </div>
