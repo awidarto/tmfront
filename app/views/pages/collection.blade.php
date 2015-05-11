@@ -54,61 +54,61 @@
                         </p>
                     </div>
                     --}}
-                        <ul class="pagination text-center" >
-                            <?php
-                                $prev = ($current - 1 < 0 )?0:($current - 1);
-                                $next = ($current + 1 > $paging )?$current:($current + 1);
-                            ?>
-                            <li class="" >
-                                <a href="{{ mg(array('page'=>$prev))}}" class="prev" >
-                                    <i class="fa fa-chevron-left"></i>
-                                </a>
-                            </li>
-                            <?php
-                                $max_count = Config::get('shop.pagination_max_count');
+                        <div class="col-md-12">
+                            <ul class="pagination" >
+                                <?php
+                                    $prev = ($current - 1 < 0 )?0:($current - 1);
+                                    $next = ($current + 1 > $paging )?$current:($current + 1);
+                                ?>
+                                <li class="" >
+                                    <a href="{{ mg(array('page'=>$prev))}}" class="prev" >
+                                        <i class="fa fa-chevron-left"></i>
+                                    </a>
+                                </li>
+                                <?php
+                                    $max_count = Config::get('shop.pagination_max_count');
 
-                            ?>
-                            @if( $max_count >= $paging )
-                                @for($p = 0;$p < $paging + 1;$p++)
-                                    <li class="{{ ms('page',$p , 0) }}" >
-                                        <a href="{{ mg(array('page'=>$p))}}" >
-                                                {{$p + 1}}
-                                        </a>
-                                    </li>
-                                @endfor
-                            @elseif( $max_count < $paging )
+                                ?>
+                                @if( $max_count >= $paging )
+                                    @for($p = 0;$p < $paging + 1;$p++)
+                                        <li class="{{ ms('page',$p , 0) }}" >
+                                            <a href="{{ mg(array('page'=>$p))}}" >
+                                                    {{$p + 1}}
+                                            </a>
+                                        </li>
+                                    @endfor
+                                @elseif( $max_count < $paging )
 
-                                @if( $current >= ($max_count - 1) )
-                                    <?php
-                                        $pstart = $current - ($max_count - 2);
-                                        $pend = $pstart + $max_count;
-                                    ?>
-                                @else
-                                    <?php
-                                        $pstart = 0;
-                                        $pend = $max_count;
-                                    ?>
+                                    @if( $current >= ($max_count - 1) )
+                                        <?php
+                                            $pstart = $current - ($max_count - 2);
+                                            $pend = $pstart + $max_count;
+                                        ?>
+                                    @else
+                                        <?php
+                                            $pstart = 0;
+                                            $pend = $max_count;
+                                        ?>
+                                    @endif
+
+                                    @for($p = $pstart;$p < $pend;$p++)
+                                        <li class="{{ ms('page',$p , 0) }}" >
+                                            <a href="{{ mg(array('page'=>$p))}}" >
+                                                    {{$p + 1}}
+                                            </a>
+                                        </li>
+                                    @endfor
+
                                 @endif
+                                <li class="" >
+                                    <a href="{{ mg(array('page'=>$next))}}" class="next" >
+                                        <i class="fa fa-chevron-right"></i>
+                                    </a>
+                                </li>
 
-                                @for($p = $pstart;$p < $pend;$p++)
-                                    <li class="{{ ms('page',$p , 0) }}" >
-                                        <a href="{{ mg(array('page'=>$p))}}" >
-                                                {{$p + 1}}
-                                        </a>
-                                    </li>
-                                @endfor
+                            </ul>
 
-                            @endif
-                            <li class="" >
-                                <a href="{{ mg(array('page'=>$next))}}" class="next" >
-                                    <i class="fa fa-chevron-right"></i>
-                                </a>
-                            </li>
-
-                        </ul>
-
-                    <div style="text-align:center;display:block;">
-                    </div>
+                        </div>
                 </div>
 
         </div>
