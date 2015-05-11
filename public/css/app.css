@@ -611,6 +611,10 @@ ul#other-picture li{
     margin-top: 4px;
 }
 
+.item .description p{
+    border-top: thin solid #ccc;
+    padding-top: 8px;
+}
 
 
 .bx-wrapper .bx-next{

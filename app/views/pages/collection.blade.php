@@ -34,7 +34,9 @@
                                     </div>
                                     <div class="description text-center">
                                         <h1>{{ $products[$i]['itemDescription']}}</h1>
-                                        IDR {{ Ks::idr($products[$i]['priceRegular']) }}
+                                        <p>
+                                            IDR {{ Ks::idr($products[$i]['priceRegular']) }}
+                                        </p>
                                     </div>
                                 </a>
                             </div>
