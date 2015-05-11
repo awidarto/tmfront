@@ -23,15 +23,19 @@
                     @for($i = 0; $i < count($products);$i++)
                             <div class="item">
                                 <a href="{{ URL::to('shop/detail/'.$products[$i]['_id'])}}">
-                                    <h1>{{ $products[$i]['itemDescription']}}</h1>
-                                    @if(isset($products[$i]['defaultpictures']['thumbnail_url'])
-                                        && $products[$i]['defaultpictures']['thumbnail_url'] != ''
-                                        )
-                                        <img src="{{ $products[$i]['defaultpictures']['thumbnail_url'] }}" class="img-responsive" >
-                                    @else
-                                        <img src="{{ URL::to('/') }}/images/th_default.png" class="img-responsive" >
-                                    @endif
-                                    buy now for IDR {{ Ks::idr($products[$i]['priceRegular']) }}
+                                    <div class="photo">
+                                        @if(isset($products[$i]['defaultpictures']['thumbnail_url'])
+                                            && $products[$i]['defaultpictures']['thumbnail_url'] != ''
+                                            )
+                                            <img src="{{ $products[$i]['defaultpictures']['thumbnail_url'] }}" class="img-responsive" >
+                                        @else
+                                            <img src="{{ URL::to('/') }}/images/th_default.png" class="img-responsive" >
+                                        @endif
+                                    </div>
+                                    <div class="description text-center">
+                                        <h1>{{ $products[$i]['itemDescription']}}</h1>
+                                        IDR {{ Ks::idr($products[$i]['priceRegular']) }}
+                                    </div>
                                 </a>
                             </div>
                     @endfor

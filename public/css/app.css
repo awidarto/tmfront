@@ -592,6 +592,7 @@ ul#other-picture li{
     margin-top: 8px;
     min-height: 37px;
     hyphens:auto;
+    word-wrap: break-word;
 }
 
 .item img{
