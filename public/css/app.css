@@ -605,6 +605,14 @@ ul#other-picture li{
     margin-left: 0px;
 }
 
+.item .photo, .item .description{
+    padding: 4px;
+    background-color: #eee;
+    margin-top: 4px;
+}
+
+
+
 .bx-wrapper .bx-next{
     right:-5px;
 }
