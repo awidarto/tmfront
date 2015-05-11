@@ -547,6 +547,11 @@ ul#other-picture li{
     color:white;
 }
 
+#col-list{
+    text-align: center;
+}
+
+
 #col-list .item{
     width:23%;
     max-width: 24%;
