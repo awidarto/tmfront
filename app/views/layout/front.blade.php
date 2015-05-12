@@ -70,7 +70,7 @@
                     <div class="col-lg-4" id="tm-logo-container">
                         <a href="{{ URL::to('/') }}"><img class="img-responsive" style="width:350px;height:auto;" src="{{ URL::to('images/').'/logo_toimoi_color.png' }}"></a>
                     </div>
-                    <div class="col-lg-6" style="display:block;padding-top:115px;">
+                    <div class="col-lg-6" style="display:block;padding-top:68px;">
                         {{ Form::open(array('url' => 'search/collection','class'=>'form-inline', 'method'=>'get' ,'role'=>'form')) }}
                             <div class="form-group">
                                 {{ Former::text('search','')->placeholder('Search')->style('width:330px;')->id('search')->class('search form-control') }}
@@ -78,7 +78,7 @@
                             <button type="submit" class="btn btn-default ">Search</button>
                         {{ Form::close() }}
                     </div>
-                    <div class="col-lg-2" style="display:block;padding-top:115px;">
+                    <div class="col-lg-2" style="display:block;padding-top:68px;">
                             <a style="padding-top:6px;display:form-inline" href="{{ URL::to('login')}}" class="btn btn-primary" ><i class="fa fa-sign-out"></i> Login</a>
                     </div>
                     {{--
