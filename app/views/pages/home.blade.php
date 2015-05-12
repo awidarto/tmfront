@@ -23,6 +23,8 @@
     .slide-box-container a.title h2{
         padding: 5px;
         margin: 0px;
+        background-color: #000;
+        color: #FFF;
     }
 
     .three-box-slide{
@@ -42,6 +44,8 @@
         z-index: 100;
         margin: 0px;
         padding: 6px;
+        background-color: #000;
+        color: #FFF;
     }
 
 
