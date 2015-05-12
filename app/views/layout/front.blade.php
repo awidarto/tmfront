@@ -60,21 +60,38 @@
     <div id="wrap">
         <!-- topmost header -->
         <div id="tm-head" class="visible-md visible-lg">
+            {{--
             @if($head = Prefs::getHeader())
                 {{ $head }}
             @else
+
+            --}}
                 <div class="container">
-                    <div class="col-lg-8" id="tm-logo-container">
-                        <a href="{{ URL::to('/') }}"><img class="img-responsive" src="{{ URL::to('images/').'/tmlogotrans.png' }}"></a>
+                    <div class="col-lg-4" id="tm-logo-container">
+                        <a href="{{ URL::to('/') }}"><img class="img-responsive" style="width:350px;height:auto;" src="{{ URL::to('images/').'/logo_toimoi_color.png' }}"></a>
                     </div>
+                    <div class="col-lg-6" style="display:block;padding-top:115px;">
+                        {{ Form::open(array('url' => 'search/collection','class'=>'form-inline', 'method'=>'get' ,'role'=>'form')) }}
+                            <div class="form-group">
+                                {{ Former::text('search','')->placeholder('Search')->style('width:330px;')->id('search')->class('search form-control') }}
+                            </div>
+                            <button type="submit" class="btn btn-default ">Search</button>
+                        {{ Form::close() }}
+                    </div>
+                    <div class="col-lg-2" style="display:block;padding-top:115px;">
+                            <a style="padding-top:6px;display:form-inline" href="{{ URL::to('login')}}" class="btn btn-primary" ><i class="fa fa-sign-out"></i> Login</a>
+                    </div>
+                    {{--
                     <div class="col-lg-4" id="tm-side-head">
                         @if(isset($tmhead) && is_array($tmhead) && !empty($tmhead))
                             {{ $tmhead[0]['body'] }}
                         @endif
                     </div>
+                    --}}
                 </div>
-
+            {{--
             @endif
+            --}}
         </div>
         <!-- Fixed navbar -->
         <div class="navbar navbar-default "  id="tm-head-navbar">

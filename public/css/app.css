@@ -10,8 +10,8 @@ body{
 }
 
 #tm-head{
-    background-color: #0098a6;
-    height:220px;
+    /*background-color: #0098a6;*/
+    height:180px;
 }
 
 #tm-head a{
@@ -217,16 +217,22 @@ h3{
         margin-top: 20px;
     }
 
+    div.navbar-default{
+        border-bottom: thin solid #555;
+        border-radius: 0px;
+    }
+
     .navbar-default .navbar-nav>.active>a,
     .navbar-default .navbar-nav>li>a:hover{
         padding-top: 10px;
+        /*
         background-color: #000;
-        color: #FFF;
+        color: #FFF;*/
     }
 
     .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus{
-        background-color: #000;
-        color: #FFF;
+        /*background-color: #000;
+        color: #FFF;*/
     }
 
     .navbar-default, .navbar-default .navbar-collapse, .navbar-default .navbar-form{

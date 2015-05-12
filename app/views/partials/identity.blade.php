@@ -64,9 +64,6 @@
                 }
             }
         ?>
-        {{ Form::open(array('url' => 'search/collection','class'=>'form-inline', 'method'=>'get' ,'role'=>'form')) }}
-            {{ Former::text('search','')->placeholder('Search')->id('search')->class('search') }}
-        {{ Form::close() }}
         <div class="clearfix"></div>
         <p>
             Not yet registered ? <a href="{{ URL::to('signup')}}">sign up here</a>
