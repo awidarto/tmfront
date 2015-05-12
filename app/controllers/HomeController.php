@@ -56,9 +56,15 @@ class HomeController extends BaseController {
                             ->orderBy('createdAt','desc')
                             ->get()->toArray();
 
+        $products = Product::orderBy('createdAt','desc')
+                            ->take(8)
+                            ->get()->toArray();
+
+
         $twits = Twitter::getSearch(array('q'=>'@toimoiindonesia'));
 
 		return View::make('pages.home')
+                ->with('products',$products)
                 ->with('hello',$hello)
                 ->with('tmhead',$tmhead)
                 ->with('goodbuy',$goodbuy)

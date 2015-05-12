@@ -182,6 +182,46 @@
     </div>
 
     <div class="row">
+        <div class="col-md-12" id="main">
+            <div class="col-md-4 visible-xs">
+                @include('partials.identity')
+            </div>
+
+            {{ Breadcrumbs::render() }}
+            @if(count($products) > 0 )
+                <div id="col-list" class="item-col">
+                    @for($i = 0; $i < count($products);$i++)
+                            <div class="item">
+                                <a href="{{ URL::to('shop/detail/'.$products[$i]['_id'])}}">
+                                    <div class="photo">
+                                        @if(isset($products[$i]['defaultpictures']['thumbnail_url'])
+                                            && $products[$i]['defaultpictures']['thumbnail_url'] != ''
+                                            )
+                                            <img src="{{ $products[$i]['defaultpictures']['thumbnail_url'] }}" class="img-responsive" >
+                                        @else
+                                            <img src="{{ URL::to('/') }}/images/th_default.png" class="img-responsive" >
+                                        @endif
+                                    </div>
+                                    <div class="description text-center">
+                                        <h1>{{ $products[$i]['itemDescription']}}</h1>
+                                        <p>
+                                            IDR {{ Ks::idr($products[$i]['priceRegular']) }}
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                    @endfor
+                </div>
+            @else
+                <p>No Product found in this category</p>
+            @endif
+
+
+        </div>
+    </div>
+
+
+    <div class="row">
         <div class="col-md-3">
             @include('partials.location')
         </div>
