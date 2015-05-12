@@ -48,6 +48,11 @@
         color: #FFF;
     }
 
+    .home-foot h2{
+        background-color: #000;
+        padding: 2px 4px;
+        color: #FFF;
+    }
 
     .news-box{
         height: 230px;
@@ -225,7 +230,7 @@
     </div>
 
 
-    <div class="row">
+    <div class="row home-foot" >
         <div class="col-md-3">
             @include('partials.location')
         </div>
