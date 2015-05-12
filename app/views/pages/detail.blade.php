@@ -12,7 +12,7 @@
             <div class="item-detail" style="width:600px;max-width:600px;">
                 @if(isset($product['defaultpictures']['large_url']))
                 <div id="viewer">
-                    <img id="zoomed"  src="{{ $product['defaultpictures']['full_url'] }}" data-zoom-image="{{ $product['defaultpictures']['full_url'] }}"/>
+                    <img id="zoomed" style="width:600px;max-width:600px;" src="{{ $product['defaultpictures']['full_url'] }}" data-zoom-image="{{ $product['defaultpictures']['full_url'] }}" />
                 </div>
                 hover to zoom
                 @else
