@@ -25,13 +25,23 @@
 
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Webshop <b class="caret"></b></a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu multi-level">
                 <?php
+                  /*
                   $categories = Prefs::getProductCategory()->productCatToSelection('slug', 'title', false );
+                  @foreach($categories as $category=>$cname)
+                  <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/'.$category) }}" >{{ $cname }}</a></li>
+                  @endforeach
+                  */
                 ?>
-                @foreach($categories as $category=>$cname)
-                <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/'.$category) }}" >{{ $cname }}</a></li>
-                @endforeach
+               <li class="dropdown-submenu" ><a href="{{ URL::to('shop/collection/home-living') }}" >Home Living</a>
+                  <ul class="dropdown-menu">
+                    <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/lifestyle') }}" >Lifestyle</a></li>
+                    <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/lifestyle') }}" >Lifestyle</a></li>
+                  </ul>
+               </li>
+                <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/lifestyle') }}" >Lifestyle</a></li>
+
               </ul>
             </li>
 
