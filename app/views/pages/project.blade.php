@@ -4,7 +4,7 @@
 @section('content')
 
     {{ HTML::style('css/blueimp-gallery.min.css') }}
-
+<img src="{{ URL::to('js/bxslider/images/bx_loader.gif')}}" class="versteck" style="display:none;">
 <style type="text/css">
     ul.years{
         list-style-type: none;
