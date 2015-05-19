@@ -251,13 +251,17 @@
                         <a href="{{ URL::to('shop/detail/'.$c['_id'])}}">
                             @if(isset($c['defaultpictures']['medium_url']) && $c['defaultpictures']['medium_url'] != '')
                                 <div>
-                                    <div class="color-chip" style="background-color:{{ Prefs::getColorCode($c['colour']) }}"></div>
+                                    <div class="color-chip-square" style="background-color:{{ Prefs::getColorCode($c['colour']) }}"></div>
+                                    {{--
                                     <img data-color="{{ $c['colour']}}" src="{{ $c['defaultpictures']['medium_url'] }}" class="color-thumb img-responsive" >
+                                    --}}
                                 </div>
                             @else
                                 <div>
-                                    <div class="color-chip" style="background-color:{{ Prefs::getColorCode($c['colour']) }}"></div>
+                                    <div class="color-chip-square" style="background-color:{{ Prefs::getColorCode($c['colour']) }}"></div>
+                                    {{--
                                     <img data-color="{{ $c['colour']}}" src="{{ URL::to('/') }}/images/th_default.png" class="color-thumb img-responsive" >
+                                    --}}
                                 </div>
                             @endif
                         </a>
