@@ -57,7 +57,7 @@ class ProjectsController extends BaseController {
         Breadcrumbs::addCrumb('project',URL::to('shop/projects').'/'.$tag);
         Breadcrumbs::addCrumb($tag,URL::to('shop/projectds').'/'.$tag);
 
-        return View::make('pages.press')
+        return View::make('pages.project')
             ->with('title', ucfirst($tag).' Projects')
             ->with('tag',$tag)
             ->with('currentpage',$currentpage)
