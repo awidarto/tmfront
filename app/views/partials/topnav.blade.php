@@ -34,13 +34,23 @@
                   @endforeach
                   */
                 ?>
-               <li class="dropdown-submenu" ><a href="{{ URL::to('shop/collection/home-living') }}" >Home Living</a>
+               <li class="dropdown-submenu" >
+                  <a href="{{ URL::to('shop/collection/home-living') }}" >Home Living</a>
                   <ul class="dropdown-menu">
-                    <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/lifestyle') }}" >Lifestyle</a></li>
-                    <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/lifestyle') }}" >Lifestyle</a></li>
+                    <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/accesories') }}" >Accesories</a></li>
+                    <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/cooking-dining') }}" >Cooking & Dining</a></li>
+                    <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/furniture') }}" >Furniture</a></li>
+                    <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/lighting') }}" >Lighting</a></li>
                   </ul>
                </li>
-                <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/lifestyle') }}" >Lifestyle</a></li>
+               <li class="dropdown-submenu" >
+                  <a href="{{ URL::to('shop/collection/lifestyle') }}" >Lifestyle</a>
+                  <ul class="dropdown-menu">
+                    <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/bags') }}" >Bags</a></li>
+                    <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/stationary-dining') }}" >Stationary</a></li>
+                    <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/gifts') }}" >Gifts</a></li>
+                  </ul>
+               </li>
 
               </ul>
             </li>

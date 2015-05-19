@@ -141,7 +141,7 @@ class ShopController extends BaseController {
 
         $paging = floor($total_found / $perpage);
 
-        $categoryName = $categories[$category];
+        $categoryName = (isset($categories[$category]))?$categories[$category]:'Uncategorized';
 
         Breadcrumbs::addCrumb($categoryName,URL::to('shop/collection').'/'.$category);
 
