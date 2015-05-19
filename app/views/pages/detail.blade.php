@@ -148,8 +148,8 @@
                     }
 
                     .color-chip{
-                        min-height: 35px;
-                        height: 35px;
+                        min-height: 25px;
+                        height: 25px;
                         display: block;
                         margin-bottom: 2px;
                     }
