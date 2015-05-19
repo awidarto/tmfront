@@ -17,7 +17,7 @@ class Prefs {
         $color = Color::where('color','regex',new MongoRegex('/'.$colorname.'/i'))->first();
 
         if($color){
-            return $color->color;
+            return $color->hex;
         }else{
             return '#FFFFFF';
         }

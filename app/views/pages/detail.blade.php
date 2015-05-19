@@ -47,7 +47,9 @@
                         {{ $product['itemDescription'] }}
                     </p>
                     <p>
-                        Color : {{ $product['colour'] }}
+                        Color :
+                        <div class="color-chip-square" style="background-color:{{ Prefs::getColorCode($product['colour']) }}"></div>
+
                     </p>
                     <p>
                         Dimension : {{ $product['W'].' cm x '.$product['H'].' cm x '.$product['L'].' cm' }}
@@ -146,8 +148,17 @@
                     }
 
                     .color-chip{
-                        min-height: 10px;
-                        height: 12px;
+                        min-height: 35px;
+                        height: 35px;
+                        display: block;
+                        margin-bottom: 2px;
+                    }
+
+                    .color-chip-square{
+                        min-height: 35px;
+                        height: 35px;
+                        min-width: 35px;
+                        width: 35px;
                         display: block;
                         margin-bottom: 2px;
                     }
