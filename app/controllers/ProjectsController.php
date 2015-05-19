@@ -24,6 +24,8 @@ class ProjectsController extends BaseController {
     public function getIndex($tag)
     {
 
+        $slug = Input::get('s');
+
         $page = Input::get('page');
         $page = (is_null($page))?0:$page;
 
@@ -35,6 +37,14 @@ class ProjectsController extends BaseController {
                     ->take($perpage)
                     ->orderBy('title','desc')
                     ->get()->toArray();
+
+        $pagecount = Showcase::where('tags','like','%project%')->count();
+
+        if( $slug == '' && $pagecount > 0 ){
+            $slug = $pages[0]['slug'];
+        }
+
+        $currentpage = Showcase::where('tags','like','%project%')->where('slug',$slug)->first();
 
         $currentcount = count($pages);
 
@@ -49,6 +59,7 @@ class ProjectsController extends BaseController {
 
         return View::make('pages.press')
             ->with('title', ucfirst($tag).' Projects')
+            ->with('currentpage',$currentpage)
             ->with('pages',$pages)
             ->with('total',$total_found)
             ->with('alltotal',$total_all)

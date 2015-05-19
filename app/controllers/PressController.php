@@ -17,6 +17,8 @@ class PressController extends BaseController {
 
     public function getIndex()
     {
+        $slug = Input::get('s');
+
 
         $page = Input::get('page');
         $page = (is_null($page))?0:$page;
@@ -29,6 +31,14 @@ class PressController extends BaseController {
                     ->orderBy('title','desc')
                     ->get()->toArray();
 
+        $pagecount = Showcase::where('tags','like','%press%')->count();
+
+        if( $slug == '' && $pagecount > 0 ){
+            $slug = $pages[0]['slug'];
+        }
+
+        $currentpage = Showcase::where('tags','like','%press%')->where('slug',$slug)->first();
+
         $currentcount = count($pages);
 
         $total_found = Showcase::where('tags','like','%press%')->count();
@@ -39,6 +49,7 @@ class PressController extends BaseController {
 
         return View::make('pages.press')
             ->with('title','Press')
+            ->with('currentpage',$currentpage)
             ->with('pages',$pages)
             ->with('total',$total_found)
             ->with('alltotal',$total_all)
