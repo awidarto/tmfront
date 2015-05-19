@@ -161,6 +161,7 @@
                         width: 35px;
                         display: block;
                         margin-bottom: 2px;
+                        border: thin solid #eee;
                     }
 
                 </style>
