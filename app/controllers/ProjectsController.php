@@ -59,6 +59,7 @@ class ProjectsController extends BaseController {
 
         return View::make('pages.press')
             ->with('title', ucfirst($tag).' Projects')
+            ->with('tag',$tag)
             ->with('currentpage',$currentpage)
             ->with('pages',$pages)
             ->with('total',$total_found)
