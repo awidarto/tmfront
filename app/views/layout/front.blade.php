@@ -143,7 +143,11 @@
                 </div><!--/.nav-collapse -->
                     <a class="pull-right cart-icon" href="{{ URL::to('shop/purchases')}}"><i class="fa fa-money"></i></a>
 
-                    <a class="pull-right cart-icon" href="{{ URL::to('shop/cart')}}"><i class="fa fa-shopping-cart"></i> <span id="cart-qty" style="vertical-align: top;" class="badge" >{{ Commerce::getCartItemCount(Auth::user()->activeCart,Config::get('site.outlet_id') )}}</span></a>
+                    <a class="pull-right cart-icon" href="{{ URL::to('shop/cart')}}"><i class="fa fa-shopping-cart"></i>
+                    @if(Auth::check())
+                    <span id="cart-qty" style="vertical-align: top;" class="badge" >{{ Commerce::getCartItemCount(Auth::user()->activeCart,Config::get('site.outlet_id') )}}</span>
+                    @endif
+                    </a>
             </div>
         </div>
 
