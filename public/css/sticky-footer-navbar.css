@@ -60,8 +60,8 @@ body {
   padding-top: 5px;
   padding-left: 15px;
   padding-right: 15px;
-  background-color: #000;
-  color: #FFF;
+  /*background-color: #000;*/
+  color: #DDD;
 }
 
 code {
