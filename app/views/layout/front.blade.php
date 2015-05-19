@@ -45,6 +45,9 @@
 
     {{ HTML::script('js/accounting.min.js') }}
 
+    @if(isset($isloc) && $isloc == 1)
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=en" />
+    @endif
 
     <script type="text/javascript">
         $(document).ready(function(){

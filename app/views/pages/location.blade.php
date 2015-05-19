@@ -3,12 +3,11 @@
 
 @section('content')
 {{ HTML::script('js/gmap3/gmap3.js') }}
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=en" />
 
 <style type="text/css">
     #map{
-        width: 640px;
-        height:450px;
+        width: 100%;
+        height:600px;
     }
 </style>
 
@@ -65,7 +64,7 @@
 </script>
 <div id="home">
     <div class="row">
-        <div class="col-md-8" id="main">
+        <div class="col-md-12" id="main">
             <div class="col-md-4 visible-xs">
                 @include('partials.identity')
             </div>
@@ -78,11 +77,6 @@
 
                 </div>
             </div>
-        </div>
-        <div class="col-md-4 visible-lg tm-side">
-            @include('partials.identity')
-            @include('partials.location')
-            @include('partials.twitter')
         </div>
     </div>
 </div>

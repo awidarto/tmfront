@@ -29,6 +29,7 @@ class LocationController extends BaseController {
         }
 
         return View::make('pages.location')
+            ->with('isloc',1)
             ->with('body', $body)
             ->with('markers', $markers)
             ->with('title','Find Us')
