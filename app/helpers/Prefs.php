@@ -13,6 +13,16 @@ class Prefs {
 
     }
 
+    public static function getColorCode($colorname){
+        $color = Color::where('color','regex',new MongoRegex('/'.$colorname.'/i'))->first();
+
+        if($color){
+            return $color->color;
+        }else{
+            return '#FFFFFF';
+        }
+    }
+
     public static function getCategory(){
         $c = Category::get();
 

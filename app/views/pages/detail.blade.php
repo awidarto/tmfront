@@ -40,7 +40,6 @@
 
         </div>
         <div class="col-md-4 visible-lg tm-side item-detail">
-                @include('partials.identity')
                 <h2 style="display:block;padding-left:0px;font-size:24px;font-weight:bold;margin-top:24px;">{{ $product['itemDescription']}}</h2>
                 buy now for IDR {{ Ks::idr($product['priceRegular']) }}
                 <div id="item-description">
@@ -146,6 +145,13 @@
                         float: left;
                     }
 
+                    .color-chip{
+                        min-height: 10px;
+                        height: 12px;
+                        display: block;
+                        margin-bottom: 2px;
+                    }
+
                 </style>
                 {{--
                 <div class="color-box">
@@ -233,9 +239,15 @@
                         <?php $c = $c->toArray(); ?>
                         <a href="{{ URL::to('shop/detail/'.$c['_id'])}}">
                             @if(isset($c['defaultpictures']['medium_url']) && $c['defaultpictures']['medium_url'] != '')
-                                <img data-color="{{ $c['colour']}}" src="{{ $c['defaultpictures']['medium_url'] }}" class="color-thumb img-responsive" >
+                                <div>
+                                    <div class="color-chip" style="background-color:{{ Prefs::getColorCode($c['colour']) }}"></div>
+                                    <img data-color="{{ $c['colour']}}" src="{{ $c['defaultpictures']['medium_url'] }}" class="color-thumb img-responsive" >
+                                </div>
                             @else
-                                <img data-color="{{ $c['colour']}}" src="{{ URL::to('/') }}/images/th_default.png" class="color-thumb img-responsive" >
+                                <div>
+                                    <div class="color-chip" style="background-color:{{ Prefs::getColorCode($c['colour']) }}"></div>
+                                    <img data-color="{{ $c['colour']}}" src="{{ URL::to('/') }}/images/th_default.png" class="color-thumb img-responsive" >
+                                </div>
                             @endif
                         </a>
                     @endforeach
