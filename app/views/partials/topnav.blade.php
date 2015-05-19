@@ -47,7 +47,7 @@
                   <a href="{{ URL::to('shop/collection/lifestyle') }}" >Lifestyle</a>
                   <ul class="dropdown-menu">
                     <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/bags') }}" >Bags</a></li>
-                    <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/stationary-dining') }}" >Stationary</a></li>
+                    <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/stationary') }}" >Stationary</a></li>
                     <li {{ sa('shop/collection' ) }} ><a href="{{ URL::to('shop/collection/gifts') }}" >Gifts</a></li>
                   </ul>
                </li>
