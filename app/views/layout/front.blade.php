@@ -55,6 +55,18 @@
         });
     </script>
 
+    <style type="text/css">
+         .cart-icon {
+            font-size: 18px !important;
+            margin-left: 8px;
+         }
+
+         a.cart-icon:hover{
+            text-decoration: none;
+            color: maroon;
+         }
+    </style>
+
 </head>
 
 <body>
@@ -81,10 +93,26 @@
                             <button type="submit" class="btn btn-default ">Search</button>
                         {{ Form::close() }}
                     </div>
+                @if(Auth::check())
+                    <div class="col-lg-2" style="display:block;padding-top:42px;">
+                            <div>
+                                <p>Welcome {{ Auth::user()->firstname.' '.Auth::user()->lastname }}</p>
+                                <p><a style="padding-top:6px;display:form-inline"  href="{{ URL::to('logout') }}"  class="btn btn-primary" ><i class="fa fa-sign-out"></i> Logout</a></p>
+                            </div>
+                @else
                     <div class="col-lg-2" style="display:block;padding-top:68px;">
-                            <a style="padding-top:6px;display:form-inline" href="{{ URL::to('login')}}" class="btn btn-primary" ><i class="fa fa-sign-out"></i> Login</a>
+                            <a style="padding-top:6px;display:form-inline" href="{{ URL::to('login')}}" class="btn btn-primary" ><i class="fa fa-sign-in"></i> Login</a>
+                @endif
                     </div>
                     {{--
+
+                            <div>
+                                <p>You have <span id="cart-qty" >{{ Commerce::getCartItemCount(Auth::user()->activeCart,Config::get('site.outlet_id') )}}</span> items in your shopping cart<br />
+                                    <a class="pull-left" href="{{ URL::to('shop/purchases')}}"><i class="fa fa-money"></i> My Purchases</a>
+                                    <a class="pull-right" href="{{ URL::to('shop/cart')}}"><i class="fa fa-shopping-cart"></i> View Cart</a>
+                                </p>
+                            </div>
+
                     <div class="col-lg-4" id="tm-side-head">
                         @if(isset($tmhead) && is_array($tmhead) && !empty($tmhead))
                             {{ $tmhead[0]['body'] }}
@@ -110,7 +138,12 @@
 
                 <div class="collapse navbar-collapse">
                     @include('partials.topnav')
+
+
                 </div><!--/.nav-collapse -->
+                    <a class="pull-right cart-icon" href="{{ URL::to('shop/purchases')}}"><i class="fa fa-money"></i></a>
+
+                    <a class="pull-right cart-icon" href="{{ URL::to('shop/cart')}}"><i class="fa fa-shopping-cart"></i> <span id="cart-qty" style="vertical-align: top;" class="badge" >{{ Commerce::getCartItemCount(Auth::user()->activeCart,Config::get('site.outlet_id') )}}</span></a>
             </div>
         </div>
 
