@@ -103,6 +103,7 @@
                     <div class="col-lg-2" style="display:block;padding-top:68px;">
                             <a style="padding-top:6px;display:form-inline" href="{{ URL::to('login')}}" class="btn btn-primary" ><i class="fa fa-sign-in"></i> Login</a>
                 @endif
+                    <a href="{{URL::to('signup') }}">Have no account ? Sign Up !</a>
                     </div>
                     {{--
 
