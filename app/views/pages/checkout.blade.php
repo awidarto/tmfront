@@ -49,7 +49,6 @@
             </div>
         </div>
         <div class="col-md-4 visible-lg tm-side">
-            @include('partials.identity')
             @include('partials.location')
             @include('partials.twitter')
         </div>
