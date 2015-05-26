@@ -4,8 +4,8 @@
 
 <style type="text/css">
     .slide-box-container{
-        width: 215px;
-        max-width: 230px;
+        width: 100%;
+        /*max-width: 230px;*/
         height: 215px;
         max-height: 230px;
         overflow: hidden;
@@ -28,8 +28,10 @@
     }
 
     .three-box-slide{
-        width: 280px;
+        width: 100%;
+        /*
         max-width: 280px;
+        */
         height: 215px;
         max-height: 230px;
         overflow: hidden;
@@ -228,17 +230,16 @@
 
 
     <div class="row home-foot" >
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-12 col-xs-12">
             @include('partials.location')
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-12 col-xs-12">
             @include('partials.twitter')
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-12 col-xs-12">
             @include('partials.instagram')
         </div>
-        <div class="col-md-3">
-
+        <div class="col-md-3 col-sm-12 col-xs-12">
             @include('partials.news')
         </div>
     </div>
