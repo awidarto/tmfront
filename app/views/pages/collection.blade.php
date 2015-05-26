@@ -21,7 +21,7 @@
             @if(count($products) > 0 )
                 <div id="col-list" class="item-col">
                     @for($i = 0; $i < count($products);$i++)
-                            <div class="item">
+                            <div class="item col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                 <a href="{{ URL::to('shop/detail/'.$products[$i]['_id'])}}">
                                     <div class="photo">
                                         @if(isset($products[$i]['defaultpictures']['thumbnail_url'])
