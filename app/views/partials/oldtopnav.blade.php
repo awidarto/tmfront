@@ -1,4 +1,3 @@
-
 <?php
     function sa($item){
         if(URL::to($item) == URL::full()){
@@ -9,6 +8,18 @@
     }
 ?>
 
+
+      <!-- Static navbar -->
+      <div class="navbar navbar-default"  style="border-bottom: thin solid #555;border-radius: 0px;" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li {{ sa('/') }} ><a href="{{ URL::to('/') }}" >Home</a></li>
 
@@ -67,4 +78,30 @@
 
           </ul>
 
-      <!-- Static navbar -->
+          <ul class="nav navbar-nav" id="tm-socmed">
+            <?php
+              if(isset($product) && isset($product['itemDescription'])){
+                $stext = Config::get('site.name').' - '.$product['itemDescription'];
+              }else{
+                $stext = Config::get('site.name');
+              }
+            ?>
+            <li>
+              <a class="social" href="https://twitter.com/share?text={{ urlencode( $stext ) }}&url={{ urlencode( URL::full() ) }}" target="_blank" ><img src="{{ URL::to('/')}}/images/twitter.png"></a></li>
+            <li><a class="social" href="http://www.facebook.com/sharer/sharer.php?u={{ urlencode( URL::full() ) }}&title={{ urlencode( $stext ) }}"><img src="{{ URL::to('/')}}/images/facebook.png" target="_blank" ></a></li>
+            <li><a class="social" href="http://pinterest.com/pin/create/bookmarklet/?url={{ urlencode( URL::full() ) }}&is_video=false&description={{ urlencode( $stext ) }}" target="_blank" ><img src="{{ URL::to('/')}}/images/pinterest.png"></a></li>
+
+            <li style="padding-top:5px;">
+                <span class="ig-follow" data-id="e686823c1b" data-handle="toimoiindonesia" data-count="false" data-size="large" data-username="false"></span>
+            </li>
+            {{--
+            <li><a class="social" href="../navbar-static-top/"><img src="{{ URL::to('/')}}/images/gplus.png"></a></li>
+            --}}
+          </ul>
+
+  <script type="text/javascript">
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src="//x.instagramfollowbutton.com/follow.js";s.parentNode.insertBefore(g,s);}(document,"script"));
+  </script>
+
+
+        </div><!--/.nav-collapse -->

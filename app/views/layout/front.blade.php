@@ -56,15 +56,27 @@
     </script>
 
     <style type="text/css">
-         .cart-icon {
-            font-size: 18px !important;
+         a.cart-icon {
+            font-size: 24px !important;
             margin-left: 8px;
+            margin-top: 8px;
          }
 
          a.cart-icon:hover{
             text-decoration: none;
             color: maroon;
          }
+
+        div.container.topbar{
+            padding-top: 0px !important;
+            text-align: right;
+        }
+
+        .spacer{
+            display: inline-block;
+            width: 25px;
+        }
+
     </style>
 
 </head>
@@ -74,7 +86,7 @@
     <!-- Wrap all page content here -->
     <div id="wrap">
         <!-- topmost header -->
-        <div id="tm-head" class="visible-md visible-lg">
+        <div id="tm-head" class="visible-md visible-lg visible-sm">
             {{--
             @if($head = Prefs::getHeader())
                 {{ $head }}
@@ -82,10 +94,10 @@
 
             --}}
                 <div class="container">
-                    <div class="col-lg-4" id="tm-logo-container">
-                        <a href="{{ URL::to('/') }}"><img class="img-responsive" style="width:350px;height:auto;" src="{{ URL::to('images/').'/logo_toimoi_color.png' }}"></a>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" id="tm-logo-container">
+                        <a href="{{ URL::to('/') }}"><img class="img-responsive" src="{{ URL::to('images/').'/logo_toimoi_color.png' }}"></a>
                     </div>
-                    <div class="col-lg-6" style="display:block;padding-top:68px;">
+                    <div class="col-lg-6 col-md-6 col-sm-6" >
                         {{ Form::open(array('url' => 'search/collection','class'=>'form-inline', 'method'=>'get' ,'role'=>'form')) }}
                             <div class="form-group">
                                 {{ Former::text('search','')->placeholder('Search')->style('width:330px;')->id('search')->class('search form-control') }}
@@ -94,13 +106,13 @@
                         {{ Form::close() }}
                     </div>
                 @if(Auth::check())
-                    <div class="col-lg-2" style="display:block;padding-top:42px;">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="display:block;padding-top:42px;">
                             <div>
                                 <p>Welcome {{ Auth::user()->firstname.' '.Auth::user()->lastname }}</p>
                                 <p><a style="padding-top:6px;display:form-inline"  href="{{ URL::to('logout') }}"  class="btn btn-primary" ><i class="fa fa-sign-out"></i> Logout</a></p>
                             </div>
                 @else
-                    <div class="col-lg-2" style="display:block;padding-top:68px;">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="display:block;padding-top:68px;">
                             <a style="padding-top:6px;display:form-inline" href="{{ URL::to('login')}}" class="btn btn-primary" ><i class="fa fa-sign-in"></i> Login</a>
                 @endif
                     <a href="{{URL::to('signup') }}">No account ? Sign Up !</a>
@@ -127,33 +139,71 @@
         </div>
         <!-- Fixed navbar -->
         <div class="navbar navbar-default"  id="tm-head-navbar">
-            <div class="container" >
+            <div class="container" style="border-bottom: thin solid #CCC" >
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand visible-sm visible-xs" href="{{ URL::to('/')}}">{{ Config::get('site.name') }}</a>
                 </div>
 
                 <div class="collapse navbar-collapse">
                     @include('partials.topnav')
-
-
                 </div><!--/.nav-collapse -->
-                    <a class="pull-right cart-icon" href="{{ URL::to('shop/purchases')}}"><i class="fa fa-money"></i></a>
 
-                    <a class="pull-right cart-icon" href="{{ URL::to('shop/cart')}}"><i class="fa fa-shopping-cart"></i>
-                    @if(Auth::check())
+            </div>
+        </div>
+        <div class="container topbar">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pull-right">
+
+                    <?php
+                      if(isset($product) && isset($product['itemDescription'])){
+                        $stext = Config::get('site.name').' - '.$product['itemDescription'];
+                      }else{
+                        $stext = Config::get('site.name');
+                      }
+                    ?>
+                    <a class="social" href="https://twitter.com/share?text={{ urlencode( $stext ) }}&url={{ urlencode( URL::full() ) }}" target="_blank" ><img src="{{ URL::to('/')}}/images/twitter.png"></a>
+                    <a class="social" href="http://www.facebook.com/sharer/sharer.php?u={{ urlencode( URL::full() ) }}&title={{ urlencode( $stext ) }}"><img src="{{ URL::to('/')}}/images/facebook.png" target="_blank" ></a>
+
+                    <a class="social" href="http://pinterest.com/pin/create/bookmarklet/?url={{ urlencode( URL::full() ) }}&is_video=false&description={{ urlencode( $stext ) }}" target="_blank" ><img src="{{ URL::to('/')}}/images/pinterest.png"></a>
+
+                    <style>.ig-b- { display: inline-block; }
+                    .ig-b- img { visibility: hidden; }
+                    .ig-b-:hover { background-position: 0 -60px; } .ig-b-:active { background-position: 0 -120px; }
+                    .ig-b-24 { width: 24px; height: 24px; background: url(//badges.instagram.com/static/images/ig-badge-sprite-24.png) no-repeat 0 0; }
+                    @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+                    .ig-b-24 { background-image: url(//badges.instagram.com/static/images/ig-badge-sprite-24@2x.png); background-size: 60px 178px; } }</style>
+                    <a href="http://instagram.com/toimoiindonesia?ref=badge" class="ig-b- ig-b-24"><img src="//badges.instagram.com/static/images/ig-badge-24.png" alt="Instagram" /></a>
+                    {{--
+
+                    <span class="ig-follow" data-id="e686823c1b" data-handle="toimoiindonesia" data-count="false" data-size="large" data-username="false"></span>
+
+
+                    <script type="text/javascript">
+                        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src="//x.instagramfollowbutton.com/follow.js";s.parentNode.insertBefore(g,s);}(document,"script"));
+                    </script>
+                    --}}
+                    <span class="spacer">&nbsp;</span>
+                    <a class="cart-icon social" href="{{ URL::to('shop/purchases')}}"><i class="fa fa-money"></i></a>
+
+                    <a class="cart-icon" href="{{ URL::to('shop/cart')}}"><i class="fa fa-shopping-cart"></i>
+                    @if(Auth::check() && Commerce::getCartItemCount(Auth::user()->activeCart,Config::get('site.outlet_id')) > 0 )
                     <span id="cart-qty" style="vertical-align: top;" class="badge" >{{ Commerce::getCartItemCount(Auth::user()->activeCart,Config::get('site.outlet_id') )}}</span>
                     @endif
                     </a>
+
+                </div>
+
             </div>
+
         </div>
 
         <!-- Begin page content -->
         <div class="container">
+
             @yield('content')
         </div>
     </div>

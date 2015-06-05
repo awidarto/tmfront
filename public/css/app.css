@@ -16,7 +16,11 @@ body{
 
 #tm-head a{
     display: block;
-    padding-top:20px;
+    /*padding-top:20px;*/
+}
+
+#tm-head form{
+    margin-top: 68px;
 }
 
 #tm-side-head p{
@@ -49,6 +53,9 @@ body{
     margin-left: 95px;
 }
 
+.navbar{
+    margin-bottom: 5px !important;
+}
 
 .navbar-default a{
     text-transform: uppercase;
@@ -205,6 +212,8 @@ h3{
     padding-top: 55px;
 }
 
+
+
 @media (min-width: 978px) {
     .container {
         max-width: 930px;
@@ -266,8 +275,8 @@ h3{
 
 @media (max-width: 978px) {
     .navbar-header{
-        background-color: #0098a6;
-        color: #FFF;
+        /*background-color: #0098a6;*/
+        color: #000;
     }
 
     .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus{
@@ -288,7 +297,7 @@ h3{
     }
 
     .navbar-default, .navbar-default .navbar-collapse, .navbar-default .navbar-form{
-        /*background-color: #000;*/
+        background-color: #FFF !important;
         border:none;
     }
 

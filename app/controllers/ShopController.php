@@ -282,6 +282,7 @@ class ShopController extends BaseController {
         $deliverycost = Former::hidden('deliverycost','');
 
         $tab_data[] = array('',$totalform,array('value'=>'Sub Total'.'<input type="hidden" value="'.$gt.'" id="sub-total" />', 'attr'=>'class="right" ' ) ,array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
+        $tab_data[] = array('',$tax,array('value'=>'Tax / PPN'.'<input type="hidden" name="tax" value="" id="tax" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tax), 'attr'=>'class="right" id="tax-txt"'));
         $tab_data[] = array('',$deliverycost,array('value'=>'Delivery Cost'.'<input type="hidden" name="delivery_charge" value="" id="delivery-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($dc), 'attr'=>'class="right" id="delivery-cost"'));
         $tab_data[] = array('',$totalcost,array('value'=>'Total'.'<input type="hidden" name="total_charge" value="" id="total-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tc), 'attr'=>'class="right bold" id="total-cost"'));
 
