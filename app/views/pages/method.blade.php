@@ -69,7 +69,7 @@
                                 </div>
                             </div>
 
-                            {{ Former::hidden('jne_origin','Origin')->class('form-control jne_origin_auto col-md-4')->id('jne-origin')->value(Config::get('jne.default_origin'))}}
+                            {{ Former::hidden('jne_origin',Config::get('jne.default_origin'))->id('jne-origin')}}
 
 
                             <span id="loading-indicator" style="display:none;">Loading...</span>
@@ -151,11 +151,12 @@
         $('#jne-tariff').on('change',function(){
             var sel = this.value;
             var sub = $('#sub-total').val();
+            var tax = $('#tax').val();
 
             $('#delivery-charge').val(sel);
-            $('#total-charge').val(parseInt(sel) + parseInt(sub));
+            $('#total-charge').val(parseInt(sel) + parseInt(sub) + parseInt(tax));
 
-            var total = accounting.formatNumber(parseInt(sel) + parseInt(sub), 2, ".", ",");
+            var total = accounting.formatNumber(parseInt(sel) + parseInt(sub) + parseInt(tax), 2, ".", ",");
             $('#total-cost').html( total );
 
             sel = accounting.formatNumber(parseInt(sel), 2, ".", ",");

@@ -106,8 +106,7 @@
 
                     .buy-box{
                         display: block;
-                        border: thin solid #000;
-                        border-radius: 8px;
+                        border: thin solid #eee;
                         margin-top: 20px;
                         padding: 15px;
                         font-weight: bold;
@@ -115,13 +114,13 @@
                     }
 
                     .zoom-thumb{
-                        border: thin solid black;
+                        border: thin solid #eee;
                         cursor: pointer;
                         width: 80px;
                     }
 
                     #viewer img{
-                        border: thin solid black;
+                        border: thin solid #eee;
                     }
 
                     .buy-box .xlabel{

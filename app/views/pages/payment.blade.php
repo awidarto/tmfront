@@ -74,62 +74,12 @@
             </div>
         </div>
         <div class="col-md-4 visible-lg tm-side">
-            @include('partials.identity')
-            @include('partials.location')
-            @include('partials.twitter')
         </div>
     </div>
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#jne-origin').autocomplete({
-            source:'{{ URL::to('jne/origin') }}'
-        });
 
-        $('#jne-dest').autocomplete({
-            source:'{{ URL::to('jne/dest') }}'
-        });
-
-        $('#jne-get-tariff').on('click',function(){
-            var origin = $('#jne-origin').val();
-            var dest = $('#jne-dest').val();
-            var weight = $('#jne-weight').val();
-
-            $('#loading-indicator').show();
-            $.get('{{ URL::to('jne/price') }}/' + origin +'/'+ dest +'/'+ weight,
-                function(data){
-                    if(data.result == 'OK'){
-                        $('#jne-tariff').html('');
-                        $('#jne-tariff').append('<option value="">Select available tariff</option>');
-                        for (var i = data.price.length - 1; i >= 0; i--) {
-                            var d = data.price[i];
-                            var val = d.price;
-                            var label = d.service_display + ' : IDR ' + d.price
-                            $('#jne-tariff').append('<option value="'+ val +'">' + label+ '</option>');
-                        };
-
-                        $('#loading-indicator').hide();
-
-                    }else{
-                        $('#loading-indicator').hide();
-                    }
-                },'json');
-            return false;
-        });
-
-        $('#jne-tariff').on('change',function(){
-            var sel = this.value;
-            var sub = $('#sub-total').val();
-
-            $('#delivery-charge').val(sel);
-            $('#total-charge').val(parseInt(sel) + parseInt(sub));
-
-            var total = accounting.formatNumber(parseInt(sel) + parseInt(sub), 2, ".", ",");
-            $('#total-cost').html( total );
-
-            sel = accounting.formatNumber(parseInt(sel), 2, ".", ",");
-            $('#delivery-cost').html(sel );
-        });
 
     });
 </script>

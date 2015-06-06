@@ -8,5 +8,6 @@ return array(
             'Bazaar'=>'#448ccb',
             'Discount Period'=>'#662d91',
         ),
-    'none_available'=>'Sold Out'
+    'none_available'=>'Sold Out',
+    'ppn'=>0.1,
 );

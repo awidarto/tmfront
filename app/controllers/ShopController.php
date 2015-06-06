@@ -216,7 +216,10 @@ class ShopController extends BaseController {
             $gt += $v['total'];
         }
 
-        $tab_data[] = array('','','',array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
+        $tax = $gt * Config::get('shop.ppn');
+
+        $tab_data[] = array('','',array('value'=>'Tax / PPN', 'attr'=>'class="right"'),array('value'=>Ks::idr($tax), 'attr'=>'class="right"'));
+        $tab_data[] = array('','',array('value'=>'Total', 'attr'=>'class="right"'),array('value'=>Ks::idr($gt + $tax), 'attr'=>'class="right"'));
 
         $header = array(
             'things to buy',
@@ -274,15 +277,17 @@ class ShopController extends BaseController {
         //$dc = (isset($pay['delivery_charge']))?$pay['delivery_charge']:'';
         //$tc = (isset($pay['total_charge_after_delivery']))?$pay['total_charge_after_delivery']:'';
 
+        $tax = $gt * Config::get('shop.ppn');
+
         $dc = '';
-        $tc = '';
+        $tc = $gt + $tax;
 
         $totalform = Former::hidden('totalprice',$gt);
         $totalcost = Former::hidden('totalcost','');
         $deliverycost = Former::hidden('deliverycost','');
 
         $tab_data[] = array('',$totalform,array('value'=>'Sub Total'.'<input type="hidden" value="'.$gt.'" id="sub-total" />', 'attr'=>'class="right" ' ) ,array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
-        $tab_data[] = array('',$tax,array('value'=>'Tax / PPN'.'<input type="hidden" name="tax" value="" id="tax" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tax), 'attr'=>'class="right" id="tax-txt"'));
+        $tab_data[] = array('','',array('value'=>'Tax / PPN'.'<input type="hidden" name="tax" value="'.$tax.'" id="tax" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tax), 'attr'=>'class="right" id="tax-txt"'));
         $tab_data[] = array('',$deliverycost,array('value'=>'Delivery Cost'.'<input type="hidden" name="delivery_charge" value="" id="delivery-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($dc), 'attr'=>'class="right" id="delivery-cost"'));
         $tab_data[] = array('',$totalcost,array('value'=>'Total'.'<input type="hidden" name="total_charge" value="" id="total-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tc), 'attr'=>'class="right bold" id="total-cost"'));
 
@@ -361,6 +366,7 @@ class ShopController extends BaseController {
             $pay->by_name = $datain['recipientname'];
             $pay->by_address = $datain['shipping_address'];
             $pay->payable_amount = $datain['totalprice'];
+            $pay->tax = $datain['tax'];
             $pay->delivery_charge = $datain['delivery_charge'];
             $pay->total_charge_after_delivery = $datain['total_charge'];
             $pay->jne_origin = $datain['jne_origin'];
@@ -415,11 +421,14 @@ class ShopController extends BaseController {
         $dc = (isset($pay['delivery_charge']))?$pay['delivery_charge']:'';
         $tc = (isset($pay['total_charge_after_delivery']))?$pay['total_charge_after_delivery']:'';
 
+        $tax = $pay['tax'];
+
         $totalform = Former::hidden('totalprice',$gt);
         $totalcost = Former::hidden('totalcost',$tc);
         $deliverycost = Former::hidden('deliverycost',$dc);
 
         $tab_data[] = array('',$totalform,array('value'=>'Sub Total'.'<input type="hidden" value="'.$gt.'" id="sub-total" />', 'attr'=>'class="right" ' ) ,array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
+        $tab_data[] = array('','',array('value'=>'Tax / PPN'.'<input type="hidden" name="tax" value="'.$tax.'" id="tax" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tax), 'attr'=>'class="right" id="tax-txt"'));
         $tab_data[] = array('',$deliverycost,array('value'=>'Delivery Cost'.'<input type="hidden" name="delivery_charge" value="" id="delivery-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($dc), 'attr'=>'class="right" id="delivery-cost"'));
         $tab_data[] = array('',$totalcost,array('value'=>'Total'.'<input type="hidden" name="total_charge" value="" id="total-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tc), 'attr'=>'class="right bold" id="total-cost"'));
 
@@ -494,11 +503,14 @@ class ShopController extends BaseController {
             $dc = (isset($pay['delivery_charge']))?$pay['delivery_charge']:'';
             $tc = (isset($pay['total_charge_after_delivery']))?$pay['total_charge_after_delivery']:'';
 
+            $tax = $pay['tax'];
+
             $totalform = Former::hidden('totalprice',$gt);
             $totalcost = Former::hidden('totalcost',$tc);
             $deliverycost = Former::hidden('deliverycost',$dc);
 
             $tab_data[] = array('',$totalform,array('value'=>'Sub Total'.'<input type="hidden" value="'.$gt.'" id="sub-total" />', 'attr'=>'class="right" ' ) ,array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
+            $tab_data[] = array('','',array('value'=>'Tax / PPN'.'<input type="hidden" value="'.$tax.'" id="tax" />', 'attr'=>'class="right" ' ) ,array('value'=>Ks::idr($tax), 'attr'=>'class="right"'));
             $tab_data[] = array('',$deliverycost,array('value'=>'Delivery Cost'.'<input type="hidden" name="delivery_charge" value="" id="delivery-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($dc), 'attr'=>'class="right" id="delivery-cost"'));
             $tab_data[] = array('',$totalcost,array('value'=>'Total'.'<input type="hidden" name="total_charge" value="" id="total-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tc), 'attr'=>'class="right bold" id="total-cost"'));
 
@@ -657,11 +669,14 @@ class ShopController extends BaseController {
             $dc = (isset($pay['delivery_charge']))?$pay['delivery_charge']:'';
             $tc = (isset($pay['total_charge_after_delivery']))?$pay['total_charge_after_delivery']:'';
 
+            $tax = $pay['tax'];
+
             $totalform = Former::hidden('totalprice',$gt);
             $totalcost = Former::hidden('totalcost',$tc);
             $deliverycost = Former::hidden('deliverycost',$dc);
 
             $tab_data[] = array('',$totalform,array('value'=>'Sub Total'.'<input type="hidden" value="'.$gt.'" id="sub-total" />', 'attr'=>'class="right" ' ) ,array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
+            $tab_data[] = array('','',array('value'=>'Tax / PPN'.'<input type="hidden" name="tax" value="'.$tax.'" id="tax" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tax), 'attr'=>'class="right" id="tax-txt"'));
             $tab_data[] = array('',$deliverycost,array('value'=>'Delivery Cost'.'<input type="hidden" name="delivery_charge" value="" id="delivery-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($dc), 'attr'=>'class="right" id="delivery-cost"'));
             $tab_data[] = array('',$totalcost,array('value'=>'Total'.'<input type="hidden" name="total_charge" value="" id="total-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tc), 'attr'=>'class="right bold" id="total-cost"'));
 
@@ -1047,11 +1062,14 @@ class ShopController extends BaseController {
         $dc = (isset($pay['delivery_charge']))?$pay['delivery_charge']:'';
         $tc = (isset($pay['total_charge_after_delivery']))?$pay['total_charge_after_delivery']:'';
 
+        $tax = $pay['tax'];
+
         $totalform = Former::hidden('totalprice',$gt);
         $totalcost = Former::hidden('totalcost',$tc);
         $deliverycost = Former::hidden('deliverycost',$dc);
 
         $tab_data[] = array('',$totalform,array('value'=>'Sub Total'.'<input type="hidden" value="'.$gt.'" id="sub-total" />', 'attr'=>'class="right" ' ) ,array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
+        $tab_data[] = array('','',array('value'=>'Tax / PPN'.'<input type="hidden" value="'.$tax.'" id="tax" />', 'attr'=>'class="right" ' ) ,array('value'=>Ks::idr($tax), 'attr'=>'class="right"'));
         $tab_data[] = array('',$deliverycost,array('value'=>'Delivery Cost'.'<input type="hidden" name="delivery_charge" value="" id="delivery-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($dc), 'attr'=>'class="right" id="delivery-cost"'));
         $tab_data[] = array('',$totalcost,array('value'=>'Total'.'<input type="hidden" name="total_charge" value="" id="total-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tc), 'attr'=>'class="right bold" id="total-cost"'));
 
@@ -1060,7 +1078,7 @@ class ShopController extends BaseController {
         $header = array(
             'things to buy',
             'unit',
-            'tagprice',
+            array('value'=>'tagprice', 'attr'=>'style="text-align:right"'),
             array('value'=>'price to pay', 'attr'=>'style="text-align:right"')
             );
 
@@ -1112,18 +1130,21 @@ class ShopController extends BaseController {
         $dc = (isset($pay['delivery_charge']))?$pay['delivery_charge']:'';
         $tc = (isset($pay['total_charge_after_delivery']))?$pay['total_charge_after_delivery']:'';
 
+        $tax = $pay['tax'];
+
         $totalform = Former::hidden('totalprice',$gt);
         $totalcost = Former::hidden('totalcost',$tc);
         $deliverycost = Former::hidden('deliverycost',$dc);
 
         $tab_data[] = array('',$totalform,array('value'=>'Sub Total'.'<input type="hidden" value="'.$gt.'" id="sub-total" />', 'attr'=>'class="right" ' ) ,array('value'=>Ks::idr($gt), 'attr'=>'class="right"'));
+        $tab_data[] = array('','',array('value'=>'Tax / PPN'.'<input type="hidden" name="tax" value="'.$tax.'" id="tax" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tax), 'attr'=>'class="right" id="tax-txt"'));
         $tab_data[] = array('',$deliverycost,array('value'=>'Delivery Cost'.'<input type="hidden" name="delivery_charge" value="" id="delivery-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($dc), 'attr'=>'class="right" id="delivery-cost"'));
         $tab_data[] = array('',$totalcost,array('value'=>'Total'.'<input type="hidden" name="total_charge" value="" id="total-charge" />', 'attr'=>'class="right" ' ),array('value'=>Ks::idr($tc), 'attr'=>'class="right bold" id="total-cost"'));
 
         $header = array(
             'things to buy',
             'unit',
-            'tagprice',
+            array('value'=>'tagprice', 'attr'=>'style="text-align:right"'),
             array('value'=>'price to pay', 'attr'=>'style="text-align:right"')
             );
 
@@ -1131,13 +1152,17 @@ class ShopController extends BaseController {
         $t = new HtmlTable($tab_data, $attr, $header);
         $itemtable = $t->build();
 
-        return View::make('pages.printreceipt')->with('itemtable',$itemtable)->with('payment',$pay);
+        return View::make('pages.printreceipt')
+            ->with('itemtable',$itemtable)->with('payment',$pay);
 
     }
 
     public function getPurchases()
     {
-        $purchases = Sales::where('buyer_id',Auth::user()->_id)->where('transactiontype','online')->get();
+        $purchases = Sales::where('buyer_id',Auth::user()->_id)
+                ->where('transactiontype','online')
+                ->orderBy('createdDate','desc')
+                ->get();
 
         $itemtable = '';
 

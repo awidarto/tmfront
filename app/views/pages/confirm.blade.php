@@ -20,12 +20,11 @@
             <div class="col-md-4 visible-xs">
                 @include('partials.identity')
             </div>
-            <h2>Shopping Cart</h2>
+            <h2>Bank Transfer Confirmation</h2>
             <div class="container" style="display:block;font-size:12px;">
                 {{ Former::open_vertical('shop/confirm')->id('payconfirm')}}
-                    <div class="row">
+                    <div class="row" style="border:none" >
                         <div class="col-md-12">
-                            <h5>Bank Transfer Confirmation</h5>
 
                             {{ Former::text('toimoicode','Toimoi Transaction Code')->class('form-control') }}
 
@@ -41,7 +40,7 @@
 
                         </div>
                     </div>
-                    <div class="row" >
+                    <div class="row" style="border:none" >
                         <div class="col-md-4">
                         </div>
                         <div class="col-md-4 center">
