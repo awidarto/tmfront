@@ -320,4 +320,51 @@ class Commerce{
 
     }
 
+    public static function getPrice($productId, $outletId, $defaultprice)
+    {
+        $productId = new MongoId($productId);
+        $l = Discount::where('productId', $productId)
+                ->where('outletId', $outletId )->orderBy('createdDate','desc')->first();
+
+        if($l){
+            if($l->regPrice != 0 && $l->regPrice != ''){
+                return doubleval($l->regPrice);
+            }else{
+                return $defaultprice;
+            }
+        }else{
+            return $defaultprice;
+        }
+    }
+
+    public static function getDiscountPrice($productId, $outletId, $defaultprice)
+    {
+        $productId = new MongoId($productId);
+        $l = Discount::where('productId', $productId)
+                ->where('outletId', $outletId )->orderBy('createdDate','desc')->first();
+
+        if($l){
+            if($l->discount != '' && $l->discount != 0){
+                if( doubleval($l->discount) <= 100){
+                    return doubleval($l->regPrice) * ( doubleval($l->discount)/ 100);
+                }else{
+                    if($l->regPrice != 0 && $l->regPrice != ''){
+                        return doubleval($l->regPrice);
+                    }else{
+                        return $defaultprice;
+                    }
+                }
+            }else{
+                if($l->regPrice != 0 && $l->regPrice != ''){
+                    return doubleval($l->regPrice);
+                }else{
+                    return $defaultprice;
+                }
+            }
+        }else{
+            return $defaultprice;
+        }
+    }
+
+
 }
