@@ -192,7 +192,7 @@ return array(
         'Date'            => 'Intervention\Helper\Facades\Date',
         'String'          => 'Intervention\Helper\Facades\String',
         'Image'           => 'Intervention\Image\Facades\Image',
-        'Twitter'         => 'Thujohn\Twitter\TwitterFacade',
+        'Twitter'         => 'Thujohn\Twitter\Facades\Twitter',
         'Instagram'       => 'Elevencodes\InstagramLaravel\Facades\InstagramLaravel',
         'Buzz'            => 'Buzz\Buzz',
 	),

@@ -48,6 +48,15 @@ Route::get('hashme/{mypass}',function($mypass){
     print Hash::make($mypass);
 });
 
+Route::get('testmail',function(){
+    $data['email'] = 'andy.awidarto@gmail.com';
+    $data['name'] = 'Andy Awidarto';
+
+    Emailer::sendnotification($data);
+
+});
+
+
 Route::get('insta',function(){
 
     $user_id = 647213689;

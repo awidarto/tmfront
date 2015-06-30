@@ -17,14 +17,15 @@
         "mj/breadcrumb": "dev-master",
         "knplabs/knp-snappy": "*",
         "barryvdh/laravel-snappy": "0.1.*",
-        "thujohn/twitter": "dev-master",
+        "thujohn/twitter": "~2.0",
         "php-instagram-api/php-instagram-api": "dev-master",
         "elevencodes/instagram-laravel": "2.0.*@dev",
         "fishmarket/instaphp": "dev-master",
         "pingpong/menus": "1.0.*",
         "sirsquall/buzz": "v0.12",
-        "creitive/breadcrumbs": "dev-master",
-        "mattbrown/laracurl": "dev-master"
+        "creitive/laravel4-breadcrumbs": "dev-master",
+        "mattbrown/laracurl": "1.0.0",
+        "guzzlehttp/guzzle": "~4.0"
 
 	},
 	"autoload": {
