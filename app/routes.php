@@ -51,8 +51,10 @@ Route::get('hashme/{mypass}',function($mypass){
 Route::get('testmail',function(){
     $data['email'] = 'andy.awidarto@gmail.com';
     $data['name'] = 'Andy Awidarto';
+    $data['subject'] = 'Emailer Test';
+    $template = 'emails.confirmation';
 
-    Emailer::sendnotification($data);
+    Emailer::sendnotification($data, $template);
 
 });
 
@@ -307,13 +309,23 @@ Route::post('signup',function(){
             //return Redirect::to('account/success');
 
             //$newuser = User::where('activation', $activation)->first()->toArray();
+            $de['email'] = Input::get('email');
+            $de['name'] = $data['fullname'];
+            $de['subject'] = 'Welcome to Toimoi';
+            Emailer::sendnotification($de, 'emails.signupsuccess');
 
             Session::flash('signupSuccess', 'Thank you and welcome to '.Config::get('site.name').' ! ');
+
             return Redirect::to('/');
 
         }else{
 
             Event::fire('log.a',array('create account','createaccount',Input::get('email'),'fail to create account'));
+
+            $de['email'] = Input::get('email');
+            $de['name'] = $data['fullname'];
+            $de['subject'] = 'Sign up failed - Toimoi';
+            Emailer::sendnotification($de, 'emails.signupfailed');
 
             //return Redirect::to($this->backlink)->with('notify_success',ucfirst(Str::singular($controller_name)).' saving failed');
             Session::flash('signupError', 'Failed to create membership');

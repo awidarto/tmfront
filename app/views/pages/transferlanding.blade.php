@@ -28,6 +28,14 @@
                     <div style="font-size:24pt;font-weight:bold;display:block;text-align:center;padding:8px;">{{ $session_id }}</div>
                 <p>
                     please keep it handy, you will need it to confirm your payment later.<br />
+                </p>
+                <p>
+                    Please make a bank transfer to this account, then notify us :<br />
+                    BCA a/c : 286 301 3348<br />
+                    a/n PT Toimoi Indonesia <br />
+                    BCA Cab. Kemang
+                </p>
+                <p>
                     If you have made your transfer payment , you may confirm your payment here :<br />
                 </p>
                 <div class="clearfix center" style="text-align:center;">

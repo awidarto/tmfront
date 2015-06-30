@@ -10,24 +10,31 @@ class Emailer{
 
     }
 
-    public static function sendnotification($data){
+    public static function sendnotification($data,$template = null){
 
             //$sales = $sales->toArray();
             $content = '';
 
+            $template = is_null($template)?'emails.confirmation':$template;
+
             try{
 
-                Mail::send('emails.confirmation',array('body'=>$content), function($message) use ($data){
+                Mail::send($template,array('body'=>$content, 'data'=>$data), function($message) use ($data){
 
                     $fullname = $data['name'];
 
                     $to = $data['email'];
 
+                    $subject = $data['subject'];
+
                     $message->to($to, $fullname);
 
-                    $message->subject('Payment Confirmation');
+                    $message->subject($subject);
 
-                    $message->cc('toimoiindonesia@gmail.com');
+                    $message->to(Config::get('shop.admin_email') );
+
+                    $headers = $message->getHeaders();
+                    $headers->addTextHeader('X-MC-PreserveRecipients', 'false');
 
                     //$message->attach(public_path().'/storage/pdf/'.$prop['propertyId'].'.pdf');
                 });

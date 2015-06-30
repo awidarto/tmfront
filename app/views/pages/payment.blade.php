@@ -16,7 +16,7 @@
 </style>
 <div id="home">
     <div class="row">
-        <div class="col-md-8" id="main">
+        <div class="col-md-12" id="main">
             <div class="col-md-4 visible-xs">
                 @include('partials.identity')
             </div>
@@ -43,7 +43,8 @@
                             <h5>How Do You Want To Pay ?</h5>
                                 <p>
                                     Make a bank transfer to this account, then notify us :
-                                    BCA a/c : 123456789
+                                    BCA a/c : 286 301 3348
+                                    a/n PT Toimoi Indonesia
                                     BCA Cab. Kemang
                                 </p>
                             {{ Former::open_vertical('shop/paytransfer')->id('paymethod')}}
@@ -72,8 +73,6 @@
                         </div>
                     </div>
             </div>
-        </div>
-        <div class="col-md-4 visible-lg tm-side">
         </div>
     </div>
 </div>

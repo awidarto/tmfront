@@ -51,16 +51,38 @@ class ShopController extends BaseController {
 
         $cid = Confirmation::insertGetId($in);
 
+        $mailres = false;
+
         if($cid){
             $result = true;
             $sales = Sales::where('sessionId',$sid)->first();
             $sales->transactionstatus = 'confirmed';
             $msales = $sales->toArray();
             $sales->save();
-            $mailres = Emailer::confirmationsuccess($msales);
+
+            $ed['email'] = $sales->buyer_email;
+            $ed['name'] = $sales->buyer_name;
+            $ed['subject'] = 'Konfirmasi Pembayaran';
+
+            $ed['toimoicode'] = $in['toimoicode'];
+            $ed['accountname'] = $in['accountname'];
+            $ed['bank'] = $in['bank'];
+            $ed['accountnumber'] = $in['accountnumber'];
+            $ed['transaction_code'] = $in['transaction_code'];
+            $ed['message'] = $in['message'];
+            $ed['transferamount'] = $in['transferamount'];
+            $ed['phone'] = $in['phone'];
+            $ed['createdDate'] = date('d-m-Y H:i:s', $in['createdDate']->sec);
+            $ed['paymethod'] = 'transfer';
+            $ed['status'] = 'success';
+
+            $mailres = Emailer::sendnotification($ed, 'emails.paymentconfirmation');
+
+            //$mailres = Emailer::confirmationsuccess($msales);
         }else{
             $result = false;
         }
+
 
         return View::make('pages.confirmresult')->with('result',$result)->with('email',$mailres);
 
@@ -589,6 +611,17 @@ class ShopController extends BaseController {
             Auth::user()->activeCart = '';
 
             User::where('_id',Auth::user()->_id)->update(array('activeCart'=>''));
+
+            $ed['email'] = $sales->buyer_email;
+            $ed['name'] = $sales->buyer_name;
+            $ed['subject'] = 'Bukti Pemesanan';
+            $ed['session_id'] = $session_id;
+            $ed['by_phone'] = Auth::user()->phone;
+            $ed['by_address'] = $sales->buyer_address.' '.$sales->buyer_city;
+            $ed['by_name'] = $sales->buyer_name;
+            $ed['itemtable'] = $itemtable;
+
+            Emailer::sendnotification($ed, 'emails.ordersuccess');
 
             return View::make('pages.transferlanding')
                 ->with('itemtable',$itemtable)
