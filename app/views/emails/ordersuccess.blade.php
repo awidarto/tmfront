@@ -14,7 +14,12 @@ Berikut adalah detail pemesanan kamu.
 {{ $data['itemtable'] }}
 </p>
 <p>
-    <b>Pembayaran</b><br />
+    <b>Pembayaran Kartu Kredit</b><br />
+    Lakukan pembayaran dengan menggunakan kartu kredit, debit atau DOKU Wallet secara online di website toimoi.<br />
+</p>
+
+<p>
+    <b>Pembayaran Transfer</b><br />
     Lakukan pembayaran ke salah satu rekening berikut:<br />
     Bank BCA<br />
     No. Rekening 286 301 3348<br />

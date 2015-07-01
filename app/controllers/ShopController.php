@@ -837,6 +837,19 @@ class ShopController extends BaseController {
             //remove session data
             Auth::user()->activeCart = '';
 
+            User::where('_id',Auth::user()->_id)->update(array('activeCart'=>''));
+
+            $ed['email'] = $sales->buyer_email;
+            $ed['name'] = $sales->buyer_name;
+            $ed['subject'] = 'Bukti Pemesanan';
+            $ed['session_id'] = $session_id;
+            $ed['by_phone'] = Auth::user()->phone;
+            $ed['by_address'] = $sales->buyer_address.' '.$sales->buyer_city;
+            $ed['by_name'] = $sales->buyer_name;
+            $ed['itemtable'] = $itemtable;
+
+            Emailer::sendnotification($ed, 'emails.ordersuccess');
+
             Former::framework('TwitterBootstrap3');
 
             return View::make('doku.checkout')
