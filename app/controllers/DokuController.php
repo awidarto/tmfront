@@ -201,8 +201,11 @@ class DokuController extends BaseController {
         $doku = Doku::where('transidmerchant',$in['order_number'])->first();
 
         $ed['toimoicode'] = $doku->cartId;
-        $ed['transaction_code'] = $in['order_number'];
-        $ed['transferamount'] = $in['purchase_amt'];
+        //$ed['transaction_code'] = $in['order_number'];
+        //$ed['transferamount'] = $in['purchase_amt'];
+        $ed['transaction_code'] = '';
+        $ed['transferamount'] = '';
+
         $ed['createdDate'] = date('d-m-Y H:i:s', time() );
         $ed['status'] = ($in['status_code'] == '0000')?'success':'failed';
         $ed['paymethod'] = 'Doku';
