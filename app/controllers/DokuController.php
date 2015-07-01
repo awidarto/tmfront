@@ -70,14 +70,15 @@ class DokuController extends BaseController {
             $trx->save();
         }
 
-        $ed['toimoicode'] = $trx->cartId;
+        $ed['toimoicode'] = $transidmerchant;
         //$ed['transaction_code'] = $in['order_number'];
         //$ed['transferamount'] = $in['purchase_amt'];
         $ed['transaction_code'] = '';
         $ed['transferamount'] = '';
 
         $ed['createdDate'] = date('d-m-Y H:i:s', time() );
-        $ed['status'] = ($status_code == '0000')?'success':'failed';
+        //$ed['status'] = ($status_code == '0000')?'success':'failed';
+        $ed['status'] = '-';
         $ed['paymethod'] = 'Doku';
 
         Emailer::sendnotification($ed, 'emails.paymentconfirmation');
