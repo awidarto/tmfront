@@ -58,7 +58,7 @@
                             </p>
                             {{ Former::open_vertical('shop/paydoku')->id('paymethod')}}
                                 {{ Former::hidden('status','review') }}
-                                <button class="btn btn-primary pull-right" id="submit">Pay Using Doku</button>
+                                <button class="btn btn-primary pull-right" id="submit">Pay Using Credit Card</button>
                             {{Former::close()}}
                         </div>
                     </div>
