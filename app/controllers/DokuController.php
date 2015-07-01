@@ -78,7 +78,7 @@ class DokuController extends BaseController {
 
         $ed['createdDate'] = date('d-m-Y H:i:s', time() );
         //$ed['status'] = ($status_code == '0000')?'success':'failed';
-        $ed['status'] = '-';
+        $ed['status'] = 'success';
         $ed['paymethod'] = 'Doku';
 
         Emailer::sendnotification($ed, 'emails.paymentconfirmation');

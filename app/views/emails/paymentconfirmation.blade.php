@@ -8,23 +8,22 @@
 
 Berikut adalah detail pembayaran via {{ $data['paymethod'] }}.
 @if( $data['paymethod'] == 'transfer' )
-<ul>
-    <li>Nomor Rekening Pengirim : {{ $data['bank'].' '.$data['accountnumber'] }}</li>
-    <li>Nama  : {{ $data['accountname'] }}</li>
-    <li>Tanggal/Waktu : {{ $data['createdDate']  }}</li>
-    <li>Jumlah : {{ $data['transferamount'] }}</li>
-    <li>No Transaksi : {{ $data['transaction_code'] }}</li>
-    <li>No. Telepon : {{ $data['phone'] }}</li>
-    <li>Catatan : {{ $data['message'] }}</li>
-</ul>
-
+    <ul>
+        <li>Nomor Rekening Pengirim : {{ $data['bank'].' '.$data['accountnumber'] }}</li>
+        <li>Nama  : {{ $data['accountname'] }}</li>
+        <li>Tanggal/Waktu : {{ $data['createdDate']  }}</li>
+        <li>Jumlah : {{ $data['transferamount'] }}</li>
+        <li>No Transaksi : {{ $data['transaction_code'] }}</li>
+        <li>No. Telepon : {{ $data['phone'] }}</li>
+        <li>Catatan : {{ $data['message'] }}</li>
+    </ul>
 @else
-<ul>
-    <li>Tanggal/Waktu : {{ $data['createdDate']  }}</li>
-    <li>No Transaksi : {{ $data['transaction_code'] }}</li>
-    <li>Jumlah : {{ $data['transferamount'] }}</li>
-    <li>Status : {{ $data['status'] }}</li>
-</ul>
+    <ul>
+        <li>Tanggal/Waktu : {{ $data['createdDate']  }}</li>
+        <li>No Transaksi : {{ $data['transaction_code'] }}</li>
+        <li>Jumlah : {{ $data['transferamount'] }}</li>
+        <li>Status : {{ $data['status'] }}</li>
+    </ul>
 @endif
 
 @if($data['status'] == 'success')
