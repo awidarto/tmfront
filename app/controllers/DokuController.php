@@ -70,6 +70,7 @@ class DokuController extends BaseController {
             $trx->save();
         }
 
+        /*
         $ed['toimoicode'] = $transidmerchant;
         //$ed['transaction_code'] = $in['order_number'];
         //$ed['transferamount'] = $in['purchase_amt'];
@@ -82,6 +83,7 @@ class DokuController extends BaseController {
         $ed['paymethod'] = 'Doku';
 
         Emailer::sendnotification($ed, 'emails.paymentconfirmation');
+        */
 
         return View::make('doku.redirect')
             ->with('redirect_url',URL::to('doku/result'))
@@ -187,19 +189,25 @@ class DokuController extends BaseController {
         */
 
         $doku = Doku::where('transidmerchant',$in['order_number'])->first();
-        /*
+
         $ed['toimoicode'] = $doku->cartId;
         //$ed['transaction_code'] = $in['order_number'];
         //$ed['transferamount'] = $in['purchase_amt'];
         $ed['transaction_code'] = '';
         $ed['transferamount'] = '';
 
+        $status = 'failed';
+
+        if($in['status_code'] == '0000'){
+            $status = 'success';
+        }
+
         $ed['createdDate'] = date('d-m-Y H:i:s', time() );
-        $ed['status'] = ($in['status_code'] == '0000')?'success':'failed';
+        $ed['status'] = $status;
         $ed['paymethod'] = 'Doku';
 
         $mailres = Emailer::sendnotification($ed, 'emails.paymentconfirmation');
-        */
+
         //print_r(Input::get());
         return View::make('doku.result')
             ->with('doku',$doku)
@@ -212,19 +220,26 @@ class DokuController extends BaseController {
         $in = Input::get();
 
         $doku = Doku::where('transidmerchant',$in['order_number'])->first();
-        /*
+
         $ed['toimoicode'] = $doku->cartId;
         //$ed['transaction_code'] = $in['order_number'];
         //$ed['transferamount'] = $in['purchase_amt'];
         $ed['transaction_code'] = '';
         $ed['transferamount'] = '';
 
+
+        $status = 'failed';
+
+        if($in['status_code'] == '0000'){
+            $status = 'success';
+        }
+
         $ed['createdDate'] = date('d-m-Y H:i:s', time() );
-        $ed['status'] = ($in['status_code'] == '0000')?'success':'failed';
+        $ed['status'] = $status;
         $ed['paymethod'] = 'Doku';
 
         $mailres = Emailer::sendnotification($ed, 'emails.paymentconfirmation');
-        */
+
         return View::make('doku.result')
             ->with('in',Input::get());
     }
