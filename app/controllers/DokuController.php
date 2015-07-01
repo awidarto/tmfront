@@ -206,7 +206,7 @@ class DokuController extends BaseController {
         $ed['status'] = $status;
         $ed['paymethod'] = 'Doku';
 
-        $mailres = Emailer::sendnotification($ed, 'emails.paymentconfirmation');
+        Emailer::sendnotification($ed, 'emails.paymentconfirmation');
 
         //print_r(Input::get());
         return View::make('doku.result')
@@ -238,7 +238,7 @@ class DokuController extends BaseController {
         $ed['status'] = $status;
         $ed['paymethod'] = 'Doku';
 
-        $mailres = Emailer::sendnotification($ed, 'emails.paymentconfirmation');
+        Emailer::sendnotification($ed, 'emails.paymentconfirmation');
 
         return View::make('doku.result')
             ->with('in',Input::get());
