@@ -228,18 +228,16 @@ class DokuController extends BaseController {
         $ed['name'] = $fullname;
 
         if($status == 'success'){
-            print 'send success';
+
             $ed['subject'] = 'Payment Success';
             Emailer::sendnotification($ed, 'emails.dokusuccess');
         }else{
-            print 'send failure';
-            $ed['subject'] = 'Transaction Failed';
 
-            print_r($ed);
+            $ed['subject'] = 'Transaction Failed';
             Emailer::sendnotification($ed, 'emails.dokucancel');
         }
 
-        die();
+        //    die();
 
         //print_r(Input::get());
         return View::make('doku.result')
