@@ -177,6 +177,8 @@ class DokuController extends BaseController {
     {
 
         $in = Input::get();
+
+        print 'result post';
         print_r($in);
         die();
         /*
@@ -236,6 +238,8 @@ class DokuController extends BaseController {
     public function getResult()
     {
         print_r(Input::get());
+
+        print 'result get';
 
         die();
 
