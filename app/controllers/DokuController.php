@@ -233,7 +233,7 @@ class DokuController extends BaseController {
             Emailer::sendnotification($ed, 'emails.dokusuccess');
         }else{
 
-            $ed['subject'] = 'Transaction Failed';
+            $ed['subject'] = 'Transaction Canceled';
             Emailer::sendnotification($ed, 'emails.dokucancel');
         }
 
