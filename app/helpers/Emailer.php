@@ -17,7 +17,7 @@ class Emailer{
 
             $template = is_null($template)?'emails.confirmation':$template;
 
-            //try{
+            try{
 
                 Mail::send($template,array('body'=>$content, 'data'=>$data), function($message) use ($data){
 
@@ -41,10 +41,10 @@ class Emailer{
 
                 return true;
 
-            //}catch(Exception $e){
+            }catch(Exception $e){
 
-            //    return false;
-            //}
+                return false;
+            }
 
 
     }
