@@ -202,8 +202,10 @@ class DokuController extends BaseController {
 
         if($sales){
             $fullname = $sales->buyer_name;
+            $email = $sales->buyer_email;
         }else{
             $fullname = 'Toimoi Customer';
+            $email = Config::get('shop.admin_email');
         }
 
         //$ed['transaction_code'] = $in['order_number'];
@@ -217,6 +219,9 @@ class DokuController extends BaseController {
             $status = 'success';
         }
 
+        $ed['email'] = $email;
+
+
         $ed['createdDate'] = date('d-m-Y H:i:s', time() );
         $ed['status'] = $status;
         $ed['paymethod'] = 'Doku';
@@ -224,9 +229,11 @@ class DokuController extends BaseController {
 
         if($status == 'success'){
             print 'send success';
+            $ed['subject'] = 'Payment Success';
             Emailer::sendnotification($ed, 'emails.dokusuccess');
         }else{
             print 'send failure';
+            $ed['subject'] = 'Transaction Failed';
 
             print_r($ed);
             Emailer::sendnotification($ed, 'emails.dokucancel');
