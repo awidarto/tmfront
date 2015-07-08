@@ -190,7 +190,20 @@ class DokuController extends BaseController {
 
         $doku = Doku::where('transidmerchant',$in['order_number'])->first();
 
-        $ed['toimoicode'] = $doku->cartId;
+
+
+        $sid = $doku->cartId;
+
+        $ed['toimoicode'] = $sid;
+
+        $sales = Sales::where('sessionId',$sid)->first();
+
+        if($sales){
+            $fullname = $sales->buyer_name;
+        }else{
+            $fullname = 'Toimoi Customer';
+        }
+
         //$ed['transaction_code'] = $in['order_number'];
         //$ed['transferamount'] = $in['purchase_amt'];
         $ed['transaction_code'] = '';
@@ -205,8 +218,13 @@ class DokuController extends BaseController {
         $ed['createdDate'] = date('d-m-Y H:i:s', time() );
         $ed['status'] = $status;
         $ed['paymethod'] = 'Doku';
+        $ed['name'] = $fullname;
 
-        Emailer::sendnotification($ed, 'emails.paymentconfirmation');
+        if($status == 'success'){
+            Emailer::sendnotification($ed, 'emails.dokusuccess');
+        }else{
+            Emailer::sendnotification($ed, 'emails.dokucancel');
+        }
 
         //print_r(Input::get());
         return View::make('doku.result')
@@ -221,7 +239,18 @@ class DokuController extends BaseController {
 
         $doku = Doku::where('transidmerchant',$in['order_number'])->first();
 
-        $ed['toimoicode'] = $doku->cartId;
+        $sid = $doku->cartId;
+
+        $ed['toimoicode'] = $sid;
+
+        $sales = Sales::where('sessionId',$sid)->first();
+
+        if($sales){
+            $fullname = $sales->buyer_name;
+        }else{
+            $fullname = 'Toimoi Customer';
+        }
+
         //$ed['transaction_code'] = $in['order_number'];
         //$ed['transferamount'] = $in['purchase_amt'];
         $ed['transaction_code'] = '';
@@ -237,8 +266,14 @@ class DokuController extends BaseController {
         $ed['createdDate'] = date('d-m-Y H:i:s', time() );
         $ed['status'] = $status;
         $ed['paymethod'] = 'Doku';
+        $ed['name'] = $fullname;
 
-        Emailer::sendnotification($ed, 'emails.paymentconfirmation');
+        if($status == 'success'){
+            Emailer::sendnotification($ed, 'emails.dokusuccess');
+        }else{
+            Emailer::sendnotification($ed, 'emails.dokucancel');
+        }
+
 
         return View::make('doku.result')
             ->with('in',Input::get());
