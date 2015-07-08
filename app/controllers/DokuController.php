@@ -227,6 +227,8 @@ class DokuController extends BaseController {
             Emailer::sendnotification($ed, 'emails.dokusuccess');
         }else{
             print 'send failure';
+
+            print_r($ed);
             Emailer::sendnotification($ed, 'emails.dokucancel');
         }
 
