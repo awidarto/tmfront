@@ -192,8 +192,6 @@ class DokuController extends BaseController {
 
         $doku = Doku::where('transidmerchant',$in['order_number'])->first();
 
-        print_r($doku);
-        die();
 
 
         $sid = $doku->cartId;
@@ -225,10 +223,14 @@ class DokuController extends BaseController {
         $ed['name'] = $fullname;
 
         if($status == 'success'){
+            print 'send success';
             Emailer::sendnotification($ed, 'emails.dokusuccess');
         }else{
+            print 'send failure';
             Emailer::sendnotification($ed, 'emails.dokucancel');
         }
+
+        die();
 
         //print_r(Input::get());
         return View::make('doku.result')
