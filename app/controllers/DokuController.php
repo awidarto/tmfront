@@ -180,7 +180,6 @@ class DokuController extends BaseController {
 
         print 'result post';
         print_r($in);
-        die();
         /*
         [order_number] => ZgcptW3fWNrw3nPvUF37
         [purchase_amt] => 316000.00
@@ -193,6 +192,8 @@ class DokuController extends BaseController {
 
         $doku = Doku::where('transidmerchant',$in['order_number'])->first();
 
+        print_r($doku);
+        die();
 
 
         $sid = $doku->cartId;
@@ -237,11 +238,8 @@ class DokuController extends BaseController {
 
     public function getResult()
     {
-        print_r(Input::get());
+        //print_r(Input::get());
 
-        print 'result get';
-
-        die();
 
         $in = Input::get();
 
