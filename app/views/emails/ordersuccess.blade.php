@@ -39,7 +39,7 @@ Berikut adalah detail pemesanan kamu.
 </p>
 <p>
     <b>Konfirmasi Pembayaran</b><br />
-    Setelah melakukan pembayaran, silakan konfirmasi melalui email ke ask@toimoi.co.id<br />
+    Setelah melakukan pembayaran, silakan konfirmasi melalui email ke {{ Config::get('shop.admin_email') }}<br />
     Format Email : KONFIRMASI Nomor Pesanan Nama Tanggal Transfer Nama Pembayar (pemilik rekening)<br />
     Terima kasih atas perhatian dan kepercayaan kamu.
 </p>
