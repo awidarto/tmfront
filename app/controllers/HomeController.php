@@ -56,8 +56,9 @@ class HomeController extends BaseController {
                             ->orderBy('createdAt','desc')
                             ->get()->toArray();
 
-        $products = Product::orderBy('createdAt','desc')
+        $products = Product::where('tags','like','%home%')
                             ->where('status','active')
+                            ->orderBy('createdAt','desc')
                             ->take(8)
                             ->get()->toArray();
 
