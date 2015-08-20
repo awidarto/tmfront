@@ -58,8 +58,8 @@ class HomeController extends BaseController {
 
         $products = Product::where('tags','like','%home%')
                             ->where('status','active')
-                            ->orderBy('category','desc')
-                            ->orderBy('createdAt','asc')
+                            ->orderBy('category','asc')
+                            ->orderBy('createdAt','desc')
                             //->take(8)
                             ->get()->toArray();
 
