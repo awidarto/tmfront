@@ -178,8 +178,8 @@ class DokuController extends BaseController {
 
         $in = Input::get();
 
-        print 'result post';
-        print_r($in);
+        //print 'result post';
+        //print_r($in);
         /*
         [order_number] => ZgcptW3fWNrw3nPvUF37
         [purchase_amt] => 316000.00
@@ -208,10 +208,10 @@ class DokuController extends BaseController {
             $email = Config::get('shop.admin_email');
         }
 
-        //$ed['transaction_code'] = $in['order_number'];
-        //$ed['transferamount'] = $in['purchase_amt'];
-        $ed['transaction_code'] = '';
-        $ed['transferamount'] = '';
+        $ed['transaction_code'] = $in['order_number'];
+        $ed['transferamount'] = $in['purchase_amt'];
+        //$ed['transaction_code'] = '';
+        //$ed['transferamount'] = '';
 
         $status = 'failed';
 
@@ -266,10 +266,10 @@ class DokuController extends BaseController {
             $fullname = 'Toimoi Customer';
         }
 
-        //$ed['transaction_code'] = $in['order_number'];
-        //$ed['transferamount'] = $in['purchase_amt'];
-        $ed['transaction_code'] = '';
-        $ed['transferamount'] = '';
+        $ed['transaction_code'] = $in['order_number'];
+        $ed['transferamount'] = $in['purchase_amt'];
+        //$ed['transaction_code'] = '';
+        //$ed['transferamount'] = '';
 
 
         $status = 'failed';
