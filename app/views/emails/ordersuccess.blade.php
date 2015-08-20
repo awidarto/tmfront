@@ -5,7 +5,7 @@ Terima kasih telah berbelanja di toimoi.co.id.<br />
 Berikut adalah detail pemesanan kamu.
 <ul>
     <li>Nomor Pesanan : {{ $data['session_id'] }}</li>
-    <li>Tanggal/Waktu Pemesanan : </li>
+    <li>Tanggal/Waktu Pemesanan : {{ $data['ordertime'] }}</li>
     <li>Nama Lengkap : {{ $data['by_name'] }}</li>
     <li>Email : {{ $data['email'] }}</li>
     <li>Alamat Pengiriman : {{ $data['by_address'] }}</li>

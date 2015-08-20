@@ -620,6 +620,7 @@ class ShopController extends BaseController {
             $ed['by_address'] = $sales->buyer_address.' '.$sales->buyer_city;
             $ed['by_name'] = $sales->buyer_name;
             $ed['itemtable'] = $itemtable;
+            $ed['ordertime'] = $sales->lastUpdate;
 
             Emailer::sendnotification($ed, 'emails.ordersuccess');
 
@@ -847,6 +848,7 @@ class ShopController extends BaseController {
             $ed['by_address'] = $sales->buyer_address.' '.$sales->buyer_city;
             $ed['by_name'] = $sales->buyer_name;
             $ed['itemtable'] = $itemtable;
+            $ed['ordertime'] = $sales->lastUpdate;
 
             Emailer::sendnotification($ed, 'emails.ordersuccess');
 
