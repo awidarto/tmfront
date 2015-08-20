@@ -6,7 +6,7 @@
     .slide-box-container{
         width: 100%;
         /*max-width: 230px;*/
-        height: 200px;
+        height: 215px;
         max-height: 230px;
         overflow: hidden;
         border: solid thin #eee;
@@ -21,18 +21,6 @@
     }
 
     .slide-box-container a.title h2{
-        padding: 5px;
-        margin: 0px;
-        background-color: #000;
-        color: #FFF;
-    }
-
-    .slide-box-container h2{
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        z-index: 100;
-
         padding: 5px;
         margin: 0px;
         background-color: #000;
@@ -109,18 +97,6 @@
         </div>
         <div class="col-md-3 visible-lg">
             <div class="slide-box-container">
-                @include('partials.location')
-            </div>
-            <br />
-            <div class="slide-box-container">
-                @include('partials.instagram')
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4 col-lg-4">
-            <div class="three-box-slide">
                 <a href="#" class="title" data-toggle="tooltip" title="New Stuff" ><h2>HELLO</h2></a>
                 <ul class="slider">
                     @foreach($hello as $hs)
@@ -140,25 +116,9 @@
                     @endforeach
 
                 </ul>
-
-                {{--
-                <h2>WE LOVE</h2>
-                <ul id="slider1" class="slider">
-                    @foreach($welove as $hs)
-                        @if(isset($hs['defaultpictures']['medium_portrait_url']))
-                        <li>
-                            <a href="{{ URL::to('/post/view/'.$hs['slug'])}}" >
-                                <img src="{{ $hs['defaultpictures']['medium_portrait_url'] }}" />
-                            </a>
-                        </li>
-                        @endif
-                    @endforeach
-                </ul>
-                --}}
             </div>
-        </div>
-        <div class="col-md-4 col-lg-4">
-            <div class="three-box-slide">
+            <br />
+            <div class="slide-box-container">
                 <a href="#"  class="title"  data-toggle="tooltip" title="Best Seller" ><h2>GOOD BUY</h2></a>
                 <ul class="slider">
                     @foreach($goodbuy as $hs)
@@ -177,8 +137,25 @@
                         </li>
                     @endforeach
                 </ul>
+            </div>
+        </div>
+    </div>
 
-
+    <div class="row">
+        <div class="col-md-4 col-lg-4">
+            <div class="three-box-slide">
+                <h2>WE LOVE</h2>
+                <ul id="slider1" class="slider">
+                    @foreach($welove as $hs)
+                        @if(isset($hs['defaultpictures']['medium_portrait_url']))
+                        <li>
+                            <a href="{{ URL::to('/post/view/'.$hs['slug'])}}" >
+                                <img src="{{ $hs['defaultpictures']['medium_portrait_url'] }}" />
+                            </a>
+                        </li>
+                        @endif
+                    @endforeach
+                </ul>
             </div>
         </div>
         <div class="col-md-4 col-lg-4">
@@ -195,7 +172,10 @@
                         @endif
                     @endforeach
                 </ul>
-                {{--
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4">
+            <div class="three-box-slide">
                 <h2>QUOTE</h2>
                 <ul id="slider1" class="slider">
                     @foreach($quotes as $hs)
@@ -208,7 +188,6 @@
                         @endif
                     @endforeach
                 </ul>
-                --}}
             </div>
         </div>
     </div>
@@ -249,24 +228,21 @@
         </div>
     </div>
 
-    {{--
 
     <div class="row home-foot" >
         <div class="col-md-3 col-sm-12 col-xs-12">
-
+            @include('partials.location')
         </div>
         <div class="col-md-3 col-sm-12 col-xs-12">
             @include('partials.twitter')
         </div>
         <div class="col-md-3 col-sm-12 col-xs-12">
-
+            @include('partials.instagram')
         </div>
         <div class="col-md-3 col-sm-12 col-xs-12">
             @include('partials.news')
         </div>
     </div>
-
-    --}}
             <script type="text/javascript">
                 $(document).ready(function(){
                     $('.slider').bxSlider({
