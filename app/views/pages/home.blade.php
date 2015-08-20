@@ -81,10 +81,19 @@
         font-weight: bold;
         display: block;
     }
+
+    h1.separator{
+        width: 100%;
+        font-size: 20px;
+        text-align: center;
+        background-color: #cccc;
+        margin:0px;
+        padding: 15px;
+    }
 </style>
 
 <div id="home">
-    <div class="row">
+    <div class="row" style="border:none;">
         <div class="col-md-9">
             <div class="col-md-4 visible-xs">
                 @include('partials.identity')
@@ -118,7 +127,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="border:none;">
         <div class="col-md-4 col-lg-4">
             <div class="three-box-slide">
                 <a href="#" class="title" data-toggle="tooltip" title="New Stuff" ><h2>HELLO</h2></a>
@@ -210,6 +219,12 @@
                 </ul>
                 --}}
             </div>
+        </div>
+    </div>
+
+    <div class="row" style="border:none;">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background-color: #ccc;border:none;">
+            <h1 class="separator" >PRODUCT</h1>
         </div>
     </div>
 
