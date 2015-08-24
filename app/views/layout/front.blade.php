@@ -91,7 +91,7 @@
     <!-- Wrap all page content here -->
     <div id="wrap">
         <!-- topmost header -->
-        <div id="tm-head" class="visible-md visible-lg visible-sm">
+        <div id="tm-head" class="visible-md visible-lg visible-sm visible-xs">
             {{--
             @if($head = Prefs::getHeader())
                 {{ $head }}

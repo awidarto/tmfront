@@ -94,10 +94,12 @@
 
 <div id="home">
     <div class="row" style="border:none;">
-        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+            {{--
             <div class="col-md-4 visible-xs">
                 @include('partials.identity')
             </div>
+            --}}
             <div class="slide-box" style="width:100%;">
                 <ul id="slider1" class="slider">
                     @foreach($headslider as $hs)
@@ -117,7 +119,7 @@
             </div>
         </div>
 
-        <div class="col-sm-3 col-md-3 col-lg-3 visible-lg visible-md visible-sm">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 visible-lg visible-md visible-sm visible-xs">
             <div class="slide-box-container">
                 @include('partials.location')
             </div>
@@ -129,7 +131,7 @@
     </div>
 
     <div class="row" style="border:none;">
-        <div class="col-md-4 col-lg-4">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
             <div class="three-box-slide">
                 <a href="#" class="title" data-toggle="tooltip" title="New Stuff" ><h2>HELLO</h2></a>
                 <ul class="slider">
@@ -167,7 +169,7 @@
                 --}}
             </div>
         </div>
-        <div class="col-md-4 col-lg-4">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
             <div class="three-box-slide">
                 <a href="#"  class="title"  data-toggle="tooltip" title="Best Seller" ><h2>GOOD BUY</h2></a>
                 <ul class="slider">
@@ -191,7 +193,7 @@
 
             </div>
         </div>
-        <div class="col-md-4 col-lg-4">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
             <div class="three-box-slide">
                 <h2>IDEAS</h2>
                 <ul id="slider1" class="slider">
@@ -236,7 +238,7 @@
             @if(count($products) > 0 )
                 <div id="col-list" class="item-col">
                     @for($i = 0; $i < count($products);$i++)
-                            <div class="item col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="item col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 <a href="{{ URL::to('shop/detail/'.$products[$i]['_id'])}}">
                                     <div class="photo">
                                         @if(isset($products[$i]['defaultpictures']['thumbnail_url'])
