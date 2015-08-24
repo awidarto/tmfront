@@ -50,6 +50,29 @@ class PageController extends BaseController {
 
         $perpage = Config::get('shop.pagination_itemperpage');
 
+
+        $datemax = Page::where('section','=',$section)
+                    ->where('category','=',$category)
+                    ->where('status','active')
+                    ->max('createdDate');
+
+        $datemin = Page::where('section','=',$section)
+                    ->where('category','=',$category)
+                    ->where('status','active')
+                    ->min('createdDate');
+
+        $start    = (new DateTime( date('Y-m-d H:i:s',$datemin->sec ) ))->modify('first day of this month');
+        $end      = (new DateTime( date('Y-m-d H:i:s',$datemax->sec ) ))->modify('first day of this month');
+        $interval = DateInterval::createFromDateString('1 month');
+        $period   = new DatePeriod($start, $interval, $end);
+
+        $archives = array();
+        foreach ($period as $dt) {
+            $archives[$dt->format("Y-m")] = $dt->format("F Y");
+        }
+
+        krsort($archives);
+
         $pages = Page::where('section','=',$section)
                     ->where('category','=',$category)
                     ->where('status','active')
@@ -77,6 +100,7 @@ class PageController extends BaseController {
                     ->with('current',$page)
                     ->with('perpage',$perpage)
                     ->with('currentcount',$currentcount)
+                    ->with('archives',$archives)
                     ->with('paging',$paging);
     }
 

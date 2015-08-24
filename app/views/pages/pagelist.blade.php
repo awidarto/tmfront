@@ -3,7 +3,7 @@
 @section('content')
 <div id="home">
     <div class="row">
-        <div class="col-md-12" id="newslistbox">
+        <div class="col-md-8" id="newslistbox">
             <div class="col-md-4 visible-xs">
                 @include('partials.identity')
             </div>
@@ -88,6 +88,19 @@
                 </div>
 
         </div>
+        <div class="col-md-4 visible-lg tm-side">
+            <h4>Archive</h4>
+            <ul>
+            @foreach($archives as $k=>$v)
+                <li>
+                    <a href="{{ mg(array('ar'=>$k)) }}">
+                        <h6>{{ $v }}</h6>
+                    </a>
+                </li>
+            @endforeach
+            </ul>
+        </div>
+
     </div>
 </div>
 @stop
