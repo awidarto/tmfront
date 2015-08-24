@@ -94,7 +94,7 @@
 
 <div id="home">
     <div class="row" style="border:none;">
-        <div class="col-md-9">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
             <div class="col-md-4 visible-xs">
                 @include('partials.identity')
             </div>
@@ -116,7 +116,8 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-3 visible-lg">
+
+        <div class="col-sm-3 col-md-3 col-lg-3 visible-lg visible-md visible-sm">
             <div class="slide-box-container">
                 @include('partials.location')
             </div>
