@@ -17,7 +17,10 @@
                                 <p>
                                     {{ str_limit(strip_tags($pages[$i]['body']), 350, '...')  }}
                                 </p>
+                                <p>
+                                <span>{{ date('d/m/Y', $pages[$i]['createdDate']->sec )  }}</span>
                                 <span class="pull-right">more &raquo;</span>
+                                </p>
                             </a>
                         </div>
                     </li>

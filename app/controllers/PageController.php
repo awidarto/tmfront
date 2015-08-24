@@ -50,6 +50,9 @@ class PageController extends BaseController {
 
         $perpage = Config::get('shop.pagination_itemperpage');
 
+        $armonth = Input::get('ar');
+        $armonth = (is_null($page))?0:$armonth;
+
 
         $datemax = Page::where('section','=',$section)
                     ->where('category','=',$category)
@@ -73,12 +76,35 @@ class PageController extends BaseController {
 
         krsort($archives);
 
-        $pages = Page::where('section','=',$section)
-                    ->where('category','=',$category)
-                    ->where('status','active')
-                    ->skip($page * $perpage)
-                    ->take($perpage)
-                    ->get()->toArray();
+
+        if($armonth == 0){
+            $pages = Page::where('section','=',$section)
+                        ->where('category','=',$category)
+                        ->where('status','active')
+                        ->orderBy('createdDate','desc')
+                        ->skip($page * $perpage)
+                        ->take($perpage)
+                        ->get()->toArray();
+
+        }else{
+
+            $ars = explode('-', $armonth);
+
+            $days = cal_days_in_month(CAL_GREGORIAN, $ars['1'], $ars[0]);
+
+            //print $armonth.'-01 00:00:00 to '.$armonth.'-31 23:59:59';
+            $pages = Page::where('section','=',$section)
+                        ->where('category','=',$category)
+                        ->where('createdDate','>=', new DateTime( $armonth.'-01 00:00:00' ) )
+                        ->where('createdDate','<=', new DateTime( $armonth.'-'.$days.' 23:59:59' ) )
+                        ->where('status','active')
+                        ->orderBy('createdDate','desc')
+                        ->skip($page * $perpage)
+                        ->take($perpage)
+                        ->get()->toArray();
+
+        }
+
 
         $currentcount = count($pages);
 
