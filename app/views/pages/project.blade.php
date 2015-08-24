@@ -22,11 +22,16 @@
     .gridcontainer{
         display: block;
         clear: both;
+        margin-left: 15px;
     }
 
     ul.thumbgrid img{
         width: 255px;
         height: auto;
+    }
+
+    h2{
+        margin-left: 15px;
     }
 </style>
 <div id="home">
