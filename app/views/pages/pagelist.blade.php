@@ -1,6 +1,13 @@
 @extends('layout.front')
 
 @section('content')
+<style type="text/css">
+    #newslistbox ul.breadcrumb{
+        margin-left: 0px;
+    }
+
+</style>
+
 <div id="home">
     <div class="row">
         <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" id="newslistbox">
@@ -34,7 +41,7 @@
                     </div>
                     --}}
 
-                    <div class="pagination">
+                    <div class="pagination" style="margin-left:25px;">
                         <ul>
                             <?php
                                 $prev = ($current - 1 < 0 )?0:($current - 1);
