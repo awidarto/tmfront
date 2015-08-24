@@ -3,7 +3,7 @@
 @section('content')
 <div id="home">
     <div class="row">
-        <div class="col-md-8" id="newslistbox">
+        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" id="newslistbox">
             <div class="col-md-4 visible-xs">
                 @include('partials.identity')
             </div>
@@ -88,7 +88,7 @@
                 </div>
 
         </div>
-        <div class="col-md-4 visible-lg tm-side">
+        <div class="col-sm-4 col-md-4 col-lg-4 visible-lg visible-md visible-sm  tm-side">
             <h4>Archive</h4>
             <ul>
             @foreach($archives as $k=>$v)
