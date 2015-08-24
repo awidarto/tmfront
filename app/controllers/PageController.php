@@ -122,8 +122,8 @@ class PageController extends BaseController {
 
         $paging = floor($total_found / $perpage);
 
-        Breadcrumbs::addCrumb($section,URL::to('shop/projects').'/'.$section);
-        Breadcrumbs::addCrumb($category,URL::to('shop/projectds').'/'.$category);
+        Breadcrumbs::addCrumb(ucwords($section),URL::to('page/list/').'/'.$section.'/'.$category );
+        Breadcrumbs::addCrumb(ucwords($category),URL::to('page/list/').'/'.$section.'/'.$category );
 
         return View::make('pages.pagelist')
                     ->with('pages',$pages)
@@ -142,9 +142,19 @@ class PageController extends BaseController {
         if(!is_null($slug)){
             $page = Page::where('slug','=',$slug)
                 ->first()->toArray();
+
+            $section = $page['section'];
+            $category = $page['category'];
+            $slug = $page['slug'];
+
+            Breadcrumbs::addCrumb(ucwords($section),URL::to('page/list/').'/'.$section.'/'.$category );
+            Breadcrumbs::addCrumb(ucwords( str_replace('-', ' ', $page['category']) ),URL::to('page/list/').'/'.$section.'/'.$category );
+            Breadcrumbs::addCrumb(ucwords($page['title']),URL::to('page/list/').'/'.$section.'/'.$category.'/'.$slug );
+
         }else{
             $page = null;
         }
+
         return View::make('pages.pagereader')->with('content',$page);
     }
 

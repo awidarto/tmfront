@@ -77,6 +77,11 @@
             width: 25px;
         }
 
+        .breadcrumb a{
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
     </style>
 
 </head>

@@ -54,7 +54,7 @@ class ProjectsController extends BaseController {
 
         $paging = floor($total_found / $perpage);
 
-        Breadcrumbs::addCrumb('project',URL::to('shop/projects').'/'.$tag);
+        Breadcrumbs::addCrumb('Project',URL::to('shop/projects').'/'.$tag);
         Breadcrumbs::addCrumb($tag,URL::to('shop/projectds').'/'.$tag);
 
         return View::make('pages.project')
