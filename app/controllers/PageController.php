@@ -123,7 +123,7 @@ class PageController extends BaseController {
         $paging = floor($total_found / $perpage);
 
         Breadcrumbs::addCrumb(ucwords($section),URL::to('page/list/').'/'.$section.'/'.$category );
-        Breadcrumbs::addCrumb(ucwords(str_replace('-', ' ', $page['category']),URL::to('page/list/').'/'.$section.'/'.$category );
+        Breadcrumbs::addCrumb(ucwords( str_replace('-', ' ', $category)),URL::to('page/list/').'/'.$section.'/'.$category );
 
         return View::make('pages.pagelist')
                     ->with('pages',$pages)
