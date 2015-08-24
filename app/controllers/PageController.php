@@ -69,9 +69,15 @@ class PageController extends BaseController {
         $interval = DateInterval::createFromDateString('1 month');
         $period   = new DatePeriod($start, $interval, $end);
 
+        $dates = Page::distinct('createdDate')->get()->toArray();
+
         $archives = array();
-        foreach ($period as $dt) {
-            $archives[$dt->format("Y-m")] = $dt->format("F Y");
+        //foreach ($period as $dt) {
+        //    $archives[$dt->format("Y-m")] = $dt->format("F Y");
+        //}
+
+        foreach ($dates as $dt) {
+            $archives[ date('Y-m', $dt['sec']) ] = date('F Y', $dt['sec']);
         }
 
         krsort($archives);
