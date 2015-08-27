@@ -82,6 +82,10 @@
             font-size: 12px;
         }
 
+        .navbar-toggle{
+            background-color: #CCC;
+        }
+
     </style>
 
 </head>
@@ -91,7 +95,59 @@
     <!-- Wrap all page content here -->
     <div id="wrap">
         <!-- topmost header -->
-        <div id="tm-head" class="visible-md visible-lg visible-sm visible-xs">
+        <div id="tm-head" class="visible-xs">
+            {{--
+            @if($head = Prefs::getHeader())
+                {{ $head }}
+            @else
+
+            --}}
+                <div class="container" style="display:block;">
+                    <div class="row">
+                        <div class="col-xs-12" id="tm-logo-container">
+                            <a href="{{ URL::to('/') }}"><img style="height:45px;" class="" src="{{ URL::to('images/').'/logo_toimoi_color.png' }}"></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                            {{ Form::open(array('url' => 'search/collection','class'=>'form-inline ', 'method'=>'get' ,'role'=>'form', 'style'=>'margin-top:10px;')) }}
+                        <div class="col-xs-8" >
+                                <div class="form-group">
+                                    {{ Former::text('search','')->placeholder('Search')->style('width:none;')->id('search')->class('search form-control col-xs-6') }}
+                                </div>
+                        </div>
+                        <div class="col-xs-4">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Search</button>
+                        </div>
+                            {{ Form::close() }}
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8" style="display:block;">
+                            @if(Auth::check())
+                                <p>Welcome {{ Auth::user()->firstname.' '.Auth::user()->lastname }}</p>
+                                <p>
+                            @else
+                                <a href="{{URL::to('signup') }}">No account ? Sign Up !</a>
+
+                            @endif
+                        </div>
+
+                        <div class="col-xs-4" style="display:block;">
+                            @if(Auth::check())
+                                <a style="padding-top:6px;display:form-inline"  href="{{ URL::to('logout') }}"  class="btn btn-primary" ><i class="fa fa-sign-out"></i> Logout</a></p>
+                            @else
+                                <a style="padding-top:6px;margin-bottom:6px;" href="{{ URL::to('login')}}" class="btn btn-primary" ><i class="fa fa-sign-in"></i> Login</a>
+                            @endif
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+        </div>
+
+
+        <div id="tm-head" class="visible-md visible-lg visible-sm">
             {{--
             @if($head = Prefs::getHeader())
                 {{ $head }}
