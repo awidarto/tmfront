@@ -43,7 +43,13 @@
         <div class="col-sm-4 col-md-4 col-lg-4 visible-lg visible-md visible-sm  tm-side item-detail">
 
                 <h2 style="display:block;padding-left:0px;font-size:24px;font-weight:bold;margin-top:24px;">{{ $product['itemDescription']}}</h2>
-                buy now for IDR {{ Ks::idr($product['priceRegular']) }}
+                buy now for
+                @if(Config::get('shop.display_with_ppn'))
+                    <b>IDR {{ Ks::idr($product['priceRegular'] + ($product['priceRegular'] * Config::get('shop.ppn') )  ) }}</b> <br />( incl. {{ Config::get('shop.ppn') * 100 }}% PPn )
+                @else
+                    <b>IDR {{ Ks::idr($product['priceRegular']) }}</b>
+                @endif
+
                 <div id="item-description">
                     <p>
                         {{ $product['itemDescription'] }}
