@@ -35,7 +35,11 @@
                                     <div class="description text-center">
                                         <h1>{{ $products[$i]['itemDescription']}}</h1>
                                         <p>
-                                            IDR {{ Ks::idr($products[$i]['priceRegular']) }}
+                                            @if(Config::get('shop.display_with_ppn'))
+                                                IDR {{ Ks::idr($products[$i]['priceRegular'] + ($products[$i]['priceRegular'] * Config::get('shop.ppn') )  ) }}
+                                            @else
+                                                IDR {{ Ks::idr($products[$i]['priceRegular']) }}
+                                            @endif
                                         </p>
                                     </div>
                                 </a>
@@ -45,6 +49,19 @@
             @else
                 <p>No Product found in this category</p>
             @endif
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p style="text-align:right;">All prices displayed
+                        @if(Config::get('shop.display_with_ppn'))
+                            includes
+                        @else
+                            exclusive
+                        @endif
+
+                        {{ 100 * Config::get('shop.ppn') }}% PPn.
+                    </p>
+                </div>
+            </div>
 
                 <div class="row" style="border:none;text-align:center;">
                     {{--

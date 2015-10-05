@@ -10,5 +10,6 @@ return array(
         ),
     'none_available'=>'Sold Out',
     'ppn'=>0.1,
-    'admin_email'=>'toimoiindonesia@gmail.com'
+    'admin_email'=>'toimoiindonesia@gmail.com',
+    'display_with_ppn'=>true
 );
