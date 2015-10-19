@@ -36,9 +36,9 @@
                                         <h1>{{ $products[$i]['itemDescription']}}</h1>
                                         <p>
                                             @if(Config::get('shop.display_with_ppn'))
-                                                IDR {{ Ks::idr($products[$i]['priceRegular'] + ($products[$i]['priceRegular'] * Config::get('shop.ppn') )  ) }}
+                                                IDR {{ Ks::idr($products[$i]['priceRegular'] + ($products[$i]['priceRegular'] * Config::get('shop.ppn') ) , 0  ) }}
                                             @else
-                                                IDR {{ Ks::idr($products[$i]['priceRegular']) }}
+                                                IDR {{ Ks::idr($products[$i]['priceRegular'], 0 ) }}
                                             @endif
                                         </p>
                                     </div>

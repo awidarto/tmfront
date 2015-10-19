@@ -45,8 +45,9 @@ class Ks {
         return $number;
     }
 
-    public static function idr($in){
-        return number_format((double) $in,2,',','.');
+    public static function idr($in, $decimal = 2){
+
+        return number_format((double) $in,$decimal,',','.');
     }
 
     public static function usd($in){
