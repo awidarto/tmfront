@@ -252,7 +252,12 @@
                                     <div class="description text-center">
                                         <h1>{{ $products[$i]['itemDescription']}}</h1>
                                         <p>
-                                            IDR {{ Ks::idr($products[$i]['priceRegular']) }}
+                                            @if(Config::get('shop.display_with_ppn'))
+                                                <b>IDR {{ Ks::idr($products[$i]['priceRegular'] + ($products[$i]['priceRegular'] * Config::get('shop.ppn') ) , 0  ) }}</b>
+                                            @else
+                                                <b>IDR {{ Ks::idr($products[$i]['priceRegular'], 0) }}</b>
+                                            @endif
+
                                         </p>
                                     </div>
                                 </a>
