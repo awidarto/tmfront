@@ -220,8 +220,13 @@ class ShopController extends BaseController {
 
             $tab[ $t['SKU'] ]['description'] = $t['productDetail']['itemDescription'];
             $tab[ $t['SKU'] ]['qty'] = ( isset($tab[ $t['SKU'] ]['qty']) )? $tab[ $t['SKU'] ]['qty'] + 1:1;
-            $tab[ $t['SKU'] ]['tagprice'] = $t['productDetail']['priceRegular'];
-            $tab[ $t['SKU'] ]['total'] = ( isset($tab[ $t['SKU'] ]['total']) )? $tab[ $t['SKU'] ]['total'] + $t['productDetail']['priceRegular']:$t['productDetail']['priceRegular'];
+            if(Config::get('shop.cart_price') == 'catalog'){
+                $tab[ $t['SKU'] ]['tagprice'] = $t['unitPrice'];
+                $tab[ $t['SKU'] ]['total'] = ( isset($tab[ $t['SKU'] ]['total']) )? $tab[ $t['SKU'] ]['total'] + $t['unitPrice']:$t['unitPrice'];
+            }else{
+                $tab[ $t['SKU'] ]['tagprice'] = $t['productDetail']['priceRegular'];
+                $tab[ $t['SKU'] ]['total'] = ( isset($tab[ $t['SKU'] ]['total']) )? $tab[ $t['SKU'] ]['total'] + $t['productDetail']['priceRegular']:$t['productDetail']['priceRegular'];
+            }
 
         }
 
@@ -276,8 +281,15 @@ class ShopController extends BaseController {
 
             $tab[ $t['SKU'] ]['description'] = $t['productDetail']['itemDescription'];
             $tab[ $t['SKU'] ]['qty'] = ( isset($tab[ $t['SKU'] ]['qty']) )? $tab[ $t['SKU'] ]['qty'] + 1:1;
-            $tab[ $t['SKU'] ]['tagprice'] = $t['productDetail']['priceRegular'];
-            $tab[ $t['SKU'] ]['total'] = ( isset($tab[ $t['SKU'] ]['total']) )? $tab[ $t['SKU'] ]['total'] + $t['productDetail']['priceRegular']:$t['productDetail']['priceRegular'];
+
+            if(Config::get('shop.cart_price') == 'catalog'){
+                $tab[ $t['SKU'] ]['tagprice'] = $t['unitPrice'];
+                $tab[ $t['SKU'] ]['total'] = ( isset($tab[ $t['SKU'] ]['total']) )? $tab[ $t['SKU'] ]['total'] + $t['unitPrice']:$t['unitPrice'];
+            }else{
+                $tab[ $t['SKU'] ]['tagprice'] = $t['productDetail']['priceRegular'];
+                $tab[ $t['SKU'] ]['total'] = ( isset($tab[ $t['SKU'] ]['total']) )? $tab[ $t['SKU'] ]['total'] + $t['productDetail']['priceRegular']:$t['productDetail']['priceRegular'];
+            }
+
             $tab[ $t['SKU'] ]['weight'] = ( isset($tab[ $t['SKU'] ]['weight']) )? $tab[ $t['SKU'] ]['weight']:1;
 
         }
@@ -420,8 +432,14 @@ class ShopController extends BaseController {
 
             $tab[ $t['SKU'] ]['description'] = $t['productDetail']['itemDescription'];
             $tab[ $t['SKU'] ]['qty'] = ( isset($tab[ $t['SKU'] ]['qty']) )? $tab[ $t['SKU'] ]['qty'] + 1:1;
-            $tab[ $t['SKU'] ]['tagprice'] = $t['productDetail']['priceRegular'];
-            $tab[ $t['SKU'] ]['total'] = ( isset($tab[ $t['SKU'] ]['total']) )? $tab[ $t['SKU'] ]['total'] + $t['productDetail']['priceRegular']:$t['productDetail']['priceRegular'];
+            if(Config::get('shop.cart_price') == 'catalog'){
+                $tab[ $t['SKU'] ]['tagprice'] = $t['unitPrice'];
+                $tab[ $t['SKU'] ]['total'] = ( isset($tab[ $t['SKU'] ]['total']) )? $tab[ $t['SKU'] ]['total'] + $t['unitPrice']:$t['unitPrice'];
+            }else{
+                $tab[ $t['SKU'] ]['tagprice'] = $t['productDetail']['priceRegular'];
+                $tab[ $t['SKU'] ]['total'] = ( isset($tab[ $t['SKU'] ]['total']) )? $tab[ $t['SKU'] ]['total'] + $t['productDetail']['priceRegular']:$t['productDetail']['priceRegular'];
+            }
+
             $tab[ $t['SKU'] ]['weight'] = ( isset($tab[ $t['SKU'] ]['weight']) )? $tab[ $t['SKU'] ]['weight']:1;
 
         }
@@ -478,6 +496,8 @@ class ShopController extends BaseController {
         $in = Input::get();
         //var_dump($in);
 
+        //die();
+
             $trx = Transaction::where('sessionId',$session_id)->get();
 
             $pay = Payment::where('sessionId',$session_id)->first();
@@ -502,8 +522,14 @@ class ShopController extends BaseController {
 
                 $tab[ $t['SKU'] ]['description'] = $t['productDetail']['itemDescription'];
                 $tab[ $t['SKU'] ]['qty'] = ( isset($tab[ $t['SKU'] ]['qty']) )? $tab[ $t['SKU'] ]['qty'] + 1:1;
-                $tab[ $t['SKU'] ]['tagprice'] = $t['productDetail']['priceRegular'];
-                $tab[ $t['SKU'] ]['total'] = ( isset($tab[ $t['SKU'] ]['total']) )? $tab[ $t['SKU'] ]['total'] + $t['productDetail']['priceRegular']:$t['productDetail']['priceRegular'];
+                if(Config::get('shop.cart_price') == 'catalog'){
+                    $tab[ $t['SKU'] ]['tagprice'] = $t['unitPrice'];
+                    $tab[ $t['SKU'] ]['total'] = ( isset($tab[ $t['SKU'] ]['total']) )? $tab[ $t['SKU'] ]['total'] + $t['unitPrice']:$t['unitPrice'];
+                }else{
+                    $tab[ $t['SKU'] ]['tagprice'] = $t['productDetail']['priceRegular'];
+                    $tab[ $t['SKU'] ]['total'] = ( isset($tab[ $t['SKU'] ]['total']) )? $tab[ $t['SKU'] ]['total'] + $t['productDetail']['priceRegular']:$t['productDetail']['priceRegular'];
+                }
+
                 $tab[ $t['SKU'] ]['weight'] = ( isset($tab[ $t['SKU'] ]['weight']) )? $tab[ $t['SKU'] ]['weight']:1;
 
             }

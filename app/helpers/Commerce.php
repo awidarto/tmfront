@@ -143,6 +143,13 @@ class Commerce{
             ->where('status','available')
             ->take($qty)->get();
 
+            $cat_item = Product::where('SKU','=',$sku)->first();
+            if($cat_item){
+                $item_price = $cat_item->priceRegular;
+            }else{
+                $item_price = 0;
+            }
+
         $outlet = Outlet::find($outlet_id);
 
         if(count($entry) > 0){
@@ -157,8 +164,19 @@ class Commerce{
                 $ul['action'] = 'addtocart';
                 $ul['status'] = 'reserved';
                 $ul['quantity'] = 1;
-                $ul['unitPrice'] = $ul['productDetail']['priceRegular'];
-                $ul['unitTotal'] = $ul['productDetail']['priceRegular'];
+
+                if(Config::get('shop.cart_price') == 'catalog'){
+                    if($item_price > 0){
+                        $ul['unitPrice'] = $item_price;
+                        $ul['unitTotal'] = $item_price;
+                    }else{
+                        $ul['unitPrice'] = $ul['productDetail']['priceRegular'];
+                        $ul['unitTotal'] = $ul['productDetail']['priceRegular'];
+                    }
+                }else{
+                    $ul['unitPrice'] = $ul['productDetail']['priceRegular'];
+                    $ul['unitTotal'] = $ul['productDetail']['priceRegular'];
+                }
                 $ul['deliverTo'] = $outlet->name;
                 $ul['deliverToId'] = $outlet_id;
                 $ul['returnTo'] = $outlet->name;
