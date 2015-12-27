@@ -38,7 +38,7 @@ class Options {
         if($opt){
             return $opt->value;
         }else{
-            return (is_null($value))?'':$defvalue;//return specified default value
+            return (is_null($defvalue))?'':$defvalue;//return specified default value
         }
     }
 
