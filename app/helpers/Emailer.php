@@ -31,7 +31,10 @@ class Emailer{
 
                     $message->subject($subject);
 
+
                     $message->to(Config::get('shop.admin_email') );
+
+                    $message->to( Options::get( 'sales_notification_email' ,Config::get('shop.admin_email'))  );
 
                     $headers = $message->getHeaders();
                     $headers->addTextHeader('X-MC-PreserveRecipients', 'false');
@@ -66,6 +69,8 @@ class Emailer{
                     $message->subject('Payment Confirmation');
 
                     $message->cc('toimoiindonesia@gmail.com');
+
+                    $message->cc( Options::get( 'sales_notification_email' ,Config::get('shop.admin_email'))  );
 
                     //$message->attach(public_path().'/storage/pdf/'.$prop['propertyId'].'.pdf');
                 });
