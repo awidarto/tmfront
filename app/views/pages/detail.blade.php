@@ -43,11 +43,21 @@
         <div class="col-sm-4 col-md-4 col-lg-4 visible-lg visible-md visible-sm  tm-side item-detail">
 
                 <h2 style="display:block;padding-left:0px;font-size:24px;font-weight:bold;margin-top:24px;">{{ $product['itemDescription']}}</h2>
-                buy now for
+                <h3 style="display:block;padding-left:0px;font-size:16px;font-weight:bold;margin-top:24px;line-height:1.5em;">
+                    buy now for
+                    <?php
+                        $price = Commerce::getCatalogPrice( $product['_id'], Config::get('site.outlet_id'),0,true );
+                    ?>
+                    IDR {{ Ks::idr( $price['price'] , 0  ) }}
+                    @if($price['has_discount'] == true)
+                        <br />
+                        <span class="before-discount">
+                            IDR {{ Ks::idr( $price['before'] , 0  ) }}
+                        </span>
+                    @endif
+                </h3>
                 @if(Config::get('shop.display_with_ppn'))
-                    <b>IDR {{ Ks::idr($product['priceRegular'] + ($product['priceRegular'] * Config::get('shop.ppn') ) , 0  ) }}</b> <br />( incl. {{ Config::get('shop.ppn') * 100 }}% PPn )
-                @else
-                    <b>IDR {{ Ks::idr($product['priceRegular'], 0) }}</b>
+                    <br />( incl. {{ Config::get('shop.ppn') * 100 }}% PPn )
                 @endif
 
                 <div id="item-description">
@@ -359,7 +369,17 @@
                                             @else
                                                 <img src="{{ URL::to('/') }}/images/th_default.png" class="img-responsive" >
                                             @endif
-                                            buy now for IDR {{ Ks::idr($prod['priceRegular']) }}
+                                            <?php
+                                                $price = Commerce::getCatalogPrice( $prod['_id'], Config::get('site.outlet_id'),0,true );
+                                            ?>
+                                            buy now for
+                                            IDR {{ Ks::idr( $price['price'] , 0  ) }}
+                                            @if($price['has_discount'] == true)
+                                                <br />
+                                                <span class="before-discount">
+                                                    IDR {{ Ks::idr( $price['before'] , 0  ) }}
+                                                </span>
+                                            @endif
                                         </a>
 
                                     </div>
@@ -384,7 +404,17 @@
                                             @else
                                                 <img src="{{ URL::to('/') }}/images/th_default.png" class="img-responsive" >
                                             @endif
-                                            buy now for IDR {{ Ks::idr($prod['priceRegular']) }}
+                                            <?php
+                                                $price = Commerce::getCatalogPrice( $prod['_id'], Config::get('site.outlet_id'),0,true );
+                                            ?>
+                                            buy now for
+                                            IDR {{ Ks::idr( $price['price'] , 0  ) }}
+                                            @if($price['has_discount'] == true)
+                                                <br />
+                                                <span class="before-discount">
+                                                    IDR {{ Ks::idr( $price['before'] , 0  ) }}
+                                                </span>
+                                            @endif
                                         </a>
 
                                     </div>

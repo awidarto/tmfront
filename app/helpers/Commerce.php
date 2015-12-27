@@ -145,10 +145,12 @@ class Commerce{
 
             $cat_item = Product::where('SKU','=',$sku)->first();
             if($cat_item){
-                $item_price = $cat_item->priceRegular;
+                $item_price = Commerce::getCatalogPrice( $cat_item->_id, Config::get('site.outlet_id'),0,false );
             }else{
                 $item_price = 0;
             }
+
+
 
         $outlet = Outlet::find($outlet_id);
 
@@ -337,6 +339,50 @@ class Commerce{
             return Response::json(array( 'result'=>'OK' ));
 
     }
+
+    public static function getCatalogPrice($productId, $outletId, $defaultprice,$fordisplay = false)
+    {
+        $productId = new MongoId($productId);
+        $l = Product::where('_id', $productId)->orderBy('createdDate','desc')->first();
+
+        $has_discount = false;
+        $regular = 0;
+        if($l){
+            if($l->priceRegular != 0 && $l->priceRegular != ''){
+                $price = doubleval($l->priceRegular);
+            }else{
+                $price = $defaultprice;
+            }
+
+            if(strtotime($l->discFromDate) <= time() && strtotime($l->discToDate) >= time() ){
+                if($l->priceRegular != 0 && $l->priceRegular != ''){
+                    $price = $l->priceDiscount;
+                    $has_discount = true;
+                }
+            }
+
+        }else{
+            $price = $defaultprice;
+        }
+
+        if(Config::get('shop.display_with_ppn')){
+            $price = $price + ($price * Config::get('shop.ppn') );
+            $priceBefore = $l->priceRegular + ($l->priceRegular * Config::get('shop.ppn') );
+        }else{
+            $priceBefore = $l->priceRegular;
+        }
+
+        if($fordisplay){
+            if(Config::get('shop.display_with_ppn')){
+                $price = $price + ($price * Config::get('shop.ppn') );
+                $priceBefore = $l->priceRegular + ($l->priceRegular * Config::get('shop.ppn') );
+            }
+            return array('price'=>$price, 'before'=>$priceBefore, 'has_discount'=>$has_discount );
+        }else{
+            return $price;
+        }
+    }
+
 
     public static function getPrice($productId, $outletId, $defaultprice)
     {

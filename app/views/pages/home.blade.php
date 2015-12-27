@@ -252,10 +252,15 @@
                                     <div class="description text-center">
                                         <h1>{{ $products[$i]['itemDescription']}}</h1>
                                         <p>
-                                            @if(Config::get('shop.display_with_ppn'))
-                                                <b>IDR {{ Ks::idr($products[$i]['priceRegular'] + ($products[$i]['priceRegular'] * Config::get('shop.ppn') ) , 0  ) }}</b>
-                                            @else
-                                                <b>IDR {{ Ks::idr($products[$i]['priceRegular'], 0) }}</b>
+                                            <?php
+                                                $price = Commerce::getCatalogPrice( $products[$i]['_id'], Config::get('site.outlet_id'),0,true );
+                                            ?>
+                                            IDR {{ Ks::idr( $price['price'] , 0  ) }}
+                                            @if($price['has_discount'] == true)
+                                                <br />
+                                                <span class="before-discount">
+                                                    IDR {{ Ks::idr( $price['before'] , 0  ) }}
+                                                </span>
                                             @endif
 
                                         </p>

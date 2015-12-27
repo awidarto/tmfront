@@ -712,3 +712,10 @@ td.right{
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
 }
+
+.before-discount{
+    background-color:red;
+    text-decoration: line-through !important;
+    padding: 2px 2px;
+    color: white;
+}

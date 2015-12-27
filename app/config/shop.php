@@ -11,6 +11,6 @@ return array(
     'none_available'=>'Sold Out',
     'ppn'=>0.1,
     'admin_email'=>'toimoiindonesia@gmail.com',
-    'display_with_ppn'=>true,
+    'display_with_ppn'=>false,
     'cart_price'=>'catalog'
 );
