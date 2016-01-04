@@ -9,6 +9,7 @@ return array(
             'Discount Period'=>'#662d91',
         ),
     'none_available'=>'Sold Out',
+    'add_tax'=>false,
     'ppn'=>0.1,
     'admin_email'=>'toimoiindonesia@gmail.com',
     'display_with_ppn'=>false,

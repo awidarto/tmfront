@@ -2,9 +2,15 @@
 <div id="twitbox" class="lionbar">
     <?php
 
-    $toimoitwit = Twitter::getSearch(array('q'=>'toimoi','lang'=>'id','include_entities'=>1));
-    //print_r($toimoitwit);
-    //$toimoitwit = Twitter::getUserTimeline(array('screen_name'=>'toimoiindonesia'));
+        $toimoitwit = null;
+
+        try{
+            $toimoitwit = Twitter::getSearch(array('q'=>'toimoi','lang'=>'id','include_entities'=>1));
+        }catch(Exception $e){
+
+        }
+        //print_r($toimoitwit);
+        //$toimoitwit = Twitter::getUserTimeline(array('screen_name'=>'toimoiindonesia'));
 
     ?>
     <ul>
