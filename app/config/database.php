@@ -50,8 +50,8 @@ return array(
             'driver'   => 'mongodb',
             'host'     => 'localhost',
             'port'     => 27017,
-            'username' => 'shoplite',
-            'password' => 'shoplit3r',
+            'username' => 'shopli',
+            'password' => 'shoplit3',
             'database' => 'toimoi'
         ),
 
