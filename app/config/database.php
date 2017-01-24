@@ -51,7 +51,7 @@ return array(
             'host'     => 'localhost',
             'port'     => 27017,
             'username' => 'shoplite',
-            'password' => 'shopliter',
+            'password' => 'shoplit3r',
             'database' => 'toimoi'
         ),
 

@@ -191,8 +191,12 @@ class Prefs {
     }
 
     public static function ExtractProductCategory($selection = true)
-    {
-        $category = Product::distinct('category')->get()->toArray();
+    {   
+        
+
+        $category = Product::all();
+
+        //$category = Product::distinct('category')->get()->toArray();
         if($selection){
             $cats = array(''=>'All');
         }else{
