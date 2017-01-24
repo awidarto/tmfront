@@ -69,6 +69,7 @@ class PageController extends BaseController {
         $interval = DateInterval::createFromDateString('1 month');
         $period   = new DatePeriod($start, $interval, $end);
         $dates = Page::all();
+        //distinct 
         //$dates = Page::distinct('createdDate')->get()->toArray();
 
         $archives = array();
